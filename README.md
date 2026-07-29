@@ -19,4 +19,4 @@ Then visit `http://localhost:8080`.
 - [Search Ranking](https://github.com/andrebarthelmeshellmuth/spryker-search-ranking)
 - [Search Debug](https://github.com/andrebarthelmeshellmuth/spryker-search-debugger)
 
-Search Optimization is intentionally shown only as under construction.
+Search Optimization appears in the project list as under construction.

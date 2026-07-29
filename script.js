@@ -96,28 +96,22 @@ function renderVisual(kind) {
       <div class="metric-box"><small>Suggested saturation point</small><strong>k = average score of sampled results</strong></div>
     </div>`,
     signals: `<div class="visual-card histogram-fit">
-      <div class="fit-graphs">
-        <figure class="fit-figure">
-          <svg viewBox="0 0 260 170" role="img" aria-label="Aggregate frequency distribution of a business metric">
-            <line class="mini-axis" x1="24" y1="145" x2="246" y2="145" />
-            <line class="mini-axis" x1="24" y1="145" x2="24" y2="15" />
-            <g class="mini-bars">
-              <rect x="34" y="126" width="17" height="19"/><rect x="56" y="102" width="17" height="43"/><rect x="78" y="62" width="17" height="83"/><rect x="100" y="35" width="17" height="110"/><rect x="122" y="50" width="17" height="95"/><rect x="144" y="78" width="17" height="67"/><rect x="166" y="101" width="17" height="44"/><rect x="188" y="119" width="17" height="26"/><rect x="210" y="130" width="17" height="15"/>
-            </g>
-          </svg>
-          <figcaption>Observed metric distribution</figcaption>
-        </figure>
-        <figure class="fit-figure">
-          <svg viewBox="0 0 260 170" role="img" aria-label="Suggested normalization curve fitted to the metric distribution">
-            <line class="mini-grid" x1="24" y1="80" x2="246" y2="80" />
-            <line class="mini-axis" x1="24" y1="145" x2="246" y2="145" />
-            <line class="mini-axis" x1="24" y1="145" x2="24" y2="15" />
-            <path class="mini-fit" d="M24 145 C47 115, 72 88, 99 67 C135 40, 181 27, 246 22" />
-            <circle class="mini-point" cx="99" cy="67" r="5"/>
-          </svg>
-          <figcaption>Suggested normalization curve</figcaption>
-        </figure>
-      </div>
+      <figure class="fit-figure single-fit">
+        <svg viewBox="0 0 520 260" role="img" aria-label="Observed business metric profile and selected normalization function in one coordinate system">
+          <line class="mini-grid" x1="48" y1="68" x2="490" y2="68" />
+          <line class="mini-grid" x1="48" y1="132" x2="490" y2="132" />
+          <line class="mini-grid" x1="48" y1="196" x2="490" y2="196" />
+          <line class="mini-axis" x1="48" y1="226" x2="490" y2="226" />
+          <line class="mini-axis" x1="48" y1="226" x2="48" y2="26" />
+          <path class="metric-profile" d="M48 226 C73 219, 95 205, 120 185 C150 160, 181 129, 214 107 C252 82, 294 66, 339 54 C386 42, 436 34, 490 30" />
+          <path class="mini-fit" d="M48 226 C88 183, 127 148, 168 120 C215 88, 271 65, 334 50 C387 38, 439 31, 490 27" />
+          <circle class="mini-point observed-point" cx="214" cy="107" r="5"/>
+          <circle class="mini-point" cx="334" cy="50" r="5"/>
+          <text class="mini-label" x="58" y="246">raw metric value</text>
+          <text class="mini-label" x="7" y="34">normalized</text>
+        </svg>
+        <figcaption class="fit-legend"><span><i class="legend-line observed"></i>Observed metric profile</span><span><i class="legend-line fitted"></i>Selected normalization function</span></figcaption>
+      </figure>
       <div class="function-selector" aria-label="Normalization function choices">
         <span>Normalization function</span>
         <button class="selected" type="button">atan(x / avg)</button>
