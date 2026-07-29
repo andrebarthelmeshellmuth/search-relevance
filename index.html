@@ -1,29 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Search Relevance</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A transparent ranking model combining Elasticsearch relevance, business signals, and query entropy.">
+  <meta name="theme-color" content="#f5f3ef">
+  <meta property="og:title" content="Search Relevance">
+  <meta property="og:description" content="Transparent relevance engineering for commerce search.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://search-relevance.dev/">
+  <title>Search Relevance — Transparent commerce ranking</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
+  <a class="skip-link" href="#explorer">Skip to formula explorer</a>
 
-<h1>Search Relevance</h1>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Search Relevance home">
+      <span class="brand-mark" aria-hidden="true">SR</span>
+      <span>Search Relevance</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="#explorer">Formula</a>
+      <a href="#resources">Resources</a>
+      <a href="https://github.com/andrebarthelmeshellmuth" rel="noreferrer">GitHub</a>
+    </nav>
+  </header>
 
-<p>
-Open-source relevance engineering for transparent commerce search.
-</p>
+  <main id="top">
+    <section class="formula-stage" id="explorer" aria-label="Formula explorer">
+      <div class="step-nav-wrap standalone">
+          <button class="step-arrow" type="button" data-direction="previous" aria-label="Previous step">←</button>
+          <div class="step-nav" role="tablist" aria-label="Formula explanation steps">
+            <button type="button" role="tab" aria-selected="true" aria-controls="step-panel" data-step="0">Overview</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="1">Text relevance</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="2">Saturation <em>k</em></button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="3">Business signals</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="4">Signal weights</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="5">Entropy shift</button>
+          </div>
+          <button class="step-arrow" type="button" data-direction="next" aria-label="Next step">→</button>
+      </div>
 
-<h2>Projects</h2>
+      <div class="formula-card">
+        <p class="formula-label">finalScore =</p>
+        <div class="formula" aria-label="final score equals alpha times score divided by score plus k, plus one minus alpha times the sum of weighted signals">
+          <span class="formula-fragment" data-fragment="alpha">α</span>
+          <span class="operator">·</span>
+          <span class="fraction formula-fragment" data-fragment="relevance">
+            <span class="numerator">score</span>
+            <span class="denominator"><span>score</span> + <span class="formula-fragment nested" data-fragment="saturation">k</span></span>
+          </span>
+          <span class="operator">+</span>
+          <span class="formula-fragment" data-fragment="alpha">(1 − α)</span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="signals">Σ<sub>i=1</sub><sup>n</sup></span>
+          <span class="formula-fragment" data-fragment="weights">w<sub>i</sub></span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="signals">s<sub>i</sub></span>
+        </div>
+        <p class="formula-summary">Normalized text relevance + normalized business signals.</p>
+      </div>
 
-<ul>
-    <li>Search Debug</li>
-    <li>Search Ranking</li>
-    <li>Search Optimization</li>
-</ul>
+      <div class="explorer-shell">
+        <article class="step-panel" id="step-panel" role="tabpanel" aria-live="polite">
+          <div class="step-copy">
+            <p class="step-count" id="step-count">01 / 06</p>
+            <h3 id="step-title">How a result gets its score</h3>
+            <p class="step-lead" id="step-lead">
+              Every hit is a convex combination of normalized text relevance and a weighted sum of business signals.
+            </p>
+            <div class="step-body" id="step-body"></div>
+            <p class="implementation" id="step-implementation"></p>
+          </div>
+          <div class="step-visual" id="step-visual" aria-label="Visualization for the selected formula step"></div>
+        </article>
+      </div>
+    </section>
 
-<p>
-Website under construction.
-</p>
+    <section class="resources" id="resources" aria-labelledby="resources-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">Go deeper</p>
+        <h2 id="resources-title">Implementation and reference.</h2>
+      </div>
+      <div class="resource-list">
+        <a href="formula-reference.pdf">
+          <span>
+            <small>Reference</small>
+            <strong>Ranking Formula PDF</strong>
+            <em>The complete model, settings, and worked examples.</em>
+          </span>
+          <b aria-hidden="true">↗</b>
+        </a>
+        <a href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking" rel="noreferrer">
+          <span>
+            <small>Implementation</small>
+            <strong>Search Ranking</strong>
+            <em>Configure and calculate the transparent ranking formula.</em>
+          </span>
+          <b aria-hidden="true">↗</b>
+        </a>
+        <a href="https://github.com/andrebarthelmeshellmuth/spryker-search-debugger" rel="noreferrer">
+          <span>
+            <small>Explanation</small>
+            <strong>Search Debug</strong>
+            <em>Inspect how every term contributes to a result.</em>
+          </span>
+          <b aria-hidden="true">↗</b>
+        </a>
+      </div>
+      <aside class="construction-note" aria-label="Future development">
+        <span>Next</span>
+        <p><strong>Search Optimization</strong> is under construction and intentionally not part of the public package set yet.</p>
+      </aside>
+    </section>
+  </main>
 
+  <footer class="site-footer">
+    <p>Built by André Barthelmes · MIT licensed</p>
+    <p><a href="https://search-relevance.dev/">search-relevance.dev</a></p>
+  </footer>
 </body>
 </html>
