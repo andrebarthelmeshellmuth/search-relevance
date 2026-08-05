@@ -8,5 +8,4 @@ The homepage presents the ranking formula as an interactive, breadcrumb-driven e
 
 - [Search Ranking](https://github.com/andrebarthelmeshellmuth/spryker-search-ranking)
 - [Search Debug](https://github.com/andrebarthelmeshellmuth/spryker-search-debugger)
-
-Search Optimization appears in the project list as under construction.
+- [Search Optimization](https://github.com/andrebarthelmeshellmuth/spryker-search-ranking-optimizer)

@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A transparent ranking model combining Elasticsearch relevance, business signals, and query entropy.">
+  <meta name="description" content="Open-source tools for debugging and improving Spryker search relevance. Understand Elasticsearch and OpenSearch scores, normalize business signals, and build explainable product ranking.">
   <meta name="theme-color" content="#f5f3ef">
-  <meta property="og:title" content="Search Relevance">
-  <meta property="og:description" content="Transparent relevance engineering for commerce search.">
+  <meta property="og:title" content="Spryker Search Ranking & Debugging Tools | Search Relevance">
+  <meta property="og:description" content="Open-source tools for debugging and improving Spryker search relevance. Understand Elasticsearch and OpenSearch scores, normalize business signals, and build explainable product ranking.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://search-relevance.dev/">
-  <title>Search Relevance — Transparent commerce ranking</title>
+  <title>Spryker Search Ranking & Debugging Tools | Search Relevance</title>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -29,25 +29,17 @@
   </header>
 
   <main id="top">
-    <section class="formula-stage" id="explorer" aria-label="Formula explorer">
-      <div class="step-nav-wrap standalone">
-          <button class="step-arrow" type="button" data-direction="previous" aria-label="Previous step">←</button>
-          <div class="step-nav" role="tablist" aria-label="Formula explanation steps">
-            <button type="button" role="tab" aria-selected="true" aria-controls="step-panel" data-step="0">Overview</button>
-            <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="1">Text relevance</button>
-            <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="2">Saturation <em>k</em></button>
-            <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="3">Business signals</button>
-            <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="4">Signal weights</button>
-            <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="5">Entropy shift</button>
-          </div>
-          <button class="step-arrow" type="button" data-direction="next" aria-label="Next step">→</button>
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Open-source Spryker search tools</p>
+      <h1 id="hero-title">Make Spryker search relevance explainable.</h1>
+      <div class="version-badges">
+        <a class="version-badge is-live" href="#resources">✓ Search Ranking v1</a>
+        <a class="version-badge is-upcoming" href="#roadmap">🚧 Search Ranking v2 · OpenSearch 3.x</a>
       </div>
+      <p class="hero-copy">Debug and improve product ranking in Spryker with transparent scoring for Elasticsearch and OpenSearch.</p>
+    </section>
 
+    <section class="formula-stage" id="explorer" aria-label="Formula explorer">
       <div class="formula-card">
         <p class="formula-label">finalScore =</p>
         <div class="formula" aria-label="final score equals alpha times score divided by score plus k, plus one minus alpha times the sum of weighted signals">
@@ -68,7 +60,306 @@
         <p class="formula-summary">Normalized text relevance + normalized business signals.</p>
       </div>
 
-      <div class="explorer-shell">
+      <div class="step-nav-wrap standalone">
+          <div class="step-nav" role="tablist" aria-label="Formula explanation steps">
+            <button type="button" role="tab" aria-selected="true" aria-controls="step-panel" data-step="0">Overview</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="1">Elasticsearch relevance</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="2">Saturation point</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="3">Ranking signals</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="4">Signal weights</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="5">Query Specificity</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" id="optimization-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="optimization-crumbs">
+              <svg class="icon-trend" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="14 6 21 6 21 13"/></svg>
+              Optimization
+            </button>
+          </div>
+      </div>
+
+      <div class="optimization-crumbs" id="optimization-crumbs">
+        <div class="optimization-crumbs-clip">
+          <div class="optimization-crumbs-inner" role="tablist" aria-label="Automated optimization steps">
+            <button type="button" role="tab" class="crumb" data-opt-step="0">Relevance Dataset</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-opt-step="1">Rank Eval</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-opt-step="2">CMA-ES</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-opt-step="3">Optimal Parameters</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-opt-step="4">Adaptive Formula</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="optimization-panel" id="optimization-panel" hidden>
+        <div class="content-card" id="optimization-dataset">
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">1 / 5</p>
+              <h2>Relevance Dataset</h2>
+              <p class="opt-card-lead">
+                Every optimization starts with a representative collection of search queries and manually
+                judged search results.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  Each query is associated with products and their expected relevance. The quality of the
+                  optimized formula depends directly on the quality and diversity of this dataset — it
+                  should cover common searches, edge cases and business-critical queries.
+                </p>
+              </div>
+              <p class="opt-card-tag">The dataset is independent from the optimization algorithm and can continuously evolve as the shop changes.</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <div class="srp-card">
+                <div class="srp-thumb"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+                <div class="srp-info">
+                  <strong>Laser Printer</strong>
+                  <span>$89.00</span>
+                </div>
+                <div class="srp-ratings-frame">
+                  <div class="srp-ratings">
+                    <span class="rate-heart" title="Love it"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+                    <span class="rate-check" title="Relevant"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                    <span class="rate-x" title="Not relevant"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+                  </div>
+                </div>
+                <small class="admin-flag">Visible to admins</small>
+              </div>
+              <div class="srp-more">
+                <span class="mini-icon" title="4K Monitor"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+                <span class="mini-icon" title="Ultrabook Laptop"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+                <small>+ 2 more judged results for this query</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="optimization-rank-eval" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">2 / 5</p>
+              <h2>Rank Evaluation</h2>
+              <p class="opt-card-lead">
+                Rank Eval replays every query from the dataset against the current formula and compares the
+                returned order to the expected judgments.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  Elasticsearch/OpenSearch Rank Eval executes every query of the relevance dataset using the
+                  current scoring formula. Metrics such as nDCG quantify how well the current parameter set
+                  performs across the entire dataset.
+                </p>
+              </div>
+              <p class="opt-card-tag">Rank Eval provides the objective fitness value that drives the optimizer.</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <div class="visual-card">
+                <div class="rank-row">
+                  <small>Expected</small>
+                  <div class="rank-slots">
+                    <span class="mini-product is-match" title="Laser Printer">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></span>
+                      <small>Laser Printer</small>
+                    </span>
+                    <span class="mini-product is-match" title="4K Monitor">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+                      <small>4K Monitor</small>
+                    </span>
+                    <span class="mini-product is-match" title="Ultrabook Laptop">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+                      <small>Ultrabook Laptop</small>
+                    </span>
+                  </div>
+                </div>
+                <div class="rank-row">
+                  <small>Actual</small>
+                  <div class="rank-slots">
+                    <span class="mini-product is-mismatch" title="4K Monitor">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+                      <small>4K Monitor</small>
+                    </span>
+                    <span class="mini-product is-mismatch" title="Laser Printer">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></span>
+                      <small>Laser Printer</small>
+                    </span>
+                    <span class="mini-product is-match" title="Ultrabook Laptop">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+                      <small>Ultrabook Laptop</small>
+                    </span>
+                  </div>
+                </div>
+                <p class="big-equation">nDCG = 0.87</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="optimization-cmaes" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">3 / 5</p>
+              <h2>CMA-ES Optimizer</h2>
+              <p class="opt-card-lead">
+                Covariance Matrix Adaptation Evolution Strategy searches for an optimal parameter set without
+                requiring derivatives or manual tuning.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  Multiple parameter candidates are evaluated using Rank Eval each generation. Better
+                  candidates survive, influence the next generation, and the search distribution shrinks and
+                  reorients as it converges toward the optimum.
+                </p>
+              </div>
+              <p class="opt-card-tag">Unlike manual trial-and-error, CMA-ES explores the complete parameter space automatically.</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <svg viewBox="0 0 320 250" role="img" aria-label="Search distribution ellipses shrinking and reorienting across generations toward the optimum">
+                <line class="mini-axis" x1="26" y1="216" x2="300" y2="216" />
+                <line class="mini-axis" x1="26" y1="216" x2="26" y2="20" />
+                <ellipse cx="150" cy="118" rx="112" ry="66" transform="rotate(-20 150 118)" fill="none" stroke="#c3ccca" stroke-width="1.6" stroke-dasharray="4 4"/>
+                <ellipse cx="170" cy="130" rx="62" ry="34" transform="rotate(-9 170 130)" fill="none" stroke="#7fbdba" stroke-width="1.8" stroke-dasharray="4 4"/>
+                <ellipse cx="182" cy="140" rx="24" ry="13" transform="rotate(5 182 140)" fill="rgba(0,127,131,.14)" stroke="var(--teal)" stroke-width="2"/>
+                <circle cx="96" cy="88" r="3" fill="#c3ccca"/>
+                <circle cx="212" cy="150" r="3" fill="#c3ccca"/>
+                <circle cx="128" cy="160" r="3" fill="#c3ccca"/>
+                <circle cx="222" cy="98" r="3" fill="#7fbdba"/>
+                <circle cx="152" cy="112" r="3" fill="#7fbdba"/>
+                <circle cx="190" cy="158" r="3" fill="#7fbdba"/>
+                <circle cx="174" cy="132" r="3" fill="var(--teal)"/>
+                <circle cx="188" cy="146" r="3" fill="var(--teal)"/>
+                <circle cx="184" cy="140" r="4.5" fill="var(--ink)"/>
+                <text class="mini-label" x="128" y="236">parameter 1</text>
+                <text class="mini-label" x="6" y="26">parameter 2</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="optimization-parameters" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">4 / 5</p>
+              <h2>Optimal Parameters</h2>
+              <p class="opt-card-lead">
+                After the optimization completes, the best performing parameter set becomes the new runtime
+                configuration for the adaptive scoring formula.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  Typical optimized values include the entropy exponent, text weight, business signal
+                  weights, and the maximum entropy shift — the same symbols used throughout this formula.
+                </p>
+              </div>
+              <p class="opt-card-tag">Optimization happens offline. Runtime searches only use the resulting parameter set and remain deterministic and fast.</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <table class="param-table">
+                <tbody>
+                  <tr>
+                    <td class="param-name">α <small>text weight</small></td>
+                    <td class="param-value is-before">0.73</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">0.62</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">w<sub>ctr</sub> <small>click-through rate</small></td>
+                    <td class="param-value is-before">0.45</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">0.38</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">w<sub>conv</sub> <small>conversion rate</small></td>
+                    <td class="param-value is-before">0.30</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">0.41</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">γ <small>entropy exponent</small></td>
+                    <td class="param-value is-before">1.0</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">1.4</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">m <small>max entropy shift</small></td>
+                    <td class="param-value is-before">0.25</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">0.18</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="optimization-runtime" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">5 / 5</p>
+              <h2>Adaptive Formula</h2>
+              <p class="opt-card-lead">
+                The optimized parameters are loaded by the runtime search engine and applied to every query —
+                deterministically, with no optimizer involved at request time.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  Query entropy dynamically balances textual relevance and business signals while preserving
+                  a fully explainable ranking. Whenever the catalog or business priorities change, the
+                  optimization process can simply run again to produce a new parameter set.
+                </p>
+              </div>
+              <p class="opt-card-tag">Runtime ranking and offline optimization are intentionally separated. Search requests never execute the optimizer.</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <div class="visual-card">
+                <div class="rank-row">
+                  <small>Before</small>
+                  <div class="rank-slots">
+                    <span class="mini-product is-mismatch" title="4K Monitor">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+                      <small>4K Monitor</small>
+                    </span>
+                    <span class="mini-product is-mismatch" title="Laser Printer">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></span>
+                      <small>Laser Printer</small>
+                    </span>
+                    <span class="mini-product is-match" title="Ultrabook Laptop">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+                      <small>Ultrabook Laptop</small>
+                    </span>
+                  </div>
+                </div>
+                <div class="rank-row">
+                  <small>After</small>
+                  <div class="rank-slots">
+                    <span class="mini-product is-match" title="Laser Printer">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></span>
+                      <small>Laser Printer</small>
+                    </span>
+                    <span class="mini-product is-match" title="4K Monitor">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+                      <small>4K Monitor</small>
+                    </span>
+                    <span class="mini-product is-match" title="Ultrabook Laptop">
+                      <span class="mini-thumb"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+                      <small>Ultrabook Laptop</small>
+                    </span>
+                  </div>
+                </div>
+                <p class="big-equation">nDCG = 1.0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="explorer-shell" id="explorer-shell">
         <article class="step-panel" id="step-panel" role="tabpanel" aria-live="polite">
           <div class="step-copy">
             <p class="step-count" id="step-count">01 / 06</p>
@@ -89,7 +380,15 @@
         <h2 id="resources-title">Projects</h2>
       </div>
       <div class="resource-list">
-        <a href="https://github.com/andrebarthelmeshellmuth/spryker-search-debugger" rel="noreferrer">
+        <a href="https://github.com/andrebarthelmeshellmuth/spryker-search-toolkit" rel="noreferrer">
+          <span>
+            <small>Bundle</small>
+            <strong>Search Toolkit</strong>
+            <em>One composer require for the three packages below.</em>
+          </span>
+          <b aria-hidden="true">↗</b>
+        </a>
+        <a class="is-nested" href="https://github.com/andrebarthelmeshellmuth/spryker-search-debugger" rel="noreferrer">
           <span>
             <small>Explanation</small>
             <strong>Search Debug</strong>
@@ -97,7 +396,7 @@
           </span>
           <b aria-hidden="true">↗</b>
         </a>
-        <a href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking" rel="noreferrer">
+        <a class="is-nested" href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking" rel="noreferrer">
           <span>
             <small>Implementation</small>
             <strong>Search Ranking</strong>
@@ -105,20 +404,28 @@
           </span>
           <b aria-hidden="true">↗</b>
         </a>
-        <div class="resource-item is-under-construction">
+        <a class="is-nested" href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking-optimizer" rel="noreferrer">
           <span>
             <small>Optimization</small>
             <strong>Search Optimization</strong>
             <em>Learn ranking parameters from weighted human relevance judgments.</em>
           </span>
-          <b>Under construction</b>
-        </div>
+          <b aria-hidden="true">↗</b>
+        </a>
       </div>
+    </section>
+
+    <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="section-heading compact">
+        <h2 id="roadmap-title">Roadmap</h2>
+      </div>
+      <p>Search Relevance v1 targets the capabilities available in OpenSearch 1.3, which has been the default for Spryker installations for several years.</p>
+      <p>With Spryker now enabling OpenSearch 3.x, a new generation of ranking features becomes practical. Search Relevance v2 will explore reranking, hybrid retrieval, Learning-to-Rank and other capabilities that previously weren't available.</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Built by André Barthelmes · MIT licensed</p>
+    <p>Built by André Barthelmes-Hellmuth · MIT licensed</p>
     <p><a href="https://search-relevance.dev/">search-relevance.dev</a></p>
   </footer>
 </body>
