@@ -165,7 +165,7 @@ function highlightFormulaFragments(names) {
   });
 }
 
-function showStep(index, focus = false) {
+function showStep(index, focus = false, scrollTabIntoView = true) {
   closeOptimizationCrumbs();
   activeStep = (index + steps.length) % steps.length;
   const step = steps[activeStep];
@@ -182,7 +182,7 @@ function showStep(index, focus = false) {
     const isActive = i === activeStep;
     button.setAttribute("aria-selected", String(isActive));
     button.tabIndex = isActive ? 0 : -1;
-    if (isActive) button.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    if (isActive && scrollTabIntoView) button.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   });
 
   highlightFormulaFragments(step.fragments);
@@ -236,4 +236,8 @@ optimizationToggle.addEventListener("click", () => {
   highlightFormulaFragments(isOpen ? ["alpha", "weights"] : steps[activeStep].fragments);
 });
 
-showStep(0);
+// No scrollIntoView here: this is the initial render, before the visitor has scrolled or interacted at
+// all, so the tab strip (which sits below the hero, off-screen at scroll 0) has no business being pulled
+// into view — every real user action still calls showStep() with its default (true), keeping the active
+// tab visible during click/keyboard navigation.
+showStep(0, false, false);
