@@ -253,8 +253,8 @@
               </p>
               <div class="opt-card-body">
                 <p>
-                  Typical optimized values include the entropy exponent, text weight, business signal
-                  weights, and the maximum entropy shift — the same symbols used throughout this formula.
+                  Typical optimized values include the specificity exponent, text weight, business signal
+                  weights, and the maximum specificity shift — the same symbols used throughout this formula.
                 </p>
               </div>
               <p class="opt-card-tag">Optimization happens offline. Runtime searches only use the resulting parameter set and remain deterministic and fast.</p>
@@ -281,13 +281,13 @@
                     <td class="param-value is-after">0.41</td>
                   </tr>
                   <tr>
-                    <td class="param-name">γ <small>entropy exponent</small></td>
+                    <td class="param-name">γ <small>specificity exponent</small></td>
                     <td class="param-value is-before">1.0</td>
                     <td class="param-arrow" aria-hidden="true">→</td>
                     <td class="param-value is-after">1.4</td>
                   </tr>
                   <tr>
-                    <td class="param-name">m <small>max entropy shift</small></td>
+                    <td class="param-name">m <small>max specificity shift</small></td>
                     <td class="param-value is-before">0.25</td>
                     <td class="param-arrow" aria-hidden="true">→</td>
                     <td class="param-value is-after">0.18</td>
@@ -309,7 +309,7 @@
               </p>
               <div class="opt-card-body">
                 <p>
-                  Query entropy dynamically balances textual relevance and business signals while preserving
+                  Query specificity dynamically balances textual relevance and business signals while preserving
                   a fully explainable ranking. Whenever the catalog or business priorities change, the
                   optimization process can simply run again to produce a new parameter set.
                 </p>
@@ -409,6 +409,14 @@
             <small>Optimization</small>
             <strong>Search Optimization</strong>
             <em>Learn ranking parameters from weighted human relevance judgments.</em>
+          </span>
+          <b aria-hidden="true">↗</b>
+        </a>
+        <a href="https://github.com/andrebarthelmeshellmuth/spryker-search-feedback" target="_blank" rel="noopener noreferrer">
+          <span>
+            <small>Feedback</small>
+            <strong>Search Feedback</strong>
+            <em>Let an authorized storefront admin file a ticket about a set of search results.</em>
           </span>
           <b aria-hidden="true">↗</b>
         </a>
