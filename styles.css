@@ -142,6 +142,8 @@ h1 {
   text-transform: uppercase;
   letter-spacing: .11em;
 }
+/* Greek α uppercases to Α, visually indistinguishable from Latin "A" inside an uppercase label. */
+.formula-label .no-uppercase { text-transform: none; }
 .formula {
   display: flex;
   align-items: center;
@@ -529,6 +531,7 @@ h1 {
 /* Revised formula-first layout */
 .formula-stage {
   padding-block: 2.25rem 7rem;
+  --formula-size: clamp(1.45rem, 3.5vw, 3.35rem);
 }
 .step-nav-wrap.standalone {
   margin-bottom: 1.25rem;
@@ -544,9 +547,11 @@ h1 {
   padding: clamp(1.35rem, 3.2vw, 2.5rem);
 }
 .formula {
-  font-size: clamp(1.45rem, 3.5vw, 3.35rem);
+  font-size: var(--formula-size);
 }
-.formula-secondary { font-size: .72em; }
+/* Tied to --formula-size (not a bare em) so this tracks the main formula's actual rendered size at every
+   breakpoint, rather than the inherited body font-size the element would otherwise fall back to. */
+.formula-secondary { font-size: calc(var(--formula-size) * .66); }
 .specificity-formula-card .formula-summary { font-size: .9rem; }
 .explorer-shell {
   overflow: hidden;

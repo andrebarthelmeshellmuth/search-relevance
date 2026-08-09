@@ -60,6 +60,22 @@
         <p class="formula-summary">Normalized text relevance + normalized business signals.</p>
       </div>
 
+      <div class="formula-card specificity-formula-card" id="specificity-formula-card" hidden>
+        <p class="formula-label">Then, query specificity shifts <span class="no-uppercase">α</span> →</p>
+        <div class="formula formula-secondary" aria-label="effective alpha equals alpha plus m times the sign of d times the absolute value of d to the power of gamma">
+          <span class="formula-fragment" data-fragment="spec-alpha">α<sub>eff</sub></span>
+          <span class="operator">=</span>
+          <span class="formula-fragment" data-fragment="spec-alpha">α</span>
+          <span class="operator">+</span>
+          <span class="formula-fragment" data-fragment="spec-shift">m</span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="spec-shift">sign(d)</span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="spec-shift">|d|<sup>γ</sup></span>
+        </div>
+        <p class="formula-summary">d = 2 · normalize(specificity) − 1, centered on a typical query for this catalog</p>
+      </div>
+
       <div class="step-nav-wrap standalone">
           <div class="step-nav" role="tablist" aria-label="Formula explanation steps">
             <button type="button" role="tab" aria-selected="true" aria-controls="step-panel" data-step="0">Overview</button>
@@ -82,22 +98,6 @@
               Optimization
             </button>
           </div>
-      </div>
-
-      <div class="formula-card specificity-formula-card" id="specificity-formula-card" hidden>
-        <p class="formula-label">Then, query specificity shifts α →</p>
-        <div class="formula formula-secondary" aria-label="effective alpha equals alpha plus m times the sign of d times the absolute value of d to the power of gamma">
-          <span class="formula-fragment" data-fragment="spec-alpha">α<sub>eff</sub></span>
-          <span class="operator">=</span>
-          <span class="formula-fragment" data-fragment="spec-alpha">α</span>
-          <span class="operator">+</span>
-          <span class="formula-fragment" data-fragment="spec-shift">m</span>
-          <span class="operator">·</span>
-          <span class="formula-fragment" data-fragment="spec-shift">sign(d)</span>
-          <span class="operator">·</span>
-          <span class="formula-fragment" data-fragment="spec-shift">|d|<sup>γ</sup></span>
-        </div>
-        <p class="formula-summary">d = 2 · normalize(specificity) − 1, centered on a typical query for this catalog</p>
       </div>
 
       <div class="optimization-crumbs" id="specificity-crumbs">
