@@ -215,7 +215,7 @@ h1 {
   gap: .4rem;
   font-size: .8rem;
 }
-.step-nav-optimization .icon-trend { flex: 0 0 auto; }
+.step-nav-optimization .icon-trend, .step-nav-optimization .icon-target { flex: 0 0 auto; }
 .step-nav-optimization[aria-expanded="true"] { color: var(--ink); background: var(--teal-soft); }
 .optimization-crumbs {
   display: grid;
@@ -546,6 +546,8 @@ h1 {
 .formula {
   font-size: clamp(1.45rem, 3.5vw, 3.35rem);
 }
+.formula-secondary { font-size: .72em; }
+.specificity-formula-card .formula-summary { font-size: .9rem; }
 .explorer-shell {
   overflow: hidden;
 }

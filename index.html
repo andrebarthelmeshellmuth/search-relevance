@@ -72,13 +72,48 @@
             <span aria-hidden="true">›</span>
             <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="4">Signal weights</button>
             <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="5">Query Specificity</button>
+            <button type="button" id="specificity-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="specificity-crumbs">
+              <svg class="icon-target" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/></svg>
+              Query Specificity
+            </button>
             <span aria-hidden="true">›</span>
             <button type="button" id="optimization-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="optimization-crumbs">
               <svg class="icon-trend" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="14 6 21 6 21 13"/></svg>
               Optimization
             </button>
           </div>
+      </div>
+
+      <div class="formula-card specificity-formula-card" id="specificity-formula-card" hidden>
+        <p class="formula-label">Then, query specificity shifts α →</p>
+        <div class="formula formula-secondary" aria-label="effective alpha equals alpha plus m times the sign of d times the absolute value of d to the power of gamma">
+          <span class="formula-fragment" data-fragment="spec-alpha">α<sub>eff</sub></span>
+          <span class="operator">=</span>
+          <span class="formula-fragment" data-fragment="spec-alpha">α</span>
+          <span class="operator">+</span>
+          <span class="formula-fragment" data-fragment="spec-shift">m</span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="spec-shift">sign(d)</span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="spec-shift">|d|<sup>γ</sup></span>
+        </div>
+        <p class="formula-summary">d = 2 · normalize(specificity) − 1, centered on a typical query for this catalog</p>
+      </div>
+
+      <div class="optimization-crumbs" id="specificity-crumbs">
+        <div class="optimization-crumbs-clip">
+          <div class="optimization-crumbs-inner" role="tablist" aria-label="Query specificity steps">
+            <button type="button" role="tab" class="crumb" data-spec-step="0">Analyze Query Terms</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-spec-step="1">Raw Specificity</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-spec-step="2">Normalize</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-spec-step="3">Shift the Balance</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" role="tab" class="crumb" data-spec-step="4">Calibrate</button>
+          </div>
+        </div>
       </div>
 
       <div class="optimization-crumbs" id="optimization-crumbs">
@@ -354,6 +389,210 @@
                 </div>
                 <p class="big-equation">nDCG = 1.0</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="optimization-panel" id="specificity-panel" hidden>
+        <div class="content-card" id="specificity-terms">
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">1 / 5</p>
+              <h2>Analyze Query Terms</h2>
+              <p class="opt-card-lead">
+                Every matched term is looked up in the index's own term statistics — how many documents
+                contain it, out of how many total.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  A term that appears in almost every product (<code>chair</code>) carries little
+                  information about intent. A term that appears in almost none (<code>gsr</code>) is strong
+                  evidence the customer knows exactly what they want. A term with zero real matches anywhere
+                  in the catalog is skipped entirely, not treated as maximally rare.
+                </p>
+              </div>
+              <p class="opt-card-tag">idf<sub>term</sub> = log(catalog size / documents containing the term)</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <div class="parameter-card">
+                <strong>Analyze Query</strong>
+                <table class="freq-table">
+                  <tbody>
+                    <tr><td>chair</td><td>df 58</td><td>idf 0.30</td></tr>
+                    <tr><td>bosch</td><td>df 17</td><td>idf 1.51</td></tr>
+                    <tr><td>gsr</td><td>df 2</td><td>idf 3.75</td></tr>
+                    <tr><td>18v</td><td>df 2</td><td>idf 3.75</td></tr>
+                  </tbody>
+                </table>
+                <p>Rare terms carry far more discriminating power than common catalog terms.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="specificity-raw" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">2 / 5</p>
+              <h2>Blend into Raw Specificity</h2>
+              <p class="opt-card-lead">
+                A query's per-term scores are combined into one number — weighted toward whichever term
+                carries the strongest evidence.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  The harmonic mean of every term's idf is pulled down hard the moment even one term is
+                  common, while the blend weight β lets the single rarest term still dominate when it's a
+                  strong enough signal on its own. A single-term query skips the blend — its own idf
+                  <em>is</em> the raw specificity.
+                </p>
+              </div>
+              <p class="opt-card-tag">specificity = β · max(idf) + (1 − β) · harmonicMean(idf)</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <div class="visual-card">
+                <div class="visual-split">
+                  <div class="metric-box"><small>max(idf)</small><strong>3.75</strong></div>
+                  <div class="metric-box"><small>harmonic mean</small><strong>1.03</strong></div>
+                  <div class="metric-box"><small>β</small><strong>0.6</strong></div>
+                  <div class="metric-box"><small>raw specificity</small><strong>2.66</strong></div>
+                </div>
+                <p class="big-equation">"Bosch GSR 18V-55" → 2.66</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="specificity-normalize" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">3 / 5</p>
+              <h2>Normalize — the same curve, again</h2>
+              <p class="opt-card-lead">
+                Raw specificity is squashed through the exact same saturating shape used for Elasticsearch
+                relevance — <strong>x / (x + k)</strong> — just with its own saturation point.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  A curve exponent γ<sub>c</sub> can additionally steepen or soften the transition around
+                  the saturation point. It defaults to 1, which collapses back to the plain, unshaped ratio
+                  — the identical formula from step 2 of the main explorer, applied to a second signal.
+                </p>
+              </div>
+              <p class="opt-card-tag">normalize(x) = x<sup>γc</sup> / (x<sup>γc</sup> + k<sub>spec</sub><sup>γc</sup>)</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <div class="visual-card">
+                <svg class="chart-svg" viewBox="0 0 420 250" role="img" aria-label="Saturation curve applied to raw specificity">
+                  <line class="chart-grid" x1="52" y1="65" x2="390" y2="65" />
+                  <line class="chart-grid" x1="52" y1="130" x2="390" y2="130" />
+                  <line class="chart-axis" x1="52" y1="215" x2="390" y2="215" />
+                  <line class="chart-axis" x1="52" y1="215" x2="52" y2="25" />
+                  <path class="chart-curve" d="M52 215 C78 173, 104 143, 135 119 C186 80, 255 58, 390 43" />
+                  <circle class="chart-marker" cx="145" cy="131" r="7" />
+                  <text class="chart-label" x="18" y="69">1.0</text>
+                  <text class="chart-label" x="18" y="134">0.5</text>
+                  <text class="chart-label" x="52" y="238">0</text>
+                  <text class="chart-label" x="330" y="238">raw specificity</text>
+                  <line x1="145" y1="141" x2="145" y2="215" stroke="#007f83" stroke-dasharray="4 4"/>
+                  <text class="chart-label" x="139" y="238">k_spec</text>
+                </svg>
+                <p class="big-equation">specificity / (specificity + k_spec)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="specificity-shift" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">4 / 5</p>
+              <h2>Shift the Balance</h2>
+              <p class="opt-card-lead">
+                Normalized specificity becomes a signed deviation from neutral, shaped and scaled into a
+                nudge on α.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  <strong>d = 2 · normalize(specificity) − 1</strong> centers a typical query at exactly
+                  zero. The exponent γ shapes how sensitively the shift reacts near that center — dampened
+                  for small deviations when γ &gt; 1, amplified when γ &lt; 1 — and the magnitude m caps how
+                  far specificity alone can ever move α, in either direction.
+                </p>
+              </div>
+              <p class="opt-card-tag">α<sub>eff</sub> = α + m · sign(d) · |d|<sup>γ</sup></p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <div class="entropy-parameters">
+                <div class="parameter-card">
+                  <strong>Adaptive Weighting</strong>
+                  <div class="shift-state">
+                    <small>Specific</small>
+                    <div class="mini-bar"><i style="width:85%"></i></div>
+                    <div class="bar-split"><span>Text 85%</span><span>Business 15%</span></div>
+                  </div>
+                  <div class="bar-arrow" aria-hidden="true">↓</div>
+                  <div class="shift-state">
+                    <small>Generic</small>
+                    <div class="mini-bar"><i style="width:40%"></i></div>
+                    <div class="bar-split"><span>Text 40%</span><span>Business 60%</span></div>
+                  </div>
+                  <p>The result stays deterministic and fully explainable for every single query.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" id="specificity-calibrate" hidden>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">5 / 5</p>
+              <h2>Calibrate the Parameters</h2>
+              <p class="opt-card-lead">
+                k<sub>spec</sub>, β, γ<sub>c</sub>, γ and m aren't hand-tuned guesses — they're calibrated
+                the same way the rest of the formula is.
+              </p>
+              <div class="opt-card-body">
+                <p>
+                  Search Ranking Optimizer's saturation-point calibration has a dedicated specificity mode:
+                  it samples real queries and suggests k<sub>spec</sub> directly from their observed
+                  distribution. The remaining shift parameters are part of the same parameter space the
+                  automated optimizer already searches — see Optimization above.
+                </p>
+              </div>
+              <p class="opt-card-tag">Same calibration + optimization pipeline, applied to specificity's own parameters.</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              <table class="param-table">
+                <tbody>
+                  <tr>
+                    <td class="param-name">k<sub>spec</sub> <small>specificity saturation point</small></td>
+                    <td class="param-value is-before">guessed</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">calibrated</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">β <small>blend weight</small></td>
+                    <td class="param-value is-before">0.5</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">0.6</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">γ <small>shift exponent</small></td>
+                    <td class="param-value is-before">1.0</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">1.4</td>
+                  </tr>
+                  <tr>
+                    <td class="param-name">m <small>max shift magnitude</small></td>
+                    <td class="param-value is-before">0.25</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">0.18</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

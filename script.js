@@ -38,19 +38,11 @@ const steps = [
     implementation: "wi = enteredWeighti / Σ enteredWeightj",
     fragments: ["weights"],
     visual: "weights"
-  },
-  {
-    title: "Let query specificity shift the balance",
-    lead: "Before applying business relevance, the query itself is analysed.",
-    body: `<p>Rather than relying solely on the returned search scores, the package estimates how discriminative the query terms are within the indexed catalog. Rare terms indicate a precise search intent, while common terms suggest an exploratory search.</p><p>This specificity estimate dynamically adjusts the balance between textual relevance and business relevance. Highly specific queries favour exact lexical matches, whereas generic queries allow business signals to play a larger role.</p>`,
-    implementation: "",
-    fragments: ["alpha"],
-    visual: "entropy"
   }
 ];
 
 const tabButtons = [...document.querySelectorAll("[data-step]")];
-const formula = document.querySelector(".formula");
+const formulas = [...document.querySelectorAll(".formula")];
 const title = document.getElementById("step-title");
 const lead = document.getElementById("step-lead");
 const body = document.getElementById("step-body");
@@ -129,33 +121,27 @@ function renderVisual(kind) {
         <div class="metric-box"><small>Normalized</small><strong>0.25</strong></div>
       </div>
       <p class="big-equation">Σ wᵢ = 1</p>
-    </div>`,
-    entropy: `<div class="visual-card entropy-visual">
-      <div class="entropy-examples">
-        <div class="query-box"><small>Precise query</small><strong>Bosch GSR 18V-55</strong><div class="entropy-scale"><div class="entropy-track"><i class="entropy-dot" style="left:12%"></i></div><div class="entropy-caption"><span>more relevance</span><span>more signals</span></div></div></div>
-        <div class="query-box"><small>Broad query</small><strong>chair</strong><div class="entropy-scale"><div class="entropy-track"><i class="entropy-dot" style="left:76%"></i></div><div class="entropy-caption"><span>more relevance</span><span>more signals</span></div></div></div>
-      </div>
-      <div class="entropy-parameters">
-        <div class="parameter-card"><strong>Analyze Query</strong><table class="freq-table"><tbody><tr><td>chair</td><td>df 58</td></tr><tr><td>bosch</td><td>df 17</td></tr><tr><td>gsr</td><td>df 2</td></tr><tr><td>18v</td><td>df 2</td></tr></tbody></table><p>Every analyzed query term contributes information about how distinctive the user's search is. Rare terms provide much stronger evidence of purchase intent than common catalog terms.</p></div>
-        <div class="parameter-card"><strong>Query Specificity</strong><div class="bar-rows"><div class="bar-row"><span>chair</span><span class="mini-bar"><i style="width:50%"></i></span></div><div class="bar-row"><span>bosch gsr</span><span class="mini-bar"><i style="width:100%"></i></span></div></div><p>The collected term statistics are combined into a single specificity score. Rather than classifying queries into fixed groups, the package places every query on a continuous scale between exploratory and known-item search.</p></div>
-        <div class="parameter-card"><strong>Adaptive Weighting</strong><div class="shift-state"><small>Specific</small><div class="mini-bar"><i style="width:85%"></i></div><div class="bar-split"><span>Text 85%</span><span>Business 15%</span></div></div><div class="bar-arrow" aria-hidden="true">↓</div><div class="shift-state"><small>Generic</small><div class="mini-bar"><i style="width:40%"></i></div><div class="bar-split"><span>Text 40%</span><span>Business 60%</span></div></div><p>The specificity score controls a continuous shift between lexical relevance and business relevance. The result is deterministic, explainable and configurable for each project.</p></div>
-      </div>
     </div>`
   };
   visual.innerHTML = visuals[kind];
 }
 
-function closeOptimizationCrumbs() {
+function closeAllCrumbs() {
   optimizationCrumbs.classList.remove("is-open");
   optimizationToggle.setAttribute("aria-expanded", "false");
   optimizationPanel.hidden = true;
+
+  specificityCrumbs.classList.remove("is-open");
+  specificityToggle.setAttribute("aria-expanded", "false");
+  specificityPanel.hidden = true;
+  specificityFormulaCard.hidden = true;
+
   explorerShell.hidden = false;
 }
 
 function highlightFormulaFragments(names) {
   const fragments = [...document.querySelectorAll(".formula-fragment")];
   fragments.forEach(fragment => fragment.classList.remove("is-active", "has-active-child"));
-  formula.classList.toggle("is-focused", names.length > 0);
   names.forEach(name => {
     document.querySelectorAll(`[data-fragment="${name}"]`).forEach(fragment => {
       fragment.classList.add("is-active");
@@ -163,13 +149,16 @@ function highlightFormulaFragments(names) {
       if (parentFragment) parentFragment.classList.add("has-active-child");
     });
   });
+  formulas.forEach(formula => {
+    formula.classList.toggle("is-focused", formula.querySelector(".formula-fragment.is-active") !== null);
+  });
 }
 
 function showStep(index, focus = false, scrollTabIntoView = true) {
-  closeOptimizationCrumbs();
+  closeAllCrumbs();
   activeStep = (index + steps.length) % steps.length;
   const step = steps[activeStep];
-  const totalPages = steps.length + 1; // + Optimization, the 7th page in the top breadcrumb
+  const totalPages = steps.length + 2; // + Query Specificity + Optimization, the two toggled breadcrumb lines
   count.textContent = `${String(activeStep + 1).padStart(2, "0")} / ${String(totalPages).padStart(2, "0")}`;
   title.textContent = step.title;
   lead.textContent = step.lead;
@@ -203,7 +192,7 @@ tabButtons.forEach((button, i) => {
 const optimizationToggle = document.getElementById("optimization-toggle");
 const optimizationCrumbs = document.getElementById("optimization-crumbs");
 const optimizationPanel = document.getElementById("optimization-panel");
-const optCrumbs = [...document.querySelectorAll(".optimization-crumbs-inner .crumb")];
+const optCrumbs = [...document.querySelectorAll("#optimization-crumbs .crumb")];
 const optContentIds = [
   "optimization-dataset",
   "optimization-rank-eval",
@@ -211,6 +200,23 @@ const optContentIds = [
   "optimization-parameters",
   "optimization-runtime"
 ];
+
+const specificityToggle = document.getElementById("specificity-toggle");
+const specificityCrumbs = document.getElementById("specificity-crumbs");
+const specificityPanel = document.getElementById("specificity-panel");
+const specificityFormulaCard = document.getElementById("specificity-formula-card");
+const specCrumbs = [...document.querySelectorAll("#specificity-crumbs .crumb")];
+const specContentIds = [
+  "specificity-terms",
+  "specificity-raw",
+  "specificity-normalize",
+  "specificity-shift",
+  "specificity-calibrate"
+];
+// From "Shift the Balance" onward, the shift half of the secondary formula is what's actually being
+// explained — highlighted only from here on, not during the earlier term-analysis/blend/normalize steps
+// which build toward it but don't touch α directly yet.
+const SPECIFICITY_SHIFT_STEP = 3;
 
 function showOptStep(index) {
   optCrumbs.forEach((crumb, i) => crumb.setAttribute("aria-selected", String(i === index)));
@@ -224,16 +230,52 @@ optCrumbs.forEach((crumb, i) => {
   crumb.addEventListener("click", () => showOptStep(i));
 });
 
-optimizationToggle.addEventListener("click", () => {
-  const isOpen = optimizationCrumbs.classList.toggle("is-open");
-  optimizationToggle.setAttribute("aria-expanded", String(isOpen));
-  optimizationPanel.hidden = !isOpen;
-  explorerShell.hidden = isOpen;
-  if (isOpen) showOptStep(0);
-  tabButtons.forEach((button, i) => {
-    button.setAttribute("aria-selected", String(!isOpen && i === activeStep));
+function showSpecStep(index) {
+  specCrumbs.forEach((crumb, i) => crumb.setAttribute("aria-selected", String(i === index)));
+  specContentIds.forEach((id, i) => {
+    const card = document.getElementById(id);
+    if (card) card.hidden = i !== index;
   });
-  highlightFormulaFragments(isOpen ? ["alpha", "weights"] : steps[activeStep].fragments);
+  highlightFormulaFragments(index >= SPECIFICITY_SHIFT_STEP ? ["alpha", "spec-alpha", "spec-shift"] : ["alpha"]);
+}
+
+specCrumbs.forEach((crumb, i) => {
+  crumb.addEventListener("click", () => showSpecStep(i));
+});
+
+function toggleBreadcrumbLine(willOpen, { crumbs, toggle, panel, onOpen, activeFragments }) {
+  closeAllCrumbs();
+  if (willOpen) {
+    crumbs.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    panel.hidden = false;
+    explorerShell.hidden = true;
+    onOpen();
+  }
+  tabButtons.forEach((button, i) => {
+    button.setAttribute("aria-selected", String(!willOpen && i === activeStep));
+  });
+  highlightFormulaFragments(willOpen ? activeFragments : steps[activeStep].fragments);
+}
+
+optimizationToggle.addEventListener("click", () => {
+  toggleBreadcrumbLine(!optimizationCrumbs.classList.contains("is-open"), {
+    crumbs: optimizationCrumbs,
+    toggle: optimizationToggle,
+    panel: optimizationPanel,
+    onOpen: () => showOptStep(0),
+    activeFragments: ["alpha", "weights"]
+  });
+});
+
+specificityToggle.addEventListener("click", () => {
+  toggleBreadcrumbLine(!specificityCrumbs.classList.contains("is-open"), {
+    crumbs: specificityCrumbs,
+    toggle: specificityToggle,
+    panel: specificityPanel,
+    onOpen: () => { specificityFormulaCard.hidden = false; showSpecStep(0); },
+    activeFragments: ["alpha"]
+  });
 });
 
 // No scrollIntoView here: this is the initial render, before the visitor has scrolled or interacted at
