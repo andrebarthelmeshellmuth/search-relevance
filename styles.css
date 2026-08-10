@@ -887,7 +887,15 @@ h1 {
   border-radius: 1rem;
   box-shadow: var(--shadow);
 }
-.screenshot-frame img { width: 100%; height: auto; display: block; cursor: zoom-in; }
+.screenshot-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* A custom SVG cursor, not the OS/browser's native zoom-in glyph — that one renders as a low-res
+     bitmap on some platforms and looked pixelated hovering over a screenshot. This stays crisp at any
+     zoom/DPI since it's vector, with zoom-in as the fallback if the data URI ever fails to load. */
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%2213%22%20r%3D%228%22%20fill%3D%22%23fffefa%22%20fill-opacity%3D%220.95%22%20stroke%3D%22%23122a35%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M18.5%2018.5%20L27%2027%22%20stroke%3D%22%23122a35%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M13%209%20V17%20M9%2013%20H17%22%20stroke%3D%22%23007f83%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E") 13 13, zoom-in;
+}
 .lightbox-overlay {
   position: fixed;
   inset: 0;
@@ -900,7 +908,9 @@ h1 {
 }
 .lightbox-overlay[hidden] { display: none; }
 .lightbox-image {
-  max-width: min(1400px, 92vw);
+  /* Matches roughly what "open image in new tab" shows: as close to the screenshot's native pixel
+     width (1920px) as the viewport allows, not an arbitrary smaller cap. */
+  max-width: min(1920px, 96vw);
   width: 100%;
   height: auto;
   align-self: flex-start;

@@ -72,6 +72,161 @@
     </section>
   </main>
 
+  <script type="application/json" id="screenshots-data">
+[
+  {
+    "id": "search-feedback",
+    "label": "Search Feedback",
+    "screenshots": [
+      {
+        "title": "File a ticket from the SRP",
+        "description": "The “Not happy with these results?” box renders below the product grid on the search results page, outside the filter form. It's only visible to a B2B customer signed in under a company account whose role has been explicitly granted the submit-ticket permission — a guest or a customer without that permission sees the search results page as normal, with no box at all. Once visible, picking a topic and adding free text and submitting ties the ticket to the exact query, active filters, page number, and SKUs shown at that moment, then hands the conversation off entirely to Zed — the storefront side never reads the ticket or any reply back.",
+        "src": "screenshots/search-feedback/ticket-form.png"
+      },
+      {
+        "title": "Ticket list",
+        "description": "The Zed ticket grid: ID, topic, search term, a colored status badge (orange Open / green Answered or Closed), filed-at timestamp, and a View action per row — sortable and searchable via DataTables. Any Zed admin with access to the module sees every ticket, since Zed users and Yves customers are separate identity systems with no built-in link.",
+        "src": "screenshots/search-feedback/ticket-list.png"
+      },
+      {
+        "title": "Ticket detail",
+        "description": "A ticket's full context (topic, search term, active filters as JSON, page number, the exact SKUs shown, store/locale) plus the conversation thread and a reply form. Posting a reply auto-transitions an Open ticket to Answered; status can also be changed manually in either direction independently of replying.",
+        "src": "screenshots/search-feedback/ticket-detail.png"
+      }
+    ]
+  },
+  {
+    "id": "search-debug",
+    "label": "Search Debug",
+    "screenshots": [
+      {
+        "title": "SRP score overlay",
+        "description": "The query-token headline (each token color-coded, with its own magnifying-glass link into the analyzer pipeline) sits above the results grid; every product gets a real Elasticsearch _score badge. One card's overlay is pinned open here, showing the final score first — the matched-token and BM25 boost/idf/tf breakdown underneath stays collapsed behind its own toggle until you want that level of detail, so the headline number is never buried in noise. Visible only to a B2B customer signed in under a company account whose role has been granted the see-search-debug-info permission — anyone else sees the ordinary results page, with no badges or overlay at all.",
+        "src": "screenshots/search-debug/srp-overlay.png"
+      },
+      {
+        "title": "Matched tokens breakdown",
+        "description": "\"Text signals\" and \"Matched tokens\" unfolded: each query token gets its own real per-field contribution — whichever field actually won the score for that term, at the query's real, live boost value (e.g. full-text-boosted: 5 — nothing hardcoded) — followed by \"Other score contributions\" for whatever else the explain tree scored (type, store, locale, is-active) so the numbers always account for the full score, never a partial view. Other Spryker Community packages can contribute their own sections into this same overlay via a dedicated extension-point interface — search-ranking's business-signal breakdown (metric × weight = contribution, a total, an optional baseline, and the combining formula) is built entirely on it, not a special case wired into search-debug itself.",
+        "src": "screenshots/search-debug/matched-tokens.png"
+      },
+      {
+        "title": "Business signals section, pinned across three cards",
+        "description": "search-ranking's contribution to this overlay, previewed in the previous screenshot, shown for real on three pinned cards from the same \"office chair\" search. Each card's pin button (\"Keep this overlay open\") is what makes a side-by-side comparison like this possible at all — without it, moving the mouse to read one product's numbers closes the previous one. The top card is left with Business signals collapsed, showing only its 0.809 total and the closing formula line: 0.750 × 0.614 + (1 - 0.750) × 0.809 = 0.663. The second and third are unfolded to their full metric × weight = contribution breakdown, making an otherwise invisible fact visible: the third product's random draw (0.865 × 0.100 = 0.087) is far larger than the second's (0.023 × 0.100 = 0.002), yet the second still matches the third's final score, because its top_seller contribution (0.934 × 0.550 = 0.514) outweighs the third's (0.651 × 0.550 = 0.358) by more than the random gap in the other direction. A single metric's spread never decides a product's rank on its own.",
+        "src": "screenshots/search-ranking/office-chair-business-signals.png"
+      },
+      {
+        "title": "Specificity weighting section, fully unfolded",
+        "description": "A second section search-ranking contributes into this same overlay, this time via a separate opt-in-in-code mechanism (off by default; a shop enables it deliberately, since it costs an extra Elasticsearch probe per search). Unfolded here on a \"magnetoplan\" search — a rare brand term matching only 3 products — to show the shape of the full derivation this section can display: a chain of intermediate values ending in a relevance weight (α) that moves per query instead of staying fixed. The numbers themselves, and why this particular query pushes α so far, are explained in spryker-community/search-ranking's own screenshots (\"Query specificity, worked high\" and its \"worked low\" companion); shown here only to establish that the capability exists and composes cleanly with the rest of this overlay, not as a repeat of that explanation.",
+        "src": "screenshots/search-ranking/specificity-magnetoplan.png"
+      },
+      {
+        "title": "Compare BM25 across tokens",
+        "description": "Two products pinned open side by side for the same query, \"office chair\" — the left card's BM25 breakdown is expanded for the token \"office\", the right card's for \"chair\". Their inverse document frequency tells the real story neither product's headline score reveals alone: idf 0.326 for \"office\" (a near-ubiquitous word across this example catalog) against idf 3.013 for \"chair\" (comparatively rare) — the same query-time boost and a similar term frequency, but \"chair\" is worth roughly 9× more per occurrence simply because it's more specific. Pinning turns the overlay from a per-product tooltip into a real side-by-side comparison tool.",
+        "src": "screenshots/search-debug/bm25-compare.png"
+      },
+      {
+        "title": "Trace a token to its database field",
+        "description": "Clicking the magnifying glass next to a matched token opens this page: every field the query could have matched, labeled with the real column it came from — spy_product_abstract_localized_attributes.name, spy_category_attribute.name, spy_merchant.name, and so on — not an abstracted \"title\"/\"category\" placeholder. Each highlighted fragment marks a literal, byte-for-byte occurrence of the text that produced the token, one mark per occurrence rather than one per field, since two occurrences of the \"same\" word can trace back to genuinely different source text. Any project-specific field a shop's own indexing contributes gets a real label too, via a small extension-point interface other packages and project code can register against — never a bare, unexplained value. Every highlighted mark carries its own magnifying-glass link into the exact tokenizer/filter pipeline that produced that specific occurrence's token — that's the next screenshot.",
+        "src": "screenshots/search-debug/token-source.png"
+      },
+      {
+        "title": "Full German analyzer pipeline (index time)",
+        "description": "An example of the richest path a German analyzer chain like this one can take on a real word: \"Bürostuhl\" (office chair), found inside a product description while searching \"stuhl\". Eight stages run in sequence — a char filter that protects the real brand name \"Brennenstuhl\" from being mistaken for \"Stuhl\" further down the chain, the standard tokenizer, lowercasing, german_normalization folding \"ü\" to \"u\", a German stopword filter, a dictionary decompounder splitting the compound into \"büro\" + \"stuhl\", a light German stemmer, and finally the edge-ngram filter used for prefix matching — each stage's own real, live filter definition shown inline, not just its name.",
+        "src": "screenshots/search-debug/token-analysis.png"
+      },
+      {
+        "title": "Same word, search-time pipeline",
+        "description": "The mirror image of the previous screenshot, reached the same way a shopper would: searching \"bürostuhl\" and clicking the magnifying glass on the \"stuhl\" badge in the SRP's own query-token headline. The raw text at the top is the literal query, \"bürostuhl\" — not product text, since the search-time analyzer only ever runs on what a shopper typed, never on stored documents. The first six stages are identical to the index-time path (char filter, tokenizer, lowercasing, normalization, stopwords, decompounding), since a query and a document go through the same groundwork. The chain then diverges: the index-time path ends in the edge-ngram filter (for prefix matching); the search-time path ends in the synonym filter instead, whose own caption shows the full mapping, \"stuhl => stuhl, sessel\" — a real, honest limit of a linear step-by-step trace like this one, since the badge itself can only ever follow the one token it started with, not fan out to show \"sessel\" appearing alongside it.",
+        "src": "screenshots/search-debug/token-analysis-search.png"
+      }
+    ]
+  },
+  {
+    "id": "search-ranking",
+    "label": "Search Ranking",
+    "screenshots": [
+      {
+        "title": "Metrics list — three scopes at a glance",
+        "description": "Three business-signal metrics configured for this example store, DE/de_DE: pdp_impressions, top_seller, random. Name and the \"higher is better\" direction flag are global — the same value everywhere this metric exists at all, not a column shown here. Weight, Formula and Active belong to the Store + Locale combination picked above the table — switching either reveals that pair's own independently-stored values. The Scope badge on each row shows which of two ways that trio is actually stored: \"Store\" (the default, shown for all three here) means formula, weight and active status are authored once and fanned out identically to every real locale of the store on save; \"Store + locale\" would mean the metric genuinely diverges per locale, with formula, weight and active status authored and stored separately for each (store, locale) pair.",
+        "src": "screenshots/search-ranking/metrics.png"
+      },
+      {
+        "title": "Formula authoring: fitting a curve to real data",
+        "description": "Editing top_seller mid-authoring. Name, Weight, \"Higher raw value is better\" (steers which curve shapes get suggested below, never the saved formula itself), \"Locale-specific metric\" (this store's default: one formula fanned out to every locale) and the Normalization Formula expression itself sit above the plot; Active sits below it. The plot and table are the interesting part: the dashed line is the empirical CDF of every real top_seller value this store has imported — the theoretical best-possible discriminator, since a formula's job isn't just mapping raw values into ]0;1], it's spreading products apart so the ranking can actually tell them apart. The current formula, x / max, is the flat blue line here — visibly the least-discriminating shape on the plot, compressing most products into a narrow band near zero. Underneath, six closed-form candidate formulas are each fit against the metric's own 101-point percentile digest (rebuilt by search-ranking:normalize) via a small coarse-to-fine search for that family's one free parameter, then ranked by R² — the fraction of the CDF's shape each one actually explains. The winner, atan(x / 70.88) / (pi() / 2) at R² 0.986, hugs the dashed line almost exactly; one click on \"Use this formula\" swaps it in, live, before saving.",
+        "src": "screenshots/search-ranking/edit-metric.png"
+      },
+      {
+        "title": "Product Values — the input every adopter must supply",
+        "description": "One row per (product, metric) pair for this store × locale: the metric name, its Scope badge, the raw real-world value, the normalized value in ]0;1] the last normalization run computed from it, and when that happened. Two crons keep the normalized column current: search-ranking:normalize recomputes every metric's percentile digest and writes a fresh normalized value for every row with raw data, republishes the affected product documents, and pushes the updated ranking config to storage; search-ranking:randomize reshuffles only the random tie-breaker metric's raw and normalized values on its own schedule and republishes the products it touches. Nothing in this table is computed by the package itself, though. Whatever real per-product signal a metric needs — impressions, historical sales, stock age — an adopter has to keep this table populated via their own data pipeline, or that metric silently contributes exactly zero to every product's score: no error, just a ranking indistinguishable from not having installed this package at all.",
+        "src": "screenshots/search-ranking/product-values.png"
+      },
+      {
+        "title": "Product Metric Gaps — finding the silent zeros",
+        "description": "One row per (product, active metric) pair that has no raw value at all for this store × locale — five products missing pdp_impressions here. This is the page that surfaces the exact failure mode the rest of this package warns about: a product with no imported value contributes exactly zero to that metric's share of the score, with no error anywhere to flag it, so a genuine gap looks identical to \"this product just scored zero.\" This table is how an adopter finds those gaps instead of assuming a low rank means low relevance.",
+        "src": "screenshots/search-ranking/product-metric-gap.png"
+      },
+      {
+        "title": "Settings — the ranking formula's own knobs",
+        "description": "Every field here is scoped per store × locale, same as the Store + Locale selector everywhere else in this package — what's shown is one store's own values, not a global default. For what each field actually does in the ranking formula, see this site's Formula explorer above; this page is where those same numbers get authored. The one thing worth calling out here: specificity-aware relevance weighting is off by default and, deliberately, not something a Zed user can switch on — it costs an extra Elasticsearch probe per live catalog search, so flipping it on is a code + deploy decision (SearchRankingConfig::isSpecificityWeightingEnabled()), never a checkbox. While it's off, its 5 fields lock — greyed out, un-clickable, and (this is enforced server-side, not just a visual hint) any value submitted for them is silently dropped rather than saved. Relevance saturation point, just above the lock, is usually a set-and-forget number: it only needs to move if this shop's typical Elasticsearch scores drift, and a rough estimate is one afternoon with the search-debug overlay open, noting what real scores typical queries produce. spryker-community/search-ranking-optimizer's own Calibration tooling can do this same estimation systematically instead of by hand, for this field and its specificity counterpart alike.",
+        "src": "screenshots/search-ranking/settings.png"
+      },
+      {
+        "title": "Metric History — an audit trail, not a diff",
+        "description": "Four rows across two metrics, top_seller and pdp_impressions — each one recorded twice, once per real locale of this store, sharing the same timestamp. That pairing is the visible effect of isLocaleScoped=false, the default for a metric: saving a formula, weight or active-status change for a store fans it out identically to every locale of that store, and every locale that received it gets its own row here. A metric with isLocaleScoped=true instead produces a single row per save, for the one (store, locale) pair actually changed. Every row is a snapshot of the metric's configuration AS OF that timestamp, not a before/after diff of the edit that produced it — a row always shows the value that was saved, never what it replaced; to see an earlier value for the same metric, read the next older row. The Source column reads Manual on every row shown here, but the same column also carries Auto-Tune and Optimizer apply as values: Auto-Tune is an available function of spryker-community/search-ranking-optimizer — a monthly-cron console command that checks each metric's live formula fit and, per that metric's own threshold setting, proposes or directly applies a better one once fit quality has dropped too far. Optimizer apply covers a human applying a full optimization run's result from that same package's GUI instead. Both write to this exact table, so it ends up the shared audit trail for edits from either source.",
+        "src": "screenshots/search-ranking/metric-history.png"
+      },
+      {
+        "title": "Scope Copy — bootstrapping a new market",
+        "description": "The story this page solves: one store/locale (here, DE/de_DE) has been running long enough to carry real, tuned configuration — metric weights, the relevance-blend settings, the specificity settings, and each metric's fitted formula/active flag — and a newly launched market (AT/de_DE) needs that same starting point instead of stock defaults. What never travels: the actual per-product raw/normalized values stay scope-local on purpose, so the new market's own Product Value Gaps page still shows an honest picture of what it's missing, not a false all-clear copied in from somewhere else. Two ways to move the rest: \"Copy now\" runs once, with a choice of mode — Mirror creates a metric/setting on the target even if it's never existed there; Copy only what the target already has touches only rows the target has independently configured, so it can't silently wake up something that scope deliberately never adopted. \"Lock\" always runs in Mirror mode and does one thing more: the identical one-time bootstrap copy (weight, setting, formula and active status, all of it, shown in the table here), plus a persisted pairing the daily scope-copy-sync cron re-applies from then on — but only the weight and setting rows, marked \"Yes\" in the table's last column. Formula and active status are one-off only, written once at copy or lock time and never touched again by the recurring sync, since a formula changes far less often than a weight; if the source's formula improves later, the lock alone won't carry that forward — running \"Copy now\" again is what picks up a newer formula. A lock also comes with four rules, all enforced only at the moment \"Lock\" is clicked, never rechecked by the daily cron once a lock already exists: source and target must be different scopes; a scope can be the target of at most one active lock; a scope already the target of one lock can't become a source of another; and a scope already the source of one lock can't become a target of another — no chains, no scope wearing two roles at once. AT/de_DE just became DE/de_DE's locked target here, visible in both the confirmation banner and the Active locks table below.",
+        "src": "screenshots/search-ranking/scope-copy.png"
+      },
+      {
+        "title": "Random Impact — judging the tie-breaker's weight",
+        "description": "A permission-gated checkbox on the storefront's own search results page — only a customer whose role has been granted this specific permission ever sees it, everyone else gets the ordinary page. Checking it reveals a badge on any product the random tie-breaker metric actually moved: how many positions it would gain (green) or lose (red) on this page if random's weight were 0, everything else unchanged. Random earns a permanent, non-zero weight for a real reason: without some amount of controlled noise, a ranking built entirely from deterministic signals overfits to whatever those signals happen to reward, producing the exact same order for the exact same query forever — random keeps that from calcifying. That's also exactly why it's excluded from automated optimization: spryker-community/search-ranking-optimizer tunes every other metric's weight against a target, but there's no target to tune random's weight toward — its entire job is to be undirected, so no search process can meaningfully improve it. Picking its weight is a judgment call, not a computation: check this box across a handful of real queries and look at how much movement actually happens. \"cable\" here, at a weight of 0.1, moves only 4 of 12 products and only by one position each — a reasonable amount of shuffling, not chaos. A query whose top results are already near-tied on relevance (a generic term matching many near-identical products) will show much more movement at the exact same weight, since barely any score gap needs to be crossed — that's the catalog's own relevance density showing through, not the weight being wrong.",
+        "src": "screenshots/search-ranking/random-impact.png"
+      },
+      {
+        "title": "The formula in practice: three products, one query",
+        "description": "Three pinned overlays for the same \"office chair\" search — the top-ranked product's Business signals section left collapsed (only its 0.809 total and the formula line show), the second and third unfolded to their full per-metric breakdown. The first card's formula line is the one worth reading closely: 0.750 × 0.614 + (1 - 0.750) × 0.809 = 0.663 — relevance weight α blends the text-match score (0.614) and the business-signal total (0.809) into the single number that actually drives ranking. Products two and three land on the identical rounded final score, 0.652, by two different routes: product two's random draw contributes almost nothing (0.023 × 0.100 = 0.002) while product three's is unusually high (0.865 × 0.100 = 0.087) — an 0.085-point gap that would, on its own, put product three ahead. top_seller reverses that and then some: product two's 0.934 × 0.550 = 0.514 beats product three's 0.651 × 0.550 = 0.358 by 0.156, nearly double the random gap in the other direction. pdp_impressions leans slightly toward product three (0.328 vs 0.263) but not by enough to matter. The net: 0.778 vs 0.773 in business-signal total, an almost-identical text-signal score on both (0.610 vs 0.611), and a tied final score — proof that a single metric's random spread doesn't decide a product's rank on its own; it's one input among several, exactly as intended. α itself was fixed at 0.750 for every product in this example; the next two screenshots show it moving.",
+        "src": "screenshots/search-ranking/office-chair-business-signals.png"
+      },
+      {
+        "title": "Query specificity, worked low: a generic single word",
+        "description": "The specificity-weighting section previewed but left collapsed in \"The formula in practice\" — see that screenshot for how α feeds into the base score formula — unfolded here to its full derivation. The query is a single word, \"office\": 413 matches, about as generic as this catalog's vocabulary gets. Its raw specificity, 0.652, sits far below the configured saturation point (k = 3.000), so normalized specificity comes out at just 0.010 on a 0–1 scale where 0.5 is neutral. That's a signed deviation of -0.980 — almost the maximum possible pull toward \"unspecific\" — which the configured shift magnitude (0.250) turns into a -0.245 adjustment to the baseline α₀ = 0.750, landing the live α at 0.505: barely more than half business signals, half text relevance. The companion screenshot, \"Query specificity, worked high,\" runs a rare brand query through the identical formula and lands on the opposite extreme, α = 0.913.",
+        "src": "screenshots/search-ranking/specificity-office.png"
+      },
+      {
+        "title": "Query specificity, worked high: a rare brand name",
+        "description": "The mirror case of \"Query specificity, worked low\": \"magnetoplan\", a brand name matching only 3 of this catalog's several hundred products. A single rare term is enough on its own to push raw specificity to 5.032 — well past the saturation point (k = 3.000) — for a normalized specificity of 0.825 and a signed deviation of +0.650. Run through the same shift magnitude (0.250) as the low-specificity example, that becomes a +0.163 adjustment to the baseline α₀ = 0.750, landing α at 0.913: this query leans almost entirely on text relevance, and business signals barely move the final score. See \"The formula in practice\" for how α gets spent in the final blend once it's computed, and \"Query specificity, worked low\" for the same mechanism pulling the opposite way on a generic query.",
+        "src": "screenshots/search-ranking/specificity-magnetoplan.png"
+      }
+    ]
+  },
+  {
+    "id": "search-optimization",
+    "label": "Search Optimization",
+    "screenshots": [
+      {
+        "title": "Optimization run form",
+        "description": "Add a description for this screenshot."
+      },
+      {
+        "title": "Rank eval dataset",
+        "description": "Add a description for this screenshot."
+      },
+      {
+        "title": "CMA-ES progress",
+        "description": "Add a description for this screenshot."
+      },
+      {
+        "title": "Parameter checklist",
+        "description": "Add a description for this screenshot."
+      }
+    ]
+  }
+]
+</script>
+
   <footer class="site-footer">
     <p>Built by André Barthelmes-Hellmuth · MIT licensed</p>
     <p><a href="https://search-relevance.dev/">search-relevance.dev</a></p>

@@ -74,7 +74,7 @@
           <span class="operator">·</span>
           <span class="formula-fragment" data-fragment="spec-shift">|d|</span><sup><span class="formula-fragment" data-fragment="spec-param">γ</span></sup>
         </div>
-        <p class="formula-summary">d = <span class="formula-fragment" data-fragment="d-shift">2 ·</span> <span class="formula-fragment wraps-fraction" data-fragment="d-fraction"><span class="fraction"><span class="numerator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">γc</span></sup></span><span class="denominator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">γc</span></sup> + <span class="formula-fragment nested" data-fragment="spec-param">k<sub>spec</sub><sup>γc</sup></span></span></span></span> <span class="formula-fragment" data-fragment="d-shift">− 1</span></p>
+        <p class="formula-summary">d = <span class="formula-fragment" data-fragment="d-shift">2 ·</span> <span class="formula-fragment wraps-fraction" data-fragment="d-fraction"><span class="fraction"><span class="numerator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup></span><span class="denominator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup> + <span class="formula-fragment nested" data-fragment="spec-param">k<sub>spec</sub><sup>p</sup></span></span></span></span> <span class="formula-fragment" data-fragment="d-shift">− 1</span></p>
         <p class="formula-summary">specificity = <span class="formula-fragment" data-fragment="spec-max"><span class="formula-fragment nested" data-fragment="spec-param">β</span> · max(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-max">)</span> + <span class="formula-fragment" data-fragment="spec-hmean">(1 − <span class="formula-fragment nested" data-fragment="spec-param">β</span>) · harmonicMean(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-hmean">)</span></p>
       </div>
 
@@ -476,12 +476,12 @@
               </p>
               <div class="opt-card-body">
                 <p>
-                  A curve exponent γ<sub>c</sub> can additionally steepen or soften the transition around
+                  A curve exponent p can additionally steepen or soften the transition around
                   the saturation point. It defaults to 1, which collapses back to the plain, unshaped ratio
                   — the identical formula from step 2 of the main explorer, applied to a second signal.
                 </p>
               </div>
-              <p class="opt-card-tag">normalize(x) = x<sup>γc</sup> / (x<sup>γc</sup> + k<sub>spec</sub><sup>γc</sup>)</p>
+              <p class="opt-card-tag">normalize(x) = x<sup>p</sup> / (x<sup>p</sup> + k<sub>spec</sub><sup>p</sup>)</p>
             </div>
             <div class="opt-card-visual" aria-hidden="true">
               <div class="visual-card">
@@ -552,7 +552,7 @@
               <p class="opt-card-index">5 / 5</p>
               <h2>Calibrate the Parameters</h2>
               <p class="opt-card-lead">
-                k<sub>spec</sub>, β, γ<sub>c</sub>, γ and m aren't hand-tuned guesses — they're calibrated
+                k<sub>spec</sub>, β, p, γ and m aren't hand-tuned guesses — they're calibrated
                 the same way the rest of the formula is.
               </p>
               <div class="opt-card-body">

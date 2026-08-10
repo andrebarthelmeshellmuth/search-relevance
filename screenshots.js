@@ -1,46 +1,10 @@
-const PACKAGES = [
-  {
-    id: "search-feedback",
-    label: "Search Feedback",
-    screenshots: [
-      { title: "File a ticket from the SRP", description: "The “Not happy with these results?” box renders below the product grid on the search results page, outside the filter form. It's only visible to a B2B customer signed in under a company account whose role has been explicitly granted the submit-ticket permission — a guest or a customer without that permission sees the search results page as normal, with no box at all. Once visible, picking a topic and adding free text and submitting ties the ticket to the exact query, active filters, page number, and SKUs shown at that moment, then hands the conversation off entirely to Zed — the storefront side never reads the ticket or any reply back.", src: "screenshots/search-feedback/ticket-form.png" },
-      { title: "Ticket list", description: "The Zed ticket grid: ID, topic, search term, a colored status badge (orange Open / green Answered or Closed), filed-at timestamp, and a View action per row — sortable and searchable via DataTables. Any Zed admin with access to the module sees every ticket, since Zed users and Yves customers are separate identity systems with no built-in link.", src: "screenshots/search-feedback/ticket-list.png" },
-      { title: "Ticket detail", description: "A ticket's full context (topic, search term, active filters as JSON, page number, the exact SKUs shown, store/locale) plus the conversation thread and a reply form. Posting a reply auto-transitions an Open ticket to Answered; status can also be changed manually in either direction independently of replying.", src: "screenshots/search-feedback/ticket-detail.png" }
-    ]
-  },
-  {
-    id: "search-debug",
-    label: "Search Debug",
-    screenshots: [
-      { title: "SRP score overlay", description: "The query-token headline (each token color-coded, with its own magnifying-glass link into the analyzer pipeline) sits above the results grid; every product gets a real Elasticsearch _score badge. One card's overlay is pinned open here, showing the final score first — the matched-token and BM25 boost/idf/tf breakdown underneath stays collapsed behind its own toggle until you want that level of detail, so the headline number is never buried in noise. Visible only to a B2B customer signed in under a company account whose role has been granted the see-search-debug-info permission — anyone else sees the ordinary results page, with no badges or overlay at all.", src: "screenshots/search-debug/srp-overlay.png" },
-      { title: "Matched tokens breakdown", description: "\"Text signals\" and \"Matched tokens\" unfolded: each query token gets its own real per-field contribution — whichever field actually won the score for that term, at the query's real, live boost value (e.g. full-text-boosted: 5 — nothing hardcoded) — followed by \"Other score contributions\" for whatever else the explain tree scored (type, store, locale, is-active) so the numbers always account for the full score, never a partial view. Other Spryker Community packages can contribute their own sections into this same overlay via a dedicated extension-point interface — search-ranking's business-signal breakdown (metric × weight = contribution, a total, an optional baseline, and the combining formula) is built entirely on it, not a special case wired into search-debug itself.", src: "screenshots/search-debug/matched-tokens.png" },
-      { title: "Compare BM25 across tokens", description: "Two products pinned open side by side for the same query, \"office chair\" — the left card's BM25 breakdown is expanded for the token \"office\", the right card's for \"chair\". Their inverse document frequency tells the real story neither product's headline score reveals alone: idf 0.326 for \"office\" (a near-ubiquitous word across this demo shop's catalog) against idf 3.013 for \"chair\" (comparatively rare) — the same query-time boost and a similar term frequency, but \"chair\" is worth roughly 9× more per occurrence simply because it's more specific. Pinning turns the overlay from a per-product tooltip into a real side-by-side comparison tool.", src: "screenshots/search-debug/bm25-compare.png" },
-      { title: "Trace a token to its database field", description: "Clicking the magnifying glass next to a matched token opens this page: every field the query could have matched, labeled with the real column it came from — spy_product_abstract_localized_attributes.name, spy_category_attribute.name, spy_merchant.name, and so on — not an abstracted \"title\"/\"category\" placeholder. Each highlighted fragment marks a literal, byte-for-byte occurrence of the text that produced the token, one mark per occurrence rather than one per field, since two occurrences of the \"same\" word can trace back to genuinely different source text. Any project-specific field a shop's own indexing contributes gets a real label too, via a small extension-point interface other packages and project code can register against — never a bare, unexplained value. Every highlighted mark carries its own magnifying-glass link into the exact tokenizer/filter pipeline that produced that specific occurrence's token — that's the next screenshot.", src: "screenshots/search-debug/token-source.png" },
-      { title: "Full German analyzer pipeline (index time)", description: "An example of the richest path a German analyzer chain like this one can take on a real word: \"Bürostuhl\" (office chair), found inside a product description while searching \"stuhl\". Eight stages run in sequence — a char filter that protects the real brand name \"Brennenstuhl\" from being mistaken for \"Stuhl\" further down the chain, the standard tokenizer, lowercasing, german_normalization folding \"ü\" to \"u\", a German stopword filter, a dictionary decompounder splitting the compound into \"büro\" + \"stuhl\", a light German stemmer, and finally the edge-ngram filter used for prefix matching — each stage's own real, live filter definition shown inline, not just its name.", src: "screenshots/search-debug/token-analysis.png" },
-      { title: "Same word, search-time pipeline", description: "The mirror image of the previous screenshot, reached the same way a shopper would: searching \"bürostuhl\" and clicking the magnifying glass on the \"stuhl\" badge in the SRP's own query-token headline. The raw text at the top is the literal query, \"bürostuhl\" — not product text, since the search-time analyzer only ever runs on what a shopper typed, never on stored documents. The first six stages are identical to the index-time path (char filter, tokenizer, lowercasing, normalization, stopwords, decompounding), since a query and a document go through the same groundwork. The chain then diverges: the index-time path ends in the edge-ngram filter (for prefix matching); the search-time path ends in the synonym filter instead, whose own caption shows the full mapping, \"stuhl => stuhl, sessel\" — a real, honest limit of a linear step-by-step trace like this one, since the badge itself can only ever follow the one token it started with, not fan out to show \"sessel\" appearing alongside it.", src: "screenshots/search-debug/token-analysis-search.png" }
-    ]
-  },
-  {
-    id: "search-ranking",
-    label: "Search Ranking",
-    screenshots: [
-      { title: "Signal weights", description: "Add a description for this screenshot." },
-      { title: "Saturation point calibration", description: "Add a description for this screenshot." },
-      { title: "Metric history", description: "Add a description for this screenshot." },
-      { title: "Scope copy", description: "Add a description for this screenshot." }
-    ]
-  },
-  {
-    id: "search-optimization",
-    label: "Search Optimization",
-    screenshots: [
-      { title: "Optimization run form", description: "Add a description for this screenshot." },
-      { title: "Rank eval dataset", description: "Add a description for this screenshot." },
-      { title: "CMA-ES progress", description: "Add a description for this screenshot." },
-      { title: "Parameter checklist", description: "Add a description for this screenshot." }
-    ]
-  }
-];
+// Screenshot content (titles/descriptions/image paths) lives in a <script type="application/json"> tag
+// in screenshots.html, kept out of this file so the long-form text doesn't drown out the carousel/
+// lightbox behavior. Read synchronously rather than fetch()'d — fetch of a same-directory JSON file is
+// blocked by CORS when this page is opened as a plain file:// URL (no local server), which is how this
+// site gets previewed day to day; an inline script tag has no such restriction, on file://, http, or
+// https alike.
+const PACKAGES = JSON.parse(document.getElementById("screenshots-data").textContent);
 
 const tabButtons = [...document.querySelectorAll("[data-package]")];
 const track = document.getElementById("carousel-track");
