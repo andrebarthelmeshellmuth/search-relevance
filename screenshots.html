@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Screenshots of the Spryker Search Relevance tools: Search Feedback, Search Debug, Search Ranking and Search Optimization.">
+  <meta name="theme-color" content="#f5f3ef">
+  <meta property="og:title" content="Screenshots | Search Relevance">
+  <meta property="og:description" content="Screenshots of the Spryker Search Relevance tools: Search Feedback, Search Debug, Search Ranking and Search Optimization.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://search-relevance.dev/screenshots.html">
+  <title>Screenshots | Search Relevance</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="screenshots.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#screenshots">Skip to screenshots</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html#top" aria-label="Search Relevance home">
+      <span class="brand-mark" aria-hidden="true">SR</span>
+      <span>Search Relevance</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="index.html#explorer">Formula</a>
+      <a href="screenshots.html" aria-current="page">Screenshots</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="https://github.com/andrebarthelmeshellmuth" rel="noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero page-hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Open-source Spryker search tools</p>
+      <h1 id="hero-title">See it in action.</h1>
+      <p class="hero-copy">A tour of each package's Zed and Yves surfaces. Pick a package below, then a screenshot.</p>
+    </section>
+
+    <section class="screenshots-stage" id="screenshots" aria-label="Screenshot gallery">
+      <div class="step-nav-wrap standalone">
+        <div class="step-nav" role="tablist" aria-label="Package selection">
+          <button type="button" role="tab" aria-selected="true" aria-controls="screenshot-viewer" data-package="search-feedback">Search Feedback</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" role="tab" aria-selected="false" aria-controls="screenshot-viewer" data-package="search-debug">Search Debug</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" role="tab" aria-selected="false" aria-controls="screenshot-viewer" data-package="search-ranking">Search Ranking</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" role="tab" aria-selected="false" aria-controls="screenshot-viewer" data-package="search-optimization">Search Optimization</button>
+        </div>
+      </div>
+
+      <div class="carousel-row">
+        <button type="button" class="carousel-arrow carousel-prev" aria-label="Previous screenshot">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carousel-track"></div>
+        </div>
+        <button type="button" class="carousel-arrow carousel-next" aria-label="Next screenshot">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <article class="screenshot-viewer" id="screenshot-viewer">
+        <div class="screenshot-frame" id="screenshot-frame"></div>
+        <div class="screenshot-caption">
+          <p class="opt-card-index" id="screenshot-index"></p>
+          <h2 id="screenshot-title"></h2>
+          <p id="screenshot-description"></p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built by André Barthelmes-Hellmuth · MIT licensed</p>
+    <p><a href="https://search-relevance.dev/">search-relevance.dev</a></p>
+  </footer>
+</body>
+</html>

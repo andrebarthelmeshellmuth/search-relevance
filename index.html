@@ -23,6 +23,7 @@
     </a>
     <nav class="site-nav" aria-label="Primary navigation">
       <a href="#explorer">Formula</a>
+      <a href="screenshots.html">Screenshots</a>
       <a href="#resources">Resources</a>
       <a href="https://github.com/andrebarthelmeshellmuth" rel="noreferrer">GitHub</a>
     </nav>
@@ -67,13 +68,14 @@
           <span class="operator">=</span>
           <span class="formula-fragment" data-fragment="spec-alpha">α</span>
           <span class="operator">+</span>
-          <span class="formula-fragment" data-fragment="spec-shift">m</span>
+          <span class="formula-fragment" data-fragment="spec-shift"><span class="formula-fragment nested" data-fragment="spec-param">m</span></span>
           <span class="operator">·</span>
           <span class="formula-fragment" data-fragment="spec-shift">sign(d)</span>
           <span class="operator">·</span>
-          <span class="formula-fragment" data-fragment="spec-shift">|d|<sup>γ</sup></span>
+          <span class="formula-fragment" data-fragment="spec-shift">|d|</span><sup><span class="formula-fragment" data-fragment="spec-param">γ</span></sup>
         </div>
-        <p class="formula-summary">d = 2 · normalize(specificity) − 1, centered on a typical query for this catalog</p>
+        <p class="formula-summary">d = <span class="formula-fragment" data-fragment="d-shift">2 ·</span> <span class="formula-fragment wraps-fraction" data-fragment="d-fraction"><span class="fraction"><span class="numerator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">γc</span></sup></span><span class="denominator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">γc</span></sup> + <span class="formula-fragment nested" data-fragment="spec-param">k<sub>spec</sub><sup>γc</sup></span></span></span></span> <span class="formula-fragment" data-fragment="d-shift">− 1</span></p>
+        <p class="formula-summary">specificity = <span class="formula-fragment" data-fragment="spec-max"><span class="formula-fragment nested" data-fragment="spec-param">β</span> · max(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-max">)</span> + <span class="formula-fragment" data-fragment="spec-hmean">(1 − <span class="formula-fragment nested" data-fragment="spec-param">β</span>) · harmonicMean(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-hmean">)</span></p>
       </div>
 
       <div class="step-nav-wrap standalone">
@@ -89,7 +91,6 @@
             <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="4">Signal weights</button>
             <span aria-hidden="true">›</span>
             <button type="button" id="specificity-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="specificity-crumbs">
-              <svg class="icon-target" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/></svg>
               Query Specificity
             </button>
             <span aria-hidden="true">›</span>
@@ -619,47 +620,74 @@
         <h2 id="resources-title">Projects</h2>
       </div>
       <div class="resource-list">
-        <a href="https://github.com/andrebarthelmeshellmuth/spryker-search-toolkit" target="_blank" rel="noopener noreferrer">
-          <span>
-            <small>Bundle</small>
-            <strong>Search Toolkit</strong>
-            <em>One composer require for the four packages below.</em>
-          </span>
-          <b aria-hidden="true">↗</b>
-        </a>
-        <a class="is-nested" href="https://github.com/andrebarthelmeshellmuth/spryker-search-debugger" target="_blank" rel="noopener noreferrer">
-          <span>
-            <small>Explanation</small>
-            <strong>Search Debug</strong>
-            <em>Inspect how every term contributes to a result.</em>
-          </span>
-          <b aria-hidden="true">↗</b>
-        </a>
-        <a class="is-nested" href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking" target="_blank" rel="noopener noreferrer">
-          <span>
-            <small>Implementation</small>
-            <strong>Search Ranking</strong>
-            <em>Configure and calculate the transparent ranking formula.</em>
-          </span>
-          <b aria-hidden="true">↗</b>
-        </a>
-        <a class="is-nested" href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking-optimizer" target="_blank" rel="noopener noreferrer">
-          <span>
-            <small>Optimization</small>
-            <strong>Search Optimization</strong>
-            <em>Learn ranking parameters from weighted human relevance judgments.</em>
-          </span>
-          <b aria-hidden="true">↗</b>
-        </a>
-        <a class="is-nested" href="https://github.com/andrebarthelmeshellmuth/spryker-search-feedback" target="_blank" rel="noopener noreferrer">
-          <span>
-            <small>Feedback</small>
-            <strong>Search Feedback</strong>
-            <em>Let an authorized storefront admin file a ticket about a set of search results.</em>
-          </span>
-          <b aria-hidden="true">↗</b>
-        </a>
+        <div class="resource-row">
+          <a class="resource-row-link" href="https://github.com/andrebarthelmeshellmuth/spryker-search-toolkit" target="_blank" rel="noopener noreferrer">
+            <span>
+              <small>Bundle</small>
+              <strong>Search Toolkit</strong>
+              <em>One composer require for the four packages below.</em>
+            </span>
+            <svg class="resource-github-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+        </div>
+        <div class="resource-row is-nested">
+          <a class="resource-row-link" href="https://github.com/andrebarthelmeshellmuth/spryker-search-feedback" target="_blank" rel="noopener noreferrer">
+            <span>
+              <small>Feedback</small>
+              <strong>Search Feedback</strong>
+              <em>Let an authorized storefront admin file a ticket about a set of search results.</em>
+            </span>
+            <svg class="resource-github-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+          <a class="resource-screenshots-link" href="screenshots.html#search-feedback">Screenshots</a>
+        </div>
+        <div class="resource-row is-nested">
+          <a class="resource-row-link" href="https://github.com/andrebarthelmeshellmuth/spryker-search-debugger" target="_blank" rel="noopener noreferrer">
+            <span>
+              <small>Explanation</small>
+              <strong>Search Debug</strong>
+              <em>Inspect how every term contributes to a result.</em>
+            </span>
+            <svg class="resource-github-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+          <a class="resource-screenshots-link" href="screenshots.html#search-debug">Screenshots</a>
+        </div>
+        <div class="resource-row is-nested">
+          <a class="resource-row-link" href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking" target="_blank" rel="noopener noreferrer">
+            <span>
+              <small>Implementation</small>
+              <strong>Search Ranking</strong>
+              <em>Configure and calculate the transparent ranking formula.</em>
+            </span>
+            <svg class="resource-github-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+          <a class="resource-screenshots-link" href="screenshots.html#search-ranking">Screenshots</a>
+        </div>
+        <div class="resource-row is-nested">
+          <a class="resource-row-link" href="https://github.com/andrebarthelmeshellmuth/spryker-search-ranking-optimizer" target="_blank" rel="noopener noreferrer">
+            <span>
+              <small>Optimization</small>
+              <strong>Search Optimization</strong>
+              <em>Learn ranking parameters from weighted human relevance judgments.</em>
+            </span>
+            <svg class="resource-github-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+          <a class="resource-screenshots-link" href="screenshots.html#search-optimization">Screenshots</a>
+        </div>
+        <div class="resource-row is-nested">
+          <a class="resource-row-link" href="https://github.com/andrebarthelmeshellmuth/blackbox-optimizer" target="_blank" rel="noopener noreferrer">
+            <span>
+              <small>Dependency</small>
+              <strong>blackbox-optimizer</strong>
+              <em>The derivative-free optimization engine Search Optimization is built on — no Spryker dependency, usable in any PHP project.</em>
+            </span>
+            <svg class="resource-github-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+        </div>
       </div>
+      <p class="resource-deps-note">
+        <strong>Dependencies:</strong> Search Feedback and Search Debug install standalone — neither needs any other package here. Search Debug can optionally display Search Ranking's business-signal breakdown in its overlay if Search Ranking happens to be installed too, but works fully without it. Search Optimization requires Search Ranking, since it tunes Search Ranking's own weights. blackbox-optimizer is the general-purpose engine Search Optimization delegates the actual optimization to — it has no Spryker dependency at all and is equally usable outside this toolkit, in any PHP project that needs derivative-free, box-constrained optimization.
+      </p>
     </section>
 
     <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">

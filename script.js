@@ -213,10 +213,16 @@ const specContentIds = [
   "specificity-shift",
   "specificity-calibrate"
 ];
-// From "Shift the Balance" onward, the shift half of the secondary formula is what's actually being
-// explained — highlighted only from here on, not during the earlier term-analysis/blend/normalize steps
-// which build toward it but don't touch α directly yet.
-const SPECIFICITY_SHIFT_STEP = 3;
+// Each Query Specificity crumb highlights the slice of the three secondary formula lines it's currently
+// explaining: which term-level inputs feed raw specificity, which stage of the pipeline is active, or —
+// on the last step — every parameter that specificity's own calibration pass can tune.
+const SPEC_STEP_FRAGMENTS = [
+  ["alpha", "spec-log"],
+  ["alpha", "spec-max", "spec-hmean"],
+  ["alpha", "d-fraction"],
+  ["alpha", "d-shift"],
+  ["alpha", "spec-param"]
+];
 
 function showOptStep(index) {
   optCrumbs.forEach((crumb, i) => crumb.setAttribute("aria-selected", String(i === index)));
@@ -236,7 +242,7 @@ function showSpecStep(index) {
     const card = document.getElementById(id);
     if (card) card.hidden = i !== index;
   });
-  highlightFormulaFragments(index >= SPECIFICITY_SHIFT_STEP ? ["alpha", "spec-alpha", "spec-shift"] : ["alpha"]);
+  highlightFormulaFragments(SPEC_STEP_FRAGMENTS[index] ?? ["alpha"]);
 }
 
 specCrumbs.forEach((crumb, i) => {
@@ -274,7 +280,7 @@ specificityToggle.addEventListener("click", () => {
     toggle: specificityToggle,
     panel: specificityPanel,
     onOpen: () => { specificityFormulaCard.hidden = false; showSpecStep(0); },
-    activeFragments: ["alpha"]
+    activeFragments: SPEC_STEP_FRAGMENTS[0]
   });
 });
 
