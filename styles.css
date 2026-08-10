@@ -493,8 +493,17 @@ h1 {
 .resource-list small { color: var(--teal); font: 700 .7rem/1 ui-monospace, monospace; text-transform: uppercase; }
 .resource-list strong { font-size: 1.05rem; }
 .resource-list em { color: var(--muted); font-style: normal; }
-.resource-github-icon { flex: 0 0 auto; color: var(--ink); opacity: .55; transition: opacity .2s ease, color .2s ease; }
-.resource-row-link:hover .resource-github-icon { opacity: 1; color: var(--teal); }
+.resource-github-link {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  padding: .5rem;
+  color: var(--ink);
+  opacity: .55;
+  transition: opacity .2s ease, color .2s ease;
+}
+.resource-github-link:hover { opacity: 1; color: var(--teal); }
+.resource-github-icon { display: block; }
 .deps-diagram {
   margin: 1.5rem 0 0;
   padding: 1.5rem 1.5rem 1rem;
