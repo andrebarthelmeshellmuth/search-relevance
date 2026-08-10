@@ -712,11 +712,11 @@
           </defs>
 
           <!-- connectors (drawn first, under the nodes) -->
-          <!-- Toolkit fans out to all four packages it bundles -->
-          <line x1="480" y1="84" x2="105" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="480" y1="84" x2="355" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="480" y1="84" x2="605" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="480" y1="84" x2="855" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+          <!-- Toolkit fans out to all four packages it bundles, one strictly vertical drop per package -->
+          <line x1="105" y1="84" x2="105" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+          <line x1="355" y1="84" x2="355" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+          <line x1="605" y1="84" x2="605" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+          <line x1="855" y1="84" x2="855" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
 
           <line x1="455" y1="205" x2="503" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
           <text x="480" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">optional</text>
@@ -732,7 +732,7 @@
 
           <!-- Search Toolkit -->
           <g>
-            <rect x="375" y="20" width="210" height="64" rx="10" style="fill:var(--teal-soft); stroke:var(--teal); stroke-width:1.6" />
+            <rect x="5" y="20" width="950" height="64" rx="10" style="fill:var(--teal-soft); stroke:var(--teal); stroke-width:1.6" />
             <text x="480" y="49" class="deps-node-title" style="fill:var(--ink)">Search Toolkit</text>
             <text x="480" y="68" class="deps-node-sub" style="fill:var(--teal)">one composer require</text>
           </g>
@@ -755,7 +755,7 @@
           <g>
             <rect x="505" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
             <text x="605" y="202" class="deps-node-title" style="fill:var(--ink)">Search Ranking</text>
-            <text x="605" y="222" class="deps-node-sub" style="fill:var(--muted)">the ranking formula</text>
+            <text x="605" y="222" class="deps-node-sub" style="fill:var(--teal)">no dependencies</text>
           </g>
 
           <!-- Search Optimization -->
