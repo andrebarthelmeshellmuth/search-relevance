@@ -508,6 +508,7 @@ h1 {
 .deps-node-sub { font: 700 .62rem/1 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .02em; }
 .deps-edge-label { font: 700 .62rem/1 ui-monospace, monospace; text-transform: uppercase; letter-spacing: .02em; }
 .deps-edge-label--center { text-anchor: middle; }
+.deps-edge-label--tight { font-size: .56rem; letter-spacing: 0; }
 .deps-diagram figcaption { margin-top: .6rem; text-align: center; color: var(--muted); font-size: .82rem; }
 .construction-note {
   display: flex;
