@@ -790,6 +790,14 @@
       <p>Search Relevance v1 targets the capabilities available in OpenSearch 1.3, which has been the default for Spryker installations for several years.</p>
       <p>With Spryker now enabling OpenSearch 3.x, a new generation of ranking features becomes practical. Search Relevance v2 will explore reranking, hybrid retrieval, Learning-to-Rank and other capabilities that previously weren't available.</p>
     </section>
+
+    <section class="roadmap" id="origins" aria-labelledby="origins-title">
+      <div class="section-heading compact">
+        <h2 id="origins-title">Origins</h2>
+      </div>
+      <p>This project's starting point is Spryker's own <a href="https://docs.spryker.com/docs/pbc/all/search/latest/base-shop/best-practices/data-driven-ranking">Data-driven ranking</a> best-practice document — which itself documents a real system, not a Spryker invention: the ranking approach originally designed and implemented by Martin Loetsch and Krešimir Slugan at Contorion. Spryker's core never shipped an implementation of it, only the write-up.</p>
+      <p>search-ranking and search-ranking-optimizer are that idea built out and adapted for Spryker's actual plugin/facade architecture, then extended well past the original scope — locale/store scoping, specificity-aware relevance weighting, and automated black-box optimization among them.</p>
+    </section>
   </main>
 
   <footer class="site-footer">
