@@ -222,20 +222,14 @@
         "src": "screenshots/search-optimization/auto-tune-settings.png"
       },
       {
-        "title": "Optimization run form",
-        "description": "Add a description for this screenshot."
+        "title": "Ratings: the raw audit trail behind every rated query",
+        "description": "One row per individual heart/check/X click from the SRP widget — search term, product SKU, which admin rated it, the rating itself, and when. This is the raw input, not an aggregate: the same admin re-rating the same product for the same query updates their existing row in place rather than adding a new one, so Recorded At always reflects genuinely new activity, and the default sort surfaces that activity newest-first. The Admin column resolves the stored Yves customer reference to a real email address at render time, the same lookup search-feedback's own ticket grid uses, so this reads as \"who rated what\" instead of an opaque handle. This table is what Assess Rated Queries aggregates up from — one canonical row per search term instead of one row per click — and what both Saturation Point Calibration and a full optimization run draw their default search-term sample from.",
+        "src": "screenshots/search-optimization/ratings.png"
       },
       {
-        "title": "Rank eval dataset",
-        "description": "Add a description for this screenshot."
-      },
-      {
-        "title": "CMA-ES progress",
-        "description": "Add a description for this screenshot."
-      },
-      {
-        "title": "Parameter checklist",
-        "description": "Add a description for this screenshot."
+        "title": "Assess Rated Queries: telling the optimizer which query matters more",
+        "description": "One row per search term that has accumulated at least one rating, aggregated up from the Ratings table above — Admins rated and Total ratings tell you how much signal actually backs that row before you act on it. Importance weight is the real lever here: it's a linear weight in the weighted-mean nDCG aggregate the optimizer maximizes during a run, so a query at 2.5 contributes two and a half times as much to that aggregate — and gets ranked correspondingly better — as a query left at the 1.0 default, at the direct expense of how much attention lower-weighted queries get. Every query starts at 1.0, meaning \"no opinion yet\": the aggregate is a plain unweighted mean until someone who understands which searches actually matter to the business — a head term versus a long-tail one, a query that drives real revenue versus one that rarely converts — comes through and sets real values via Edit importance. Leaving everything at 1.0 isn't wrong, it just means every rated query is being told it matters equally, which is rarely true of a real catalog.",
+        "src": "screenshots/search-optimization/assess-rated-queries.png"
       }
     ]
   }
