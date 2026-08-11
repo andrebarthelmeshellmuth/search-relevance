@@ -741,6 +741,8 @@ h1 {
 .shift-state small { display: block; color: var(--muted); font-size: .68rem; margin-bottom: .2rem; }
 .mini-bar { display: block; height: .4rem; border-radius: 999px; background: #e7ebe9; overflow: hidden; }
 .mini-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), #74c8c4); border-radius: 999px; }
+.mini-bar i.fill-85 { width: 85%; }
+.mini-bar i.fill-40 { width: 40%; }
 .bar-row .mini-bar { width: 4.2rem; flex: 0 0 auto; }
 .shift-state .mini-bar { margin: .1rem 0; }
 .bar-split { display: flex; justify-content: space-between; gap: .3rem; margin: .3rem 0 .6rem; font-size: .62rem; color: var(--muted); }

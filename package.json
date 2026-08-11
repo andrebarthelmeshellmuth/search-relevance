@@ -1,0 +1,11 @@
+{
+  "name": "search-relevance",
+  "private": true,
+  "description": "search-relevance.dev static site -- no build step, this only pins the lint tooling used in CI.",
+  "scripts": {
+    "lint:html": "html-validate index.html screenshots.html"
+  },
+  "devDependencies": {
+    "html-validate": "^11.6.2"
+  }
+}

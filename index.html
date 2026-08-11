@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Open-source tools for debugging and improving Spryker search relevance. Understand Elasticsearch and OpenSearch scores, normalize business signals, and build explainable product ranking.">
   <meta name="theme-color" content="#f5f3ef">
-  <meta property="og:title" content="Spryker Search Ranking & Debugging Tools | Search Relevance">
+  <meta property="og:title" content="Spryker Search Ranking &amp; Debugging Tools | Search Relevance">
   <meta property="og:description" content="Open-source tools for debugging and improving Spryker search relevance. Understand Elasticsearch and OpenSearch scores, normalize business signals, and build explainable product ranking.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://search-relevance.dev/">
-  <title>Spryker Search Ranking & Debugging Tools | Search Relevance</title>
+  <title>Spryker Search Ranking &amp; Debugging Tools | Search Relevance</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ccircle%20cx='16'%20cy='16'%20r='14'%20fill='%23f5f3ef'%20stroke='%23122a35'%20stroke-width='2'/%3E%3Ctext%20x='16'%20y='21'%20font-family='ui-monospace,SFMono-Regular,Menlo,monospace'%20font-size='11'%20font-weight='700'%20fill='%23122a35'%20text-anchor='middle'%3ESR%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -43,7 +44,7 @@
     <section class="formula-stage" id="explorer" aria-label="Formula explorer">
       <div class="formula-card">
         <p class="formula-label">finalScore =</p>
-        <div class="formula" aria-label="final score equals alpha times score divided by score plus k, plus one minus alpha times the sum of weighted signals">
+        <div class="formula" role="img" aria-label="final score equals alpha times score divided by score plus k, plus one minus alpha times the sum of weighted signals">
           <span class="formula-fragment" data-fragment="alpha">α</span>
           <span class="operator">·</span>
           <span class="fraction formula-fragment" data-fragment="relevance">
@@ -63,7 +64,7 @@
 
       <div class="formula-card specificity-formula-card" id="specificity-formula-card" hidden>
         <p class="formula-label">Then, query specificity shifts <span class="no-uppercase">α</span> →</p>
-        <div class="formula formula-secondary" aria-label="effective alpha equals alpha plus m times the sign of d times the absolute value of d to the power of gamma">
+        <div class="formula formula-secondary" role="img" aria-label="effective alpha equals alpha plus m times the sign of d times the absolute value of d to the power of gamma">
           <span class="formula-fragment" data-fragment="spec-alpha">α<sub>eff</sub></span>
           <span class="operator">=</span>
           <span class="formula-fragment" data-fragment="spec-alpha">α</span>
@@ -530,13 +531,13 @@
                   <strong>Adaptive Weighting</strong>
                   <div class="shift-state">
                     <small>Specific</small>
-                    <div class="mini-bar"><i style="width:85%"></i></div>
+                    <div class="mini-bar"><i class="fill-85"></i></div>
                     <div class="bar-split"><span>Text 85%</span><span>Business 15%</span></div>
                   </div>
                   <div class="bar-arrow" aria-hidden="true">↓</div>
                   <div class="shift-state">
                     <small>Generic</small>
-                    <div class="mini-bar"><i style="width:40%"></i></div>
+                    <div class="mini-bar"><i class="fill-40"></i></div>
                     <div class="bar-split"><span>Text 40%</span><span>Business 60%</span></div>
                   </div>
                   <p>The result stays deterministic and fully explainable for every single query.</p>
@@ -610,7 +611,7 @@
             <div class="step-body" id="step-body"></div>
             <p class="implementation" id="step-implementation"></p>
           </div>
-          <div class="step-visual" id="step-visual" aria-label="Visualization for the selected formula step"></div>
+          <div class="step-visual" id="step-visual" role="img" aria-label="Visualization for the selected formula step"></div>
         </article>
       </div>
     </section>
