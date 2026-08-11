@@ -85,12 +85,12 @@
       },
       {
         "title": "Ticket list",
-        "description": "The Zed ticket grid: ID, topic, search term, a colored status badge (orange Open / green Answered or Closed), filed-at timestamp, and a View action per row — sortable and searchable via DataTables. Any Zed admin with access to the module sees every ticket, since Zed users and Yves customers are separate identity systems with no built-in link.",
+        "description": "The Zed ticket grid: ID, topic, search term, Customer, Store, Locale, a colored status badge (orange Open / green Answered or Closed), filed-at timestamp, and a View action per row — sortable and searchable via DataTables, with an optional Store/Locale filter above the table (unset by default, since this is a cross-scope triage view — the same posture search-ranking's own Metric History audit trail takes). Customer resolves the Yves customer reference to a real email via a one-line CustomerFacade::findCustomerByReference() lookup at render time, not a stored link — Zed users and Yves customers stay separate identity systems with no built-in relationship, and any Zed admin with access to the module still sees every ticket regardless of who filed it.",
         "src": "screenshots/search-feedback/ticket-list.png"
       },
       {
         "title": "Ticket detail",
-        "description": "A ticket's full context (topic, search term, active filters as JSON, page number, the exact SKUs shown, store/locale) plus the conversation thread and a reply form. Posting a reply auto-transitions an Open ticket to Answered; status can also be changed manually in either direction independently of replying.",
+        "description": "A ticket's full context (customer email, topic, search term, active filters as JSON, page number, the exact SKUs shown, store/locale) plus the conversation thread and a reply form. Posting a reply auto-transitions an Open ticket to Answered; status can also be changed manually in either direction independently of replying. The View SRP button next to the search term reconstructs the exact SRP the ticket was filed from — filters is the real SRP query string, already parsed into an array by the Yves widget — resolved to a working link via a Zed-side store → Yves host mapping, using the same STORE_TO_YVES_HOST_MAPPING convention Spryker's own AvailabilityNotification and Sitemap modules already establish, branching on dynamic-store-mode the same way core's own StoreYvesBaseUrlGetStrategy does.",
         "src": "screenshots/search-feedback/ticket-detail.png"
       }
     ]
