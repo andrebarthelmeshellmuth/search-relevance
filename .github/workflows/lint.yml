@@ -12,7 +12,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # html-validate 11.x uses fs.globSync internally, added in Node 22 -- Node 20 fails at
+          # runtime with "fs.globSync is not a function", not a version-mismatch error, so this isn't
+          # obvious from the failure alone.
+          node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run lint:html
