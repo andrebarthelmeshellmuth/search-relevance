@@ -1,10 +1,10 @@
-// Screenshot content (titles/descriptions/image paths) lives in a <script type="application/json"> tag
-// in screenshots.html, kept out of this file so the long-form text doesn't drown out the carousel/
-// lightbox behavior. Read synchronously rather than fetch()'d — fetch of a same-directory JSON file is
-// blocked by CORS when this page is opened as a plain file:// URL (no local server), which is how this
-// site gets previewed day to day; an inline script tag has no such restriction, on file://, http, or
-// https alike.
-const PACKAGES = JSON.parse(document.getElementById("screenshots-data").textContent);
+// Screenshot content (titles/descriptions/image paths) lives in screenshots-data.json, fetch()'d below —
+// kept out of this file so the long-form text doesn't drown out the carousel/lightbox behavior, and kept
+// out of screenshots.html so it's editable/diffable on its own. This requires a real HTTP origin (a local
+// server, or the deployed GitHub Pages site) — fetch() of a same-directory JSON file is blocked by CORS
+// when this page is opened as a plain file:// URL, unlike the inline <script type="application/json">
+// tag this replaced. See README for the local-preview docker-compose setup.
+let PACKAGES = null;
 
 const tabButtons = [...document.querySelectorAll("[data-package]")];
 const track = document.getElementById("carousel-track");
@@ -15,7 +15,7 @@ const indexEl = document.getElementById("screenshot-index");
 const titleEl = document.getElementById("screenshot-title");
 const descEl = document.getElementById("screenshot-description");
 
-let activePackage = PACKAGES[0];
+let activePackage = null;
 let activeIndex = 0;
 let itemStep = 0;
 let copyWidth = 0;
@@ -138,6 +138,7 @@ function selectPackage(pkg, { updateHash = true } = {}) {
 
 tabButtons.forEach(btn => {
   btn.addEventListener("click", () => {
+    if (!PACKAGES) return; // A click landing before the fetch below resolves — nothing to select yet.
     const pkg = PACKAGES.find(p => p.id === btn.dataset.package);
     if (pkg) selectPackage(pkg);
   });
@@ -145,15 +146,27 @@ tabButtons.forEach(btn => {
 
 let resizeRaf = null;
 window.addEventListener("resize", () => {
-  if (resizeRaf) return;
+  if (!PACKAGES || resizeRaf) return;
   resizeRaf = requestAnimationFrame(() => {
     renderCarousel();
     resizeRaf = null;
   });
 });
 
-const initial = PACKAGES.find(p => p.id === location.hash.slice(1)) || PACKAGES[0];
-selectPackage(initial, { updateHash: false });
+fetch("screenshots-data.json")
+  .then(response => {
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+    return response.json();
+  })
+  .then(packages => {
+    PACKAGES = packages;
+    const initial = PACKAGES.find(p => p.id === location.hash.slice(1)) || PACKAGES[0];
+    selectPackage(initial, { updateHash: false });
+  })
+  .catch(() => {
+    track.innerHTML = "";
+    frame.innerHTML = `<div class="screenshot-placeholder"><span>Couldn't load screenshots-data.json — this page needs to be served over http(s), not opened directly as a file:// URL.</span></div>`;
+  });
 
 // Lightbox: clicking the main screenshot opens it larger in a scrollable overlay, closed by the fixed
 // close button (stays put regardless of scroll position), the Escape key, or a click on the backdrop
