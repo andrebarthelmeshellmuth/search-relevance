@@ -207,6 +207,11 @@
     "label": "Search Optimization",
     "screenshots": [
       {
+        "title": "Saturation point calibration: replacing a guess with a sample",
+        "description": "search-ranking-optimizer:calibrate is normally a scheduled cron tick; fired here on demand against DE/en_US's relevance_score calibration type. It sourced its search terms from the queries this scope has real ratings for via the SRP relevance-rating widget — just one so far — fired the live catalog search-string query for it, sampled the raw Elasticsearch text-relevance score of the top 10 ranked products, and pooled those 10 values into a suggested k of 17.6953 (min 17.233, median 17.369, max 18.366; a tight spread, though still only one search term deep). The page compares that straight against the scope's live relevanceSaturationPoint of 12 above it — a number that was never computed, only eyeballed off the search-debug overlay per the Settings page's own guidance. The gap matters: at the live k=12, a real 17.7-point result already reads as 0.596 through the relevance-score/(relevance-score + k) fraction, most of the way to \"fully saturated\"; calibration's k=17.6953 says a 17.7-point result should instead read as almost exactly neutral, 0.5. Applying the suggested value (the form below pre-fills it, editable before Apply) would mean this shop's typical top-ranked results stop reading as more saturated than they actually are — at the cost of currently resting on a sample of one query, worth widening before trusting it over the original guess.",
+        "src": "screenshots/search-optimization/saturation-point-calibration.png"
+      },
+      {
         "title": "Optimization run form",
         "description": "Add a description for this screenshot."
       },
