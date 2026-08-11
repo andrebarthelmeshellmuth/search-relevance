@@ -90,7 +90,7 @@
       },
       {
         "title": "Ticket detail",
-        "description": "A ticket's full context (customer email, topic, search term, active filters as JSON, page number, the exact SKUs shown, store/locale) plus the conversation thread and a reply form. Posting a reply auto-transitions an Open ticket to Answered; status can also be changed manually in either direction independently of replying. The View SRP button next to the search term reconstructs the exact SRP the ticket was filed from — filters is the real SRP query string, already parsed into an array by the Yves widget — resolved to a working link via a Zed-side store → Yves host mapping, using the same STORE_TO_YVES_HOST_MAPPING convention Spryker's own AvailabilityNotification and Sitemap modules already establish, branching on dynamic-store-mode the same way core's own StoreYvesBaseUrlGetStrategy does.",
+        "description": "A ticket's full context (customer email, topic, search term, active filters as JSON, page number, the exact SKUs shown, store/locale) plus the conversation thread and a reply form. Posting a reply auto-transitions an Open ticket to Answered; status can also be changed manually in either direction independently of replying. The View SRP button next to the search term takes you straight to the exact search results page the ticket was filed from — same query, same active filters — though the results themselves may look different by the time you click it, since ranking, stock, and pricing keep moving.",
         "src": "screenshots/search-feedback/ticket-detail.png"
       }
     ]
