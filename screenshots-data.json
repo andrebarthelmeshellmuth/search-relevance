@@ -117,12 +117,12 @@
       },
       {
         "title": "Query specificity (generic query)",
-        "description": "Generic searches benefit more from business signals than highly specific ones. Here, the query "office" is recognized as broad, causing the ranking formula to reduce the influence of text relevance and place greater emphasis on configured business metrics. Every intermediate calculation is shown for complete transparency.",
+        "description": "Generic searches benefit more from business signals than highly specific ones. Here, the query \"office\" is recognized as broad, causing the ranking formula to reduce the influence of text relevance and place greater emphasis on configured business metrics. Every intermediate calculation is shown for complete transparency.",
         "src": "screenshots/search-ranking/specificity-office.png"
       },
       {
         "title": "Query specificity (specific query)",
-        "description": "Highly specific searches should primarily reward textual relevance. For the narrow query "banknote counter", the calculated relevance weight shifts strongly toward the OpenSearch score, ensuring that precise matches outrank products that merely perform well according to business metrics. The complete derivation is shown alongside the final ranking calculation.",
+        "description": "Highly specific searches should primarily reward textual relevance. For the narrow query \"banknote counter\", the calculated relevance weight shifts strongly toward the OpenSearch score, ensuring that precise matches outrank products that merely perform well according to business metrics. The complete derivation is shown alongside the final ranking calculation.",
         "src": "screenshots/search-ranking/specificity-banknote-counter.png"
       }
     ]
