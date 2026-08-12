@@ -26,9 +26,16 @@ function placeholderIcon() {
   return `<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 8"/></svg>`;
 }
 
+// Every variant falls back to shot.src so a screenshot added to screenshots-data.json by hand still
+// renders (just heavier) before `npm run images` has been run over it.
+const thumbSrc = (shot) => shot.thumb || shot.src;
+const fullSrc = (shot) => shot.full || shot.src;
+
 function thumbHTML(shot, i) {
+  // width/height match the fixed .carousel-thumb-media box rather than the file's own 420x240, because
+  // object-fit: cover crops to exactly that box -- these attributes are here to reserve layout space.
   const media = shot.src
-    ? `<img src="${shot.src}" alt="">`
+    ? `<img src="${thumbSrc(shot)}" alt="" width="210" height="120" loading="lazy" decoding="async">`
     : `<span class="carousel-thumb-placeholder">${placeholderIcon()}</span>`;
   return `<button type="button" class="carousel-thumb" data-index="${i}" aria-label="View screenshot: ${shot.title}">
     <span class="carousel-thumb-media">${media}</span>
@@ -123,7 +130,7 @@ function renderViewer() {
   titleEl.textContent = shot.title;
   descEl.textContent = shot.description;
   frame.innerHTML = shot.src
-    ? `<img src="${shot.src}" alt="${shot.title}">`
+    ? `<img src="${fullSrc(shot)}" alt="${shot.title}" width="${shot.width ?? ""}" height="${shot.height ?? ""}" decoding="async">`
     : `<div class="screenshot-placeholder">${placeholderIcon()}<span>Screenshot coming soon</span></div>`;
 }
 

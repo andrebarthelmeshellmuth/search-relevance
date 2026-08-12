@@ -21,3 +21,22 @@ docker compose up -d
 ```
 
 Then open `http://localhost:8000/`. Stop it with `docker compose down`.
+
+## Screenshots
+
+`screenshots/` holds the 1920px PNGs, which are the source of truth but are never served to a browser.
+The gallery loads two WebP derivatives per screenshot instead — a 420×240 thumbnail for the carousel
+strip and a ≤1920px copy for the main viewer and lightbox. The thumbnail is the one that matters: the
+strip loads every screenshot of the selected package at once, so serving the originals there meant
+around 3 MB to draw a row of 210px images.
+
+After adding, replacing or removing a screenshot, add its entry to `screenshots-data.json` (`title`,
+`description`, `src`) and then run:
+
+```sh
+npm install        # once; sharp is an optionalDependency, so CI skips it
+npm run images
+```
+
+That writes the `-thumb.webp` / `-full.webp` files and fills in each entry's `thumb`, `full`, `width`
+and `height` keys. An entry with no `src` is an intentional "coming soon" placeholder and is skipped.
