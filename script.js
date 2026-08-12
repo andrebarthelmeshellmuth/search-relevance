@@ -64,7 +64,7 @@ function chartSvg(markerX = 145, markerY = 131, showK = false) {
     <text class="chart-label" x="18" y="134">0.5</text>
     <text class="chart-label" x="52" y="238">0</text>
     <text class="chart-label" x="352" y="238">raw _score</text>
-    ${showK ? `<line x1="${markerX}" y1="${markerY + 10}" x2="${markerX}" y2="215" stroke="#007f83" stroke-dasharray="4 4"/><text class="chart-label" x="${markerX - 6}" y="238">k</text>` : ""}
+    ${showK ? `<line x1="${markerX}" y1="${markerY + 10}" x2="${markerX}" y2="215" stroke="var(--teal)" stroke-dasharray="4 4"/><text class="chart-label" x="${markerX - 6}" y="238">k</text>` : ""}
   </svg>`;
 }
 
@@ -154,12 +154,36 @@ function highlightFormulaFragments(names) {
   });
 }
 
-function showStep(index, focus = false, scrollTabIntoView = true) {
+// aria-current names the one button whose content is on screen. It's removed rather than set to
+// "false" so `[aria-current]` alone is a valid CSS/query selector for "the active one".
+function setCurrent(button, isCurrent) {
+  if (isCurrent) button.setAttribute("aria-current", "step");
+  else button.removeAttribute("aria-current");
+}
+
+// Arrow keys walk a row of step buttons without leaving it, and Home/End jump to its ends. Tab still
+// stops on every button: these rows are plain groups, not tablists, so hiding all but one button from
+// Tab would be surprising rather than helpful.
+function wireArrowKeys(buttons, activate) {
+  buttons.forEach((button, i) => {
+    button.addEventListener("keydown", event => {
+      const targets = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: buttons.length - 1 };
+      if (!(event.key in targets)) return;
+      event.preventDefault();
+      const next = (targets[event.key] + buttons.length) % buttons.length;
+      activate(next);
+      buttons[next].focus();
+    });
+  });
+}
+
+function showStep(index, scrollTabIntoView = true) {
   closeAllCrumbs();
   activeStep = (index + steps.length) % steps.length;
   const step = steps[activeStep];
-  const totalPages = steps.length + 2; // + Query Specificity + Optimization, the two toggled breadcrumb lines
-  count.textContent = `${String(activeStep + 1).padStart(2, "0")} / ${String(totalPages).padStart(2, "0")}`;
+  // The two breadcrumb toggles are not counted here: opening either one hides this panel outright
+  // rather than advancing it, so a denominator including them could never be reached.
+  count.textContent = `${String(activeStep + 1).padStart(2, "0")} / ${String(steps.length).padStart(2, "0")}`;
   title.textContent = step.title;
   lead.textContent = step.lead;
   body.innerHTML = step.body;
@@ -169,25 +193,15 @@ function showStep(index, focus = false, scrollTabIntoView = true) {
 
   tabButtons.forEach((button, i) => {
     const isActive = i === activeStep;
-    button.setAttribute("aria-selected", String(isActive));
-    button.tabIndex = isActive ? 0 : -1;
+    setCurrent(button, isActive);
     if (isActive && scrollTabIntoView) button.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   });
 
   highlightFormulaFragments(step.fragments);
-
-  if (focus) tabButtons[activeStep].focus();
 }
 
-tabButtons.forEach((button, i) => {
-  button.addEventListener("click", () => showStep(i));
-  button.addEventListener("keydown", event => {
-    if (event.key === "ArrowRight") { event.preventDefault(); showStep(activeStep + 1, true); }
-    if (event.key === "ArrowLeft") { event.preventDefault(); showStep(activeStep - 1, true); }
-    if (event.key === "Home") { event.preventDefault(); showStep(0, true); }
-    if (event.key === "End") { event.preventDefault(); showStep(steps.length - 1, true); }
-  });
-});
+tabButtons.forEach((button, i) => button.addEventListener("click", () => showStep(i)));
+wireArrowKeys(tabButtons, showStep);
 
 const optimizationToggle = document.getElementById("optimization-toggle");
 const optimizationCrumbs = document.getElementById("optimization-crumbs");
@@ -225,19 +239,18 @@ const SPEC_STEP_FRAGMENTS = [
 ];
 
 function showOptStep(index) {
-  optCrumbs.forEach((crumb, i) => crumb.setAttribute("aria-selected", String(i === index)));
+  optCrumbs.forEach((crumb, i) => setCurrent(crumb, i === index));
   optContentIds.forEach((id, i) => {
     const card = document.getElementById(id);
     if (card) card.hidden = i !== index;
   });
 }
 
-optCrumbs.forEach((crumb, i) => {
-  crumb.addEventListener("click", () => showOptStep(i));
-});
+optCrumbs.forEach((crumb, i) => crumb.addEventListener("click", () => showOptStep(i)));
+wireArrowKeys(optCrumbs, showOptStep);
 
 function showSpecStep(index) {
-  specCrumbs.forEach((crumb, i) => crumb.setAttribute("aria-selected", String(i === index)));
+  specCrumbs.forEach((crumb, i) => setCurrent(crumb, i === index));
   specContentIds.forEach((id, i) => {
     const card = document.getElementById(id);
     if (card) card.hidden = i !== index;
@@ -245,9 +258,8 @@ function showSpecStep(index) {
   highlightFormulaFragments(SPEC_STEP_FRAGMENTS[index] ?? ["alpha"]);
 }
 
-specCrumbs.forEach((crumb, i) => {
-  crumb.addEventListener("click", () => showSpecStep(i));
-});
+specCrumbs.forEach((crumb, i) => crumb.addEventListener("click", () => showSpecStep(i)));
+wireArrowKeys(specCrumbs, showSpecStep);
 
 function toggleBreadcrumbLine(willOpen, { crumbs, toggle, panel, onOpen, activeFragments }) {
   closeAllCrumbs();
@@ -258,9 +270,7 @@ function toggleBreadcrumbLine(willOpen, { crumbs, toggle, panel, onOpen, activeF
     explorerShell.hidden = true;
     onOpen();
   }
-  tabButtons.forEach((button, i) => {
-    button.setAttribute("aria-selected", String(!willOpen && i === activeStep));
-  });
+  tabButtons.forEach((button, i) => setCurrent(button, !willOpen && i === activeStep));
   highlightFormulaFragments(willOpen ? activeFragments : steps[activeStep].fragments);
 }
 
@@ -288,4 +298,4 @@ specificityToggle.addEventListener("click", () => {
 // all, so the tab strip (which sits below the hero, off-screen at scroll 0) has no business being pulled
 // into view — every real user action still calls showStep() with its default (true), keeping the active
 // tab visible during click/keyboard navigation.
-showStep(0, false, false);
+showStep(0, false);

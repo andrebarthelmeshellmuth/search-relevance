@@ -129,25 +129,46 @@ function renderViewer() {
   indexEl.textContent = `${activeIndex + 1} / ${activePackage.screenshots.length}`;
   titleEl.textContent = shot.title;
   descEl.textContent = shot.description;
+  // A real <button> rather than a click handler on the <img>: the zoom-in cursor promises the image
+  // opens larger, and that promise has to hold for Enter/Space too, not just a mouse.
+  // The image itself is alt="" because the <h2> and description directly below it are its caption --
+  // the button's own label is what names it, so an alt here would just repeat the title twice.
   frame.innerHTML = shot.src
-    ? `<img src="${fullSrc(shot)}" alt="${shot.title}" width="${shot.width ?? ""}" height="${shot.height ?? ""}" decoding="async">`
+    ? `<button type="button" class="screenshot-zoom" aria-label="Enlarge screenshot: ${shot.title}">
+         <img src="${fullSrc(shot)}" alt="" width="${shot.width ?? ""}" height="${shot.height ?? ""}" decoding="async">
+       </button>`
     : `<div class="screenshot-placeholder">${placeholderIcon()}<span>Screenshot coming soon</span></div>`;
 }
 
 function selectPackage(pkg, { updateHash = true } = {}) {
   activePackage = pkg;
   activeIndex = 0;
-  tabButtons.forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.package === pkg.id)));
+  // Removed rather than set to "false", so `[aria-current]` alone selects the active button in CSS.
+  tabButtons.forEach(btn => {
+    if (btn.dataset.package === pkg.id) btn.setAttribute("aria-current", "true");
+    else btn.removeAttribute("aria-current");
+  });
   renderCarousel();
   renderViewer();
   if (updateHash) history.replaceState(null, "", `#${pkg.id}`);
 }
 
-tabButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    if (!PACKAGES) return; // A click landing before the fetch below resolves — nothing to select yet.
-    const pkg = PACKAGES.find(p => p.id === btn.dataset.package);
-    if (pkg) selectPackage(pkg);
+function selectPackageAt(index) {
+  if (!PACKAGES) return; // An interaction landing before the fetch below resolves — nothing to select.
+  const pkg = PACKAGES.find(p => p.id === tabButtons[index].dataset.package);
+  if (pkg) selectPackage(pkg);
+}
+
+tabButtons.forEach((btn, i) => {
+  btn.addEventListener("click", () => selectPackageAt(i));
+  // Arrow keys walk the package row; Tab still reaches every button, matching the homepage.
+  btn.addEventListener("keydown", event => {
+    const targets = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabButtons.length - 1 };
+    if (!(event.key in targets)) return;
+    event.preventDefault();
+    const next = (targets[event.key] + tabButtons.length) % tabButtons.length;
+    selectPackageAt(next);
+    tabButtons[next].focus();
   });
 });
 
@@ -210,9 +231,11 @@ function closeLightbox() {
 }
 
 frame.addEventListener("click", (event) => {
-  const img = event.target.closest("img");
-  if (!img) return;
-  openLightbox(img.src, img.alt);
+  if (!event.target.closest(".screenshot-zoom")) return;
+  // Read the shot from state rather than off the DOM node, so the lightbox gets the real title even
+  // though the <img> is deliberately alt="".
+  const shot = activePackage.screenshots[activeIndex];
+  openLightbox(fullSrc(shot), shot.title);
 });
 
 lightboxClose.addEventListener("click", closeLightbox);
@@ -220,5 +243,16 @@ lightbox.addEventListener("click", (event) => {
   if (event.target === lightbox) closeLightbox();
 });
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
+  if (lightbox.hidden) return;
+  if (event.key === "Escape") {
+    closeLightbox();
+    return;
+  }
+  // aria-modal="true" tells assistive tech the rest of the page is inert, but it does nothing to the
+  // actual tab order -- without this, Tab walks straight out of the overlay and into the page behind
+  // it. The close button is the only focusable thing in here, so the trap is just "stay on it".
+  if (event.key === "Tab") {
+    event.preventDefault();
+    lightboxClose.focus();
+  }
 });

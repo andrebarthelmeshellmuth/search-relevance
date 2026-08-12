@@ -42,14 +42,16 @@
 
     <section class="screenshots-stage" id="screenshots" aria-label="Screenshot gallery">
       <div class="step-nav-wrap standalone">
-        <div class="step-nav" role="tablist" aria-label="Package selection">
-          <button type="button" role="tab" aria-selected="true" aria-controls="screenshot-viewer" data-package="search-feedback">Search Feedback</button>
+        <!-- Same group/aria-current pattern as the formula explorer on the homepage, so both pages
+             behave identically under a screen reader and under the arrow keys. -->
+        <div class="step-nav" role="group" aria-label="Package selection">
+          <button type="button" aria-current="true" aria-controls="screenshot-viewer" data-package="search-feedback">Search Feedback</button>
           <span aria-hidden="true">|</span>
-          <button type="button" role="tab" aria-selected="false" aria-controls="screenshot-viewer" data-package="search-debug">Search Debug</button>
+          <button type="button" aria-controls="screenshot-viewer" data-package="search-debug">Search Debug</button>
           <span aria-hidden="true">|</span>
-          <button type="button" role="tab" aria-selected="false" aria-controls="screenshot-viewer" data-package="search-ranking">Search Ranking</button>
+          <button type="button" aria-controls="screenshot-viewer" data-package="search-ranking">Search Ranking</button>
           <span aria-hidden="true">|</span>
-          <button type="button" role="tab" aria-selected="false" aria-controls="screenshot-viewer" data-package="search-optimization">Search Optimization</button>
+          <button type="button" aria-controls="screenshot-viewer" data-package="search-optimization">Search Optimization</button>
         </div>
       </div>
 

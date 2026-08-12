@@ -82,21 +82,27 @@
           <span class="operator">·</span>
           <span class="formula-fragment" data-fragment="spec-shift">|d|</span><sup><span class="formula-fragment" data-fragment="spec-param">γ</span></sup>
         </div>
-        <p class="formula-summary">d = <span class="formula-fragment" data-fragment="d-shift">2 ·</span> <span class="formula-fragment wraps-fraction" data-fragment="d-fraction"><span class="fraction"><span class="numerator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup></span><span class="denominator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup> + <span class="formula-fragment nested" data-fragment="spec-param">k<sub>spec</sub><sup>p</sup></span></span></span></span> <span class="formula-fragment" data-fragment="d-shift">− 1</span></p>
-        <p class="formula-summary">specificity = <span class="formula-fragment" data-fragment="spec-max"><span class="formula-fragment nested" data-fragment="spec-param">β</span> · max(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-max">)</span> + <span class="formula-fragment" data-fragment="spec-hmean">(1 − <span class="formula-fragment nested" data-fragment="spec-param">β</span>) · harmonicMean(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-hmean">)</span></p>
+        <!-- Same treatment as the two formulas above: stacked fractions and superscripts read aloud as
+             an unpunctuated run of symbols, so each line carries the spoken version as its label. -->
+        <p class="formula-summary" role="img" aria-label="d equals 2 times specificity to the power of p, divided by specificity to the power of p plus k sub spec to the power of p, minus 1">d = <span class="formula-fragment" data-fragment="d-shift">2 ·</span> <span class="formula-fragment wraps-fraction" data-fragment="d-fraction"><span class="fraction"><span class="numerator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup></span><span class="denominator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup> + <span class="formula-fragment nested" data-fragment="spec-param">k<sub>spec</sub><sup>p</sup></span></span></span></span> <span class="formula-fragment" data-fragment="d-shift">− 1</span></p>
+        <p class="formula-summary" role="img" aria-label="specificity equals beta times the maximum of the log of catalog size divided by documents containing the term, plus one minus beta times the harmonic mean of the log of catalog size divided by documents containing the term">specificity = <span class="formula-fragment" data-fragment="spec-max"><span class="formula-fragment nested" data-fragment="spec-param">β</span> · max(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-max">)</span> + <span class="formula-fragment" data-fragment="spec-hmean">(1 − <span class="formula-fragment nested" data-fragment="spec-param">β</span>) · harmonicMean(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">catalog size</span><span class="denominator">documents containing the term</span></span>)</span><span class="formula-fragment" data-fragment="spec-hmean">)</span></p>
       </div>
 
+      <!-- Deliberately not role="tablist": this row mixes five step buttons with two disclosure toggles
+           that hide the panel entirely rather than swapping its contents, which is not what a tablist is
+           and which browsers reject as an invalid tablist child. aria-current="step" describes what these
+           buttons actually are, and applies just as well to the two breadcrumb rows below. -->
       <div class="step-nav-wrap standalone">
-          <div class="step-nav" role="tablist" aria-label="Formula explanation steps">
-            <button type="button" role="tab" aria-selected="true" aria-controls="step-panel" data-step="0">Overview</button>
+          <div class="step-nav" role="group" aria-label="Formula explanation steps">
+            <button type="button" aria-current="step" aria-controls="step-panel" data-step="0">Overview</button>
             <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="1">Elasticsearch relevance</button>
+            <button type="button" aria-controls="step-panel" data-step="1">Elasticsearch relevance</button>
             <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="2">Saturation point</button>
+            <button type="button" aria-controls="step-panel" data-step="2">Saturation point</button>
             <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="3">Ranking signals</button>
+            <button type="button" aria-controls="step-panel" data-step="3">Ranking signals</button>
             <span aria-hidden="true">›</span>
-            <button type="button" role="tab" aria-selected="false" aria-controls="step-panel" data-step="4">Signal weights</button>
+            <button type="button" aria-controls="step-panel" data-step="4">Signal weights</button>
             <span aria-hidden="true">›</span>
             <button type="button" id="specificity-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="specificity-crumbs">
               Query Specificity
@@ -111,32 +117,32 @@
 
       <div class="optimization-crumbs" id="specificity-crumbs">
         <div class="optimization-crumbs-clip">
-          <div class="optimization-crumbs-inner" role="tablist" aria-label="Query specificity steps">
-            <button type="button" role="tab" class="crumb" data-spec-step="0">Analyze Query Terms</button>
+          <div class="optimization-crumbs-inner" role="group" aria-label="Query specificity steps">
+            <button type="button" class="crumb" data-spec-step="0" aria-controls="specificity-terms">Analyze Query Terms</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-spec-step="1">Raw Specificity</button>
+            <button type="button" class="crumb" data-spec-step="1" aria-controls="specificity-raw">Raw Specificity</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-spec-step="2">Normalize</button>
+            <button type="button" class="crumb" data-spec-step="2" aria-controls="specificity-normalize">Normalize</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-spec-step="3">Shift the Balance</button>
+            <button type="button" class="crumb" data-spec-step="3" aria-controls="specificity-shift">Shift the Balance</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-spec-step="4">Calibrate</button>
+            <button type="button" class="crumb" data-spec-step="4" aria-controls="specificity-calibrate">Calibrate</button>
           </div>
         </div>
       </div>
 
       <div class="optimization-crumbs" id="optimization-crumbs">
         <div class="optimization-crumbs-clip">
-          <div class="optimization-crumbs-inner" role="tablist" aria-label="Automated optimization steps">
-            <button type="button" role="tab" class="crumb" data-opt-step="0">Relevance Dataset</button>
+          <div class="optimization-crumbs-inner" role="group" aria-label="Automated optimization steps">
+            <button type="button" class="crumb" data-opt-step="0" aria-controls="optimization-dataset">Relevance Dataset</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-opt-step="1">Rank Eval</button>
+            <button type="button" class="crumb" data-opt-step="1" aria-controls="optimization-rank-eval">Rank Eval</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-opt-step="2">CMA-ES</button>
+            <button type="button" class="crumb" data-opt-step="2" aria-controls="optimization-cmaes">CMA-ES</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-opt-step="3">Optimal Parameters</button>
+            <button type="button" class="crumb" data-opt-step="3" aria-controls="optimization-parameters">Optimal Parameters</button>
             <span class="arrow" aria-hidden="true">›</span>
-            <button type="button" role="tab" class="crumb" data-opt-step="4">Adaptive Formula</button>
+            <button type="button" class="crumb" data-opt-step="4" aria-controls="optimization-runtime">Adaptive Formula</button>
           </div>
         </div>
       </div>
@@ -504,7 +510,7 @@
                   <text class="chart-label" x="18" y="134">0.5</text>
                   <text class="chart-label" x="52" y="238">0</text>
                   <text class="chart-label" x="330" y="238">raw specificity</text>
-                  <line x1="145" y1="141" x2="145" y2="215" stroke="#007f83" stroke-dasharray="4 4"/>
+                  <line x1="145" y1="141" x2="145" y2="215" stroke="var(--teal)" stroke-dasharray="4 4"/>
                   <text class="chart-label" x="139" y="238">k_spec</text>
                 </svg>
                 <p class="big-equation">specificity / (specificity + k_spec)</p>
@@ -608,18 +614,25 @@
       </div>
 
       <div class="explorer-shell" id="explorer-shell">
-        <article class="step-panel" id="step-panel" role="tabpanel" aria-live="polite">
+        <!-- No aria-live: the panel is swapped by an explicit button press, and the button's own
+             aria-current already reports the change. A live region on top of that made every click
+             re-read the whole panel a second time. -->
+        <!-- <section> with an accessible name is implicitly role="region", so the name is all it needs. -->
+        <section class="step-panel" id="step-panel" aria-labelledby="step-title">
           <div class="step-copy">
-            <p class="step-count" id="step-count">01 / 06</p>
-            <h3 id="step-title">How a result gets its score</h3>
+            <p class="step-count" id="step-count">01 / 05</p>
+            <h2 id="step-title">How a result gets its score</h2>
             <p class="step-lead" id="step-lead">
               Every hit is a convex combination of normalized text relevance and a weighted sum of business signals.
             </p>
             <div class="step-body" id="step-body"></div>
             <p class="implementation" id="step-implementation"></p>
           </div>
-          <div class="step-visual" id="step-visual" role="img" aria-label="Visualization for the selected formula step"></div>
-        </article>
+          <!-- No role="img" here: a role="img" ancestor makes its whole subtree presentational, which
+               threw away each injected chart's own aria-label and left every step announcing the same
+               generic sentence. The visuals label themselves. -->
+          <div class="step-visual" id="step-visual"></div>
+        </section>
       </div>
     </section>
 
