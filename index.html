@@ -20,6 +20,9 @@
   <title>Spryker Search Ranking &amp; Debugging Tools | Search Relevance</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ccircle%20cx='16'%20cy='16'%20r='14'%20fill='%23f5f3ef'%20stroke='%23122a35'%20stroke-width='2'/%3E%3Ctext%20x='16'%20y='21'%20font-family='ui-monospace,SFMono-Regular,Menlo,monospace'%20font-size='11'%20font-weight='700'%20fill='%23122a35'%20text-anchor='middle'%3ESR%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
+  <!-- Runs before first paint, so the stylesheet can collapse the explorer to a single step without a
+       flash of all five. With scripting off the class never lands and every step stays readable. -->
+  <script>document.documentElement.classList.add("js");</script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -102,15 +105,15 @@
            buttons actually are, and applies just as well to the two breadcrumb rows below. -->
       <div class="step-nav-wrap standalone">
           <div class="step-nav" role="group" aria-label="Formula explanation steps">
-            <button type="button" aria-current="step" aria-controls="step-panel" data-step="0">Overview</button>
+            <button type="button" aria-current="step" aria-controls="step-panel-1" data-step="0">Overview</button>
             <span aria-hidden="true">›</span>
-            <button type="button" aria-controls="step-panel" data-step="1">Elasticsearch relevance</button>
+            <button type="button" aria-controls="step-panel-2" data-step="1">Elasticsearch relevance</button>
             <span aria-hidden="true">›</span>
-            <button type="button" aria-controls="step-panel" data-step="2">Saturation point</button>
+            <button type="button" aria-controls="step-panel-3" data-step="2">Saturation point</button>
             <span aria-hidden="true">›</span>
-            <button type="button" aria-controls="step-panel" data-step="3">Ranking signals</button>
+            <button type="button" aria-controls="step-panel-4" data-step="3">Ranking signals</button>
             <span aria-hidden="true">›</span>
-            <button type="button" aria-controls="step-panel" data-step="4">Signal weights</button>
+            <button type="button" aria-controls="step-panel-5" data-step="4">Signal weights</button>
             <span aria-hidden="true">›</span>
             <button type="button" id="specificity-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="specificity-crumbs">
               Query Specificity
@@ -621,32 +624,104 @@
         </div>
       </div>
 
+      <!-- All five steps are real markup, not a JS array, so the explorer's actual writing is in the
+           served HTML: readable with scripting off, and visible to link unfurlers and crawlers that
+           don't execute JS. script.js hides the inactive ones (see the .js rule in styles.css) and
+           reads each panel's behaviour from data-visual / data-fragments; the illustrations stay
+           JS-rendered because they're decoration, not content.
+
+           No aria-live on the panels: they're swapped by an explicit button press and the button's
+           own aria-current already reports the change. <section> with an accessible name is
+           implicitly role="region", so the aria-labelledby is all each one needs. And no role="img"
+           on .step-visual — a role="img" ancestor makes its subtree presentational, which would throw
+           away each injected chart's own label. The visuals label themselves. -->
       <div class="explorer-shell" id="explorer-shell">
-        <!-- No aria-live: the panel is swapped by an explicit button press, and the button's own
-             aria-current already reports the change. A live region on top of that made every click
-             re-read the whole panel a second time. -->
-        <!-- <section> with an accessible name is implicitly role="region", so the name is all it needs. -->
-        <section class="step-panel" id="step-panel" aria-labelledby="step-title">
+        <section class="step-panel is-active" id="step-panel-1" data-visual="overview" data-fragments="" aria-labelledby="step-title-1">
           <div class="step-copy">
-            <p class="step-count" id="step-count">01 / 05</p>
-            <h2 id="step-title">How a result gets its score</h2>
-            <p class="step-lead" id="step-lead">
+            <p class="step-count">01 / 05</p>
+            <h2 id="step-title-1">How a result gets its score</h2>
+            <p class="step-lead">
               Every hit is a convex combination of normalized text relevance and a weighted sum of business signals.
             </p>
-            <div class="step-body" id="step-body"></div>
-            <p class="implementation" id="step-implementation"></p>
+            <div class="step-body">
+              <p>The model has exactly two terms. <strong>α</strong> decides how much influence text relevance receives; <strong>1 − α</strong> gives the remaining influence to business signals.</p>
+              <p>Because both terms are normalized, their contributions remain comparable and the final score stays interpretable.</p>
+            </div>
+            <p class="implementation">Implemented by Search Ranking · explained by Search Debug</p>
           </div>
-          <!-- No role="img" here: a role="img" ancestor makes its whole subtree presentational, which
-               threw away each injected chart's own aria-label and left every step announcing the same
-               generic sentence. The visuals label themselves. -->
-          <div class="step-visual" id="step-visual"></div>
+          <div class="step-visual"></div>
+        </section>
+
+        <section class="step-panel" id="step-panel-2" data-visual="curve" data-fragments="relevance" aria-labelledby="step-title-2">
+          <div class="step-copy">
+            <p class="step-count">02 / 05</p>
+            <h2 id="step-title-2">Normalize Elasticsearch relevance</h2>
+            <p class="step-lead">
+              Elasticsearch's unbounded <code>_score</code> is squashed into a stable range from zero up to—but never reaching—one.
+            </p>
+            <div class="step-body">
+              <p>The transformation preserves the ordering of results while preventing large raw scores from overwhelming every other signal.</p>
+              <p>It uses the same saturation shape that BM25 applies to term frequency, here applied to the complete document score.</p>
+            </div>
+            <p class="implementation">score / (score + k)</p>
+          </div>
+          <div class="step-visual"></div>
+        </section>
+
+        <section class="step-panel" id="step-panel-3" data-visual="saturation" data-fragments="saturation" aria-labelledby="step-title-3">
+          <div class="step-copy">
+            <p class="step-count">03 / 05</p>
+            <h2 id="step-title-3">Choose the saturation point</h2>
+            <p class="step-lead">
+              The parameter k controls where normalized relevance reaches exactly 0.5.
+            </p>
+            <div class="step-body">
+              <p>When <strong>score = k</strong>, the relevance term equals <strong>0.5</strong>. Lower values saturate earlier; higher values preserve more differentiation between large Elasticsearch scores.</p>
+              <p>Rather than choosing <strong>k</strong> by guesswork, Search Ranking can estimate a practical starting point from representative searches. Import a CSV of typical queries and define the depth to inspect; the package executes the set, samples the highest-ranked results, analyzes their raw <code>_score</code> values, and recommends the observed mean as the initial saturation point.</p>
+            </div>
+            <p class="implementation">Representative queries + sampling depth → observed _score distribution → suggested k</p>
+          </div>
+          <div class="step-visual"></div>
+        </section>
+
+        <section class="step-panel" id="step-panel-4" data-visual="signals" data-fragments="signals" aria-labelledby="step-title-4">
+          <div class="step-copy">
+            <p class="step-count">04 / 05</p>
+            <h2 id="step-title-4">Add normalized business signals</h2>
+            <p class="step-lead">
+              The second term combines product-level signals such as click-through rate, conversion rate, availability, or margin.
+            </p>
+            <div class="step-body">
+              <p>Each metric is transformed into a value between zero and one before it enters the formula. This makes signals with very different units comparable.</p>
+              <p>Search Ranking derives an <strong>aggregate frequency distribution</strong> from the metric data and evaluates the available normalization functions against that observed shape. The analysis view presents the empirical distribution beside the fitted curve and recommends the closest match; the selected expression remains fully configurable.</p>
+              <p>A low-weight <strong>random()</strong> signal is also worth including in the business term. It breaks deterministic ties, introduces controlled variation, and prevents the same products from becoming permanently locked into identical positions.</p>
+            </div>
+            <p class="implementation">Distribution analysis → normalization-function suggestion · low-weight random() for controlled variation</p>
+          </div>
+          <div class="step-visual"></div>
+        </section>
+
+        <section class="step-panel" id="step-panel-5" data-visual="weights" data-fragments="weights" aria-labelledby="step-title-5">
+          <div class="step-copy">
+            <p class="step-count">05 / 05</p>
+            <h2 id="step-title-5">Keep signal weights comparable</h2>
+            <p class="step-lead">
+              Entered signal weights are force-normalized so their sum always equals one.
+            </p>
+            <div class="step-body">
+              <p>Editors can express relative importance without manually maintaining a perfect total. A weight of 30 and a weight of 10 become 0.75 and 0.25.</p>
+              <p>This normalization runs once when configuration is published, keeping the query itself simple.</p>
+            </div>
+            <p class="implementation">w<sub>i</sub> = enteredWeight<sub>i</sub> / Σ enteredWeight<sub>j</sub></p>
+          </div>
+          <div class="step-visual"></div>
         </section>
       </div>
     </section>
 
     <section class="resources" id="resources" aria-labelledby="resources-title">
       <div class="section-heading compact">
-        <h2 id="resources-title">Projects</h2>
+        <h2 id="resources-title">Resources</h2>
       </div>
       <div class="resource-list">
         <div class="resource-row">

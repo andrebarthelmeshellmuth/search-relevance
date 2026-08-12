@@ -1,55 +1,12 @@
-const steps = [
-  {
-    title: "How a result gets its score",
-    lead: "Every hit is a convex combination of normalized text relevance and a weighted sum of business signals.",
-    body: `<p>The model has exactly two terms. <strong>α</strong> decides how much influence text relevance receives; <strong>1 − α</strong> gives the remaining influence to business signals.</p><p>Because both terms are normalized, their contributions remain comparable and the final score stays interpretable.</p>`,
-    implementation: "Implemented by Search Ranking · explained by Search Debug",
-    fragments: [],
-    visual: "overview"
-  },
-  {
-    title: "Normalize Elasticsearch relevance",
-    lead: "Elasticsearch's unbounded _score is squashed into a stable range from zero up to—but never reaching—one.",
-    body: `<p>The transformation preserves the ordering of results while preventing large raw scores from overwhelming every other signal.</p><p>It uses the same saturation shape that BM25 applies to term frequency, here applied to the complete document score.</p>`,
-    implementation: "score / (score + k)",
-    fragments: ["relevance"],
-    visual: "curve"
-  },
-  {
-    title: "Choose the saturation point",
-    lead: "The parameter k controls where normalized relevance reaches exactly 0.5.",
-    body: `<p>When <strong>score = k</strong>, the relevance term equals <strong>0.5</strong>. Lower values saturate earlier; higher values preserve more differentiation between large Elasticsearch scores.</p><p>Rather than choosing <strong>k</strong> by guesswork, Search Ranking can estimate a practical starting point from representative searches. Import a CSV of typical queries and define the depth to inspect; the package executes the set, samples the highest-ranked results, analyzes their raw <code>_score</code> values, and recommends the observed mean as the initial saturation point.</p>`,
-    implementation: "Representative queries + sampling depth → observed _score distribution → suggested k",
-    fragments: ["saturation"],
-    visual: "saturation"
-  },
-  {
-    title: "Add normalized business signals",
-    lead: "The second term combines product-level signals such as click-through rate, conversion rate, availability, or margin.",
-    body: `<p>Each metric is transformed into a value between zero and one before it enters the formula. This makes signals with very different units comparable.</p><p>Search Ranking derives an <strong>aggregate frequency distribution</strong> from the metric data and evaluates the available normalization functions against that observed shape. The analysis view presents the empirical distribution beside the fitted curve and recommends the closest match; the selected expression remains fully configurable.</p><p>A low-weight <strong>random()</strong> signal is also worth including in the business term. It breaks deterministic ties, introduces controlled variation, and prevents the same products from becoming permanently locked into identical positions.</p>`,
-    implementation: "Distribution analysis → normalization-function suggestion · low-weight random() for controlled variation",
-    fragments: ["signals"],
-    visual: "signals"
-  },
-  {
-    title: "Keep signal weights comparable",
-    lead: "Entered signal weights are force-normalized so their sum always equals one.",
-    body: `<p>Editors can express relative importance without manually maintaining a perfect total. A weight of 30 and a weight of 10 become 0.75 and 0.25.</p><p>This normalization runs once when configuration is published, keeping the query itself simple.</p>`,
-    implementation: "wi = enteredWeighti / Σ enteredWeightj",
-    fragments: ["weights"],
-    visual: "weights"
-  }
-];
+// The five explorer steps live in index.html as real markup, not as data here — this file only knows
+// how to switch between them. Each panel declares its own behaviour: data-visual names the
+// illustration to draw into it, and data-fragments lists the formula fragments to light up.
+const explorerShell = document.getElementById("explorer-shell");
+const stepPanels = [...explorerShell.querySelectorAll(".step-panel")];
+const stepFragments = (index) => (stepPanels[index].dataset.fragments || "").split(" ").filter(Boolean);
 
 const tabButtons = [...document.querySelectorAll("[data-step]")];
 const formulas = [...document.querySelectorAll(".formula")];
-const title = document.getElementById("step-title");
-const lead = document.getElementById("step-lead");
-const body = document.getElementById("step-body");
-const implementation = document.getElementById("step-implementation");
-const count = document.getElementById("step-count");
-const visual = document.getElementById("step-visual");
-const explorerShell = document.getElementById("explorer-shell");
 let activeStep = 0;
 
 function chartSvg(markerX = 145, markerY = 131, showK = false) {
@@ -68,8 +25,10 @@ function chartSvg(markerX = 145, markerY = 131, showK = false) {
   </svg>`;
 }
 
-function renderVisual(kind) {
-  const visuals = {
+// Keyed by each panel's data-visual. These are illustrations rather than content, which is why they
+// stay here instead of moving into the HTML with the prose — a reader without scripting loses nothing
+// but decoration. Built once at module scope; the old version rebuilt all five on every step change.
+const VISUALS = {
     overview: `<div class="visual-card visual-split">
       <div class="metric-box"><small>Text term</small><strong>α · relevance</strong></div>
       <div class="metric-box"><small>Signal term</small><strong>(1−α) · signals</strong></div>
@@ -122,9 +81,13 @@ function renderVisual(kind) {
       </div>
       <p class="big-equation">Σ wᵢ = 1</p>
     </div>`
-  };
-  visual.innerHTML = visuals[kind];
-}
+};
+
+// Drawn once for all five panels. The inactive ones are display:none, so their contents cost nothing
+// in layout and stay out of the tab order exactly as before.
+stepPanels.forEach(panel => {
+  panel.querySelector(".step-visual").innerHTML = VISUALS[panel.dataset.visual] ?? "";
+});
 
 function closeAllCrumbs() {
   optimizationCrumbs.classList.remove("is-open");
@@ -179,17 +142,8 @@ function wireArrowKeys(buttons, activate) {
 
 function showStep(index, scrollTabIntoView = true) {
   closeAllCrumbs();
-  activeStep = (index + steps.length) % steps.length;
-  const step = steps[activeStep];
-  // The two breadcrumb toggles are not counted here: opening either one hides this panel outright
-  // rather than advancing it, so a denominator including them could never be reached.
-  count.textContent = `${String(activeStep + 1).padStart(2, "0")} / ${String(steps.length).padStart(2, "0")}`;
-  title.textContent = step.title;
-  lead.textContent = step.lead;
-  body.innerHTML = step.body;
-  implementation.textContent = step.implementation;
-  implementation.hidden = !step.implementation;
-  renderVisual(step.visual);
+  activeStep = (index + stepPanels.length) % stepPanels.length;
+  stepPanels.forEach((panel, i) => panel.classList.toggle("is-active", i === activeStep));
 
   tabButtons.forEach((button, i) => {
     const isActive = i === activeStep;
@@ -197,7 +151,7 @@ function showStep(index, scrollTabIntoView = true) {
     if (isActive && scrollTabIntoView) button.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   });
 
-  highlightFormulaFragments(step.fragments);
+  highlightFormulaFragments(stepFragments(activeStep));
 }
 
 tabButtons.forEach((button, i) => button.addEventListener("click", () => showStep(i)));
@@ -271,7 +225,7 @@ function toggleBreadcrumbLine(willOpen, { crumbs, toggle, panel, onOpen, activeF
     onOpen();
   }
   tabButtons.forEach((button, i) => setCurrent(button, !willOpen && i === activeStep));
-  highlightFormulaFragments(willOpen ? activeFragments : steps[activeStep].fragments);
+  highlightFormulaFragments(willOpen ? activeFragments : stepFragments(activeStep));
 }
 
 optimizationToggle.addEventListener("click", () => {
