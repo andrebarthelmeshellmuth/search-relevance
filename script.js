@@ -64,11 +64,15 @@ const VISUALS = {
         </svg>
         <figcaption class="fit-legend"><span><i class="legend-line observed"></i>Observed metric profile</span><span><i class="legend-line fitted"></i>Selected normalization function</span></figcaption>
       </figure>
-      <div class="function-selector" aria-label="Normalization function choices">
-        <span>Normalization function</span>
-        <button class="selected" type="button">atan(x / avg)</button>
-        <button type="button">x / max</button>
-        <button type="button">custom expression</button>
+      <!-- Spans, not buttons: this is a picture of Search Ranking's normalization picker, not a control.
+           As <button>s they were real tab stops that did nothing when activated. The visible label names
+           the group in reading order, which the aria-label on this div never did — aria-label is ignored
+           on a plain div with no role. -->
+      <div class="function-selector">
+        <span class="function-selector-label">Normalization function</span>
+        <span class="function-option is-selected">atan(x / avg)</span>
+        <span class="function-option">x / max</span>
+        <span class="function-option">custom expression</span>
       </div>
       <div class="random-note"><span>Recommended companion signal</span><strong>low-weight random()</strong></div>
     </div>`,
