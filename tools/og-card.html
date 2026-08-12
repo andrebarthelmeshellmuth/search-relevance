@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Open Graph card source</title>
+  <!-- Source for og-image.png, rendered rather than hand-drawn so the formula gets the site's real
+       layout (the fraction in particular) and the real palette. To regenerate after editing:
+         docker compose up -d
+         open http://localhost:8000/tools/og-card.html in a headless browser at exactly 1200x630
+         screenshot the viewport to og-image.png
+       See README, "Open Graph image". Not linked from the site and not in the sitemap. -->
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    html, body { margin: 0; }
+    body { width: 1200px; height: 630px; overflow: hidden; }
+    .og {
+      width: 1200px;
+      height: 630px;
+      box-sizing: border-box;
+      padding: 64px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        radial-gradient(circle at 88% 8%, rgba(0,110,113,.14), transparent 30rem),
+        var(--paper);
+    }
+    .og-brand { display: flex; align-items: center; gap: 16px; }
+    .og-brand .brand-mark { width: 46px; height: 46px; font-size: 15px; }
+    .og-brand span:last-child { font-size: 25px; font-weight: 760; letter-spacing: -.02em; }
+    .og h1 {
+      max-width: 900px;
+      margin: 0;
+      font: 520 66px/1.06 Georgia, "Liberation Serif", "Times New Roman", serif;
+      letter-spacing: -.045em;
+    }
+    .og .formula {
+      justify-content: flex-start;
+      gap: 12px;
+      font-size: 44px;
+      white-space: nowrap;
+    }
+    .og-foot {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      color: var(--muted);
+      font: 700 17px/1 ui-monospace, "DejaVu Sans Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .og-foot .accent { color: var(--teal); }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <div class="og-brand">
+      <span class="brand-mark">SR</span>
+      <span>Search Relevance</span>
+    </div>
+
+    <h1>Explainable, tunable search relevance for Spryker.</h1>
+
+    <div class="formula">
+      <span>α</span>
+      <span class="operator">·</span>
+      <span class="fraction">
+        <span class="numerator">score</span>
+        <span class="denominator">score + k</span>
+      </span>
+      <span class="operator">+</span>
+      <span>(1 − α)</span>
+      <span class="operator">·</span>
+      <span>Σ<sub>i=1</sub><sup>n</sup></span>
+      <span>w<sub>i</sub></span>
+      <span class="operator">·</span>
+      <span>s<sub>i</sub></span>
+    </div>
+
+    <div class="og-foot">
+      <span class="accent">Open-source Spryker search tools</span>
+      <span>search-relevance.dev</span>
+    </div>
+  </div>
+</body>
+</html>

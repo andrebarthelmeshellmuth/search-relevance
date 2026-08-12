@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# tools/ holds the Open Graph card source, which is a render target rather than a page.
+Disallow: /tools/
+
+Sitemap: https://search-relevance.dev/sitemap.xml

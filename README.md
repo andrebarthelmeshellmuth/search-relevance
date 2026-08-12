@@ -40,3 +40,12 @@ npm run images
 
 That writes the `-thumb.webp` / `-full.webp` files and fills in each entry's `thumb`, `full`, `width`
 and `height` keys. An entry with no `src` is an intentional "coming soon" placeholder and is skipped.
+
+## Open Graph image
+
+`og-image.png` (1200×630) is what LinkedIn and Slack show when the site is shared. It's rendered from
+`tools/og-card.html` rather than drawn by hand, so it uses the site's real stylesheet and the formula
+gets real layout. To regenerate it after editing that file: serve the site (above), load
+`http://localhost:8000/tools/og-card.html` in a headless browser at exactly 1200×630, screenshot the
+viewport, and save the result to `og-image.png`.
+
