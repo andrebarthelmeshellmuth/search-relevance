@@ -1,6 +1,14 @@
 // The five explorer steps live in index.html as real markup, not as data here — this file only knows
 // how to switch between them. Each panel declares its own behaviour: data-visual names the
 // illustration to draw into it, and data-fragments lists the formula fragments to light up.
+//
+// This one file is shared by both the English and German pages (index.html and de/index.html both
+// load the same script.js) — only the illustration strings below need a language, everything else
+// here is behaviour, not copy. LANG reads the <html lang> the page itself already declares, so there's
+// nothing to configure per page beyond that attribute.
+const LANG = document.documentElement.lang === "de" ? "de" : "en";
+const t = (en, de) => (LANG === "de" ? de : en);
+
 const explorerShell = document.getElementById("explorer-shell");
 const stepPanels = [...explorerShell.querySelectorAll(".step-panel")];
 const stepFragments = (index) => (stepPanels[index].dataset.fragments || "").split(" ").filter(Boolean);
@@ -10,7 +18,7 @@ const formulas = [...document.querySelectorAll(".formula")];
 let activeStep = 0;
 
 function chartSvg(markerX = 145, markerY = 131, showK = false) {
-  return `<svg class="chart-svg" viewBox="0 0 420 250" role="img" aria-label="Saturation curve">
+  return `<svg class="chart-svg" viewBox="0 0 420 250" role="img" aria-label="${t("Saturation curve", "Sättigungskurve")}">
     <line class="chart-grid" x1="52" y1="65" x2="390" y2="65" />
     <line class="chart-grid" x1="52" y1="130" x2="390" y2="130" />
     <line class="chart-axis" x1="52" y1="215" x2="390" y2="215" />
@@ -20,7 +28,7 @@ function chartSvg(markerX = 145, markerY = 131, showK = false) {
     <text class="chart-label" x="18" y="69">1.0</text>
     <text class="chart-label" x="18" y="134">0.5</text>
     <text class="chart-label" x="52" y="238">0</text>
-    <text class="chart-label" x="352" y="238">raw _score</text>
+    <text class="chart-label" x="352" y="238">${t("raw _score", "roher _score")}</text>
     ${showK ? `<line x1="${markerX}" y1="${markerY + 10}" x2="${markerX}" y2="215" stroke="var(--teal)" stroke-dasharray="4 4"/><text class="chart-label" x="${markerX - 6}" y="238">k</text>` : ""}
   </svg>`;
 }
@@ -30,26 +38,26 @@ function chartSvg(markerX = 145, markerY = 131, showK = false) {
 // but decoration. Built once at module scope; the old version rebuilt all five on every step change.
 const VISUALS = {
     overview: `<div class="visual-card visual-split">
-      <div class="metric-box"><small>Text term</small><strong>α · relevance</strong></div>
-      <div class="metric-box"><small>Signal term</small><strong>(1−α) · signals</strong></div>
-      <div class="metric-box"><small>Input</small><strong>Elasticsearch _score</strong></div>
-      <div class="metric-box"><small>Output</small><strong>Explainable final score</strong></div>
+      <div class="metric-box"><small>${t("Text term", "Textterm")}</small><strong>α · ${t("relevance", "Relevanz")}</strong></div>
+      <div class="metric-box"><small>${t("Signal term", "Signalterm")}</small><strong>(1−α) · ${t("signals", "Signale")}</strong></div>
+      <div class="metric-box"><small>${t("Input", "Eingabe")}</small><strong>Elasticsearch _score</strong></div>
+      <div class="metric-box"><small>${t("Output", "Ausgabe")}</small><strong>${t("Explainable final score", "Erklärbarer Endscore")}</strong></div>
     </div>`,
     curve: `<div class="visual-card">${chartSvg()}<p class="big-equation">score / (score + k)</p></div>`,
     saturation: `<div class="visual-card calibration-visual">
       <div class="calibration-flow">
-        <div class="metric-box"><small>1 · Upload</small><strong>query CSV</strong></div>
+        <div class="metric-box"><small>1 · ${t("Upload", "Hochladen")}</small><strong>${t("query CSV", "Query-CSV")}</strong></div>
         <span aria-hidden="true">→</span>
-        <div class="metric-box"><small>2 · Sample</small><strong>top X scores</strong></div>
+        <div class="metric-box"><small>2 · ${t("Sample", "Stichprobe")}</small><strong>${t("top X scores", "Top-X-Scores")}</strong></div>
         <span aria-hidden="true">→</span>
-        <div class="metric-box"><small>3 · Calculate</small><strong>average _score</strong></div>
+        <div class="metric-box"><small>3 · ${t("Calculate", "Berechnen")}</small><strong>${t("average _score", "durchschnittlicher _score")}</strong></div>
       </div>
       ${chartSvg(145, 131, true)}
-      <div class="metric-box"><small>Suggested saturation point</small><strong>k = average score of sampled results</strong></div>
+      <div class="metric-box"><small>${t("Suggested saturation point", "Vorgeschlagener Sättigungspunkt")}</small><strong>${t("k = average score of sampled results", "k = Durchschnittsscore der Stichprobe")}</strong></div>
     </div>`,
     signals: `<div class="visual-card histogram-fit">
       <figure class="fit-figure single-fit">
-        <svg viewBox="0 0 520 260" role="img" aria-label="Observed business metric profile and selected normalization function in one coordinate system">
+        <svg viewBox="0 0 520 260" role="img" aria-label="${t("Observed business metric profile and selected normalization function in one coordinate system", "Beobachtetes Geschäftsmetrik-Profil und gewählte Normalisierungsfunktion im selben Koordinatensystem")}">
           <line class="mini-grid" x1="48" y1="68" x2="490" y2="68" />
           <line class="mini-grid" x1="48" y1="132" x2="490" y2="132" />
           <line class="mini-grid" x1="48" y1="196" x2="490" y2="196" />
@@ -59,29 +67,29 @@ const VISUALS = {
           <path class="mini-fit" d="M48 226 C88 183, 127 148, 168 120 C215 88, 271 65, 334 50 C387 38, 439 31, 490 27" />
           <circle class="mini-point observed-point" cx="214" cy="107" r="5"/>
           <circle class="mini-point" cx="334" cy="50" r="5"/>
-          <text class="mini-label" x="58" y="246">raw metric value</text>
-          <text class="mini-label" x="7" y="34">normalized</text>
+          <text class="mini-label" x="58" y="246">${t("raw metric value", "roher Metrikwert")}</text>
+          <text class="mini-label" x="7" y="34">${t("normalized", "normalisiert")}</text>
         </svg>
-        <figcaption class="fit-legend"><span><i class="legend-line observed"></i>Observed metric profile</span><span><i class="legend-line fitted"></i>Selected normalization function</span></figcaption>
+        <figcaption class="fit-legend"><span><i class="legend-line observed"></i>${t("Observed metric profile", "Beobachtetes Metrikprofil")}</span><span><i class="legend-line fitted"></i>${t("Selected normalization function", "Gewählte Normalisierungsfunktion")}</span></figcaption>
       </figure>
       <!-- Spans, not buttons: this is a picture of Search Ranking's normalization picker, not a control.
            As <button>s they were real tab stops that did nothing when activated. The visible label names
            the group in reading order, which the aria-label on this div never did — aria-label is ignored
            on a plain div with no role. -->
       <div class="function-selector">
-        <span class="function-selector-label">Normalization function</span>
+        <span class="function-selector-label">${t("Normalization function", "Normalisierungsfunktion")}</span>
         <span class="function-option is-selected">atan(x / avg)</span>
         <span class="function-option">x / max</span>
-        <span class="function-option">custom expression</span>
+        <span class="function-option">${t("custom expression", "eigener Ausdruck")}</span>
       </div>
-      <div class="random-note"><span>Recommended companion signal</span><strong>low-weight random()</strong></div>
+      <div class="random-note"><span>${t("Recommended companion signal", "Empfohlenes Begleitsignal")}</span><strong>${t("low-weight random()", "random() mit geringem Gewicht")}</strong></div>
     </div>`,
     weights: `<div class="visual-card">
       <div class="visual-split">
-        <div class="metric-box"><small>Entered</small><strong>30</strong></div>
-        <div class="metric-box"><small>Normalized</small><strong>0.75</strong></div>
-        <div class="metric-box"><small>Entered</small><strong>10</strong></div>
-        <div class="metric-box"><small>Normalized</small><strong>0.25</strong></div>
+        <div class="metric-box"><small>${t("Entered", "Eingegeben")}</small><strong>30</strong></div>
+        <div class="metric-box"><small>${t("Normalized", "Normalisiert")}</small><strong>0.75</strong></div>
+        <div class="metric-box"><small>${t("Entered", "Eingegeben")}</small><strong>10</strong></div>
+        <div class="metric-box"><small>${t("Normalized", "Normalisiert")}</small><strong>0.25</strong></div>
       </div>
       <p class="big-equation">Σ wᵢ = 1</p>
     </div>`

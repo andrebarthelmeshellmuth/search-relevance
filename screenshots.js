@@ -4,6 +4,19 @@
 // server, or the deployed GitHub Pages site) — fetch() of a same-directory JSON file is blocked by CORS
 // when this page is opened as a plain file:// URL, unlike the inline <script type="application/json">
 // tag this replaced. See README for the local-preview docker-compose setup.
+//
+// This one file is shared by both the English and German pages. screenshots-data.de.json is a full,
+// separate copy of screenshots-data.json (not a per-field translation layered on top) — same src/thumb/
+// full/width/height values, German title/description text — so a future screenshot swap only has to
+// touch each language file's own image paths once, without a shared-vs-per-language split to reason
+// about. LANG picks which one to fetch; BASE (only set on de/screenshots.html, see its <html> tag)
+// accounts for that page living one directory deeper, for both the JSON fetch and every image path
+// inside it, since those paths are written relative to the repository root.
+const LANG = document.documentElement.lang === "de" ? "de" : "en";
+const t = (en, de) => (LANG === "de" ? de : en);
+const BASE = document.documentElement.dataset.base || "";
+const DATA_FILE = LANG === "de" ? "screenshots-data.de.json" : "screenshots-data.json";
+
 let PACKAGES = null;
 
 const tabButtons = [...document.querySelectorAll("[data-package]")];
@@ -28,8 +41,8 @@ function placeholderIcon() {
 
 // Every variant falls back to shot.src so a screenshot added to screenshots-data.json by hand still
 // renders (just heavier) before `npm run images` has been run over it.
-const thumbSrc = (shot) => shot.thumb || shot.src;
-const fullSrc = (shot) => shot.full || shot.src;
+const thumbSrc = (shot) => `${BASE}${shot.thumb || shot.src}`;
+const fullSrc = (shot) => `${BASE}${shot.full || shot.src}`;
 
 function thumbHTML(shot, i) {
   // width/height match the fixed .carousel-thumb-media box rather than the file's own 420x240, because
@@ -37,7 +50,7 @@ function thumbHTML(shot, i) {
   const media = shot.src
     ? `<img src="${thumbSrc(shot)}" alt="" width="210" height="120" loading="lazy" decoding="async">`
     : `<span class="carousel-thumb-placeholder">${placeholderIcon()}</span>`;
-  return `<button type="button" class="carousel-thumb" data-index="${i}" aria-label="View screenshot: ${shot.title}">
+  return `<button type="button" class="carousel-thumb" data-index="${i}" aria-label="${t("View screenshot", "Screenshot ansehen")}: ${shot.title}">
     <span class="carousel-thumb-media">${media}</span>
     <span class="carousel-thumb-label">${shot.title}</span>
   </button>`;
@@ -48,7 +61,7 @@ function thumbHTML(shot, i) {
 // arrows chasing each other in a circle) is the same symbol media players use for loop/repeat playback,
 // which is a more widely recognized "this wraps around" signal than a plain arrow.
 function loopDividerHTML() {
-  return `<span class="carousel-loop-divider" aria-hidden="true" title="Loops back to the first screenshot">
+  return `<span class="carousel-loop-divider" aria-hidden="true" title="${t("Loops back to the first screenshot", "Springt zurück zum ersten Screenshot")}">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
   </span>`;
 }
@@ -134,10 +147,10 @@ function renderViewer() {
   // The image itself is alt="" because the <h2> and description directly below it are its caption --
   // the button's own label is what names it, so an alt here would just repeat the title twice.
   frame.innerHTML = shot.src
-    ? `<button type="button" class="screenshot-zoom" aria-label="Enlarge screenshot: ${shot.title}">
+    ? `<button type="button" class="screenshot-zoom" aria-label="${t("Enlarge screenshot", "Screenshot vergrößern")}: ${shot.title}">
          <img src="${fullSrc(shot)}" alt="" width="${shot.width ?? ""}" height="${shot.height ?? ""}" decoding="async">
        </button>`
-    : `<div class="screenshot-placeholder">${placeholderIcon()}<span>Screenshot coming soon</span></div>`;
+    : `<div class="screenshot-placeholder">${placeholderIcon()}<span>${t("Screenshot coming soon", "Screenshot folgt in Kürze")}</span></div>`;
 }
 
 function selectPackage(pkg, { updateHash = true } = {}) {
@@ -181,7 +194,7 @@ window.addEventListener("resize", () => {
   });
 });
 
-fetch("screenshots-data.json")
+fetch(`${BASE}${DATA_FILE}`)
   .then(response => {
     if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
     return response.json();
@@ -193,7 +206,10 @@ fetch("screenshots-data.json")
   })
   .catch(() => {
     track.innerHTML = "";
-    frame.innerHTML = `<div class="screenshot-placeholder"><span>Couldn't load screenshots-data.json — this page needs to be served over http(s), not opened directly as a file:// URL.</span></div>`;
+    frame.innerHTML = `<div class="screenshot-placeholder"><span>${t(
+      `Couldn't load ${DATA_FILE} — this page needs to be served over http(s), not opened directly as a file:// URL.`,
+      `${DATA_FILE} konnte nicht geladen werden — diese Seite muss über http(s) ausgeliefert werden, nicht direkt als file://-URL geöffnet.`
+    )}</span></div>`;
   });
 
 // Lightbox: clicking the main screenshot opens it larger in a scrollable overlay, closed by the fixed
@@ -204,9 +220,9 @@ lightbox.className = "lightbox-overlay";
 lightbox.hidden = true;
 lightbox.setAttribute("role", "dialog");
 lightbox.setAttribute("aria-modal", "true");
-lightbox.setAttribute("aria-label", "Screenshot preview");
+lightbox.setAttribute("aria-label", t("Screenshot preview", "Screenshot-Vorschau"));
 lightbox.innerHTML = `
-  <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+  <button type="button" class="lightbox-close" aria-label="${t("Close", "Schließen")}">&times;</button>
   <img class="lightbox-image" src="" alt="">
 `;
 document.body.appendChild(lightbox);

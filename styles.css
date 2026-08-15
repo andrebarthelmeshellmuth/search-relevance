@@ -85,6 +85,7 @@ main > section {
   border-radius: 50%;
   font: 700 .7rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
 }
+.site-header-right { display: flex; align-items: center; gap: 1.5rem; }
 .site-nav { display: flex; gap: 1.5rem; }
 .site-nav a {
   font-size: .92rem;
@@ -92,6 +93,12 @@ main > section {
   text-decoration: none;
 }
 .site-nav a:hover { color: var(--teal); }
+.lang-switch { display: flex; align-items: center; gap: .5rem; font-size: .92rem; }
+.lang-switch a { display: inline-flex; align-items: center; gap: .35rem; color: var(--muted); text-decoration: none; }
+.lang-switch a:hover { color: var(--teal); }
+.lang-switch a[aria-current="page"] { color: var(--ink); font-weight: 700; }
+.lang-switch-sep { color: var(--line); }
+.lang-flag { flex-shrink: 0; border-radius: 2px; box-shadow: inset 0 0 0 1px rgba(18, 42, 53, .18); }
 .hero {
   min-height: 610px;
   display: flex;
