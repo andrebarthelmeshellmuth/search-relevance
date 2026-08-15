@@ -314,6 +314,15 @@
         "full": "screenshots/search-variant-facets/facet-and-mockup.svg",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "title": "Before \u2192 after: the search document",
+        "description": "Update the index mapping and run the standard export \u2014 no new index, no reindex-and-swap, no downtime. Before, Shoe #2's color and size values are flattened into one comma-joined string per attribute across all its variants, so it's impossible to tell which color went with which size. After, a variant-facet array holds one object per concrete (SKU, its own color, its own size), so a Color + Size filter can check whether one single variant satisfies both \u2014 the actual fix. The new field is purely additive: it sits alongside the existing document, so it only needs a mapping update and a normal export pass, not a new index.",
+        "src": "screenshots/search-variant-facets/index-document-before-after.svg",
+        "thumb": "screenshots/search-variant-facets/index-document-before-after.svg",
+        "full": "screenshots/search-variant-facets/index-document-before-after.svg",
+        "width": 1920,
+        "height": 1080
       }
     ]
   }

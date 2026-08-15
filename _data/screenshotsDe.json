@@ -314,6 +314,15 @@
         "full": "screenshots/search-variant-facets/facet-and-mockup.svg",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "title": "Vorher \u2192 nachher: das Suchdokument",
+        "description": "Index-Mapping aktualisieren und den normalen Export laufen lassen \u2014 kein neuer Index, kein Reindex-and-Swap, keine Downtime. Vorher werden Schuh #2s Farb- und Gr\u00f6\u00dfenwerte \u00fcber alle Varianten hinweg zu jeweils einem kommagetrennten String zusammengefasst, sodass nicht mehr erkennbar ist, welche Farbe zu welcher Gr\u00f6\u00dfe geh\u00f6rte. Nachher enth\u00e4lt ein variant-facet-Array ein Objekt pro Konkret-Artikel (SKU, eigene Farbe, eigene Gr\u00f6\u00dfe), sodass ein Farbe+Gr\u00f6\u00dfe-Filter pr\u00fcfen kann, ob eine einzelne Variante beide Bedingungen erf\u00fcllt \u2014 genau der Fix. Das neue Feld ist rein additiv: Es steht neben dem bestehenden Dokument, weshalb nur ein Mapping-Update und ein normaler Exportlauf n\u00f6tig sind, kein neuer Index.",
+        "src": "screenshots/search-variant-facets/index-document-before-after.svg",
+        "thumb": "screenshots/search-variant-facets/index-document-before-after.svg",
+        "full": "screenshots/search-variant-facets/index-document-before-after.svg",
+        "width": 1920,
+        "height": 1080
       }
     ]
   }

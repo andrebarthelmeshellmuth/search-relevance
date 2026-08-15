@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-labelledby="svf-doc-title svf-doc-desc">
+  <title id="svf-doc-title">Illustrative mockup: the search document before and after the fix, for Shoe #2</title>
+  <desc id="svf-doc-desc">Before, Shoe #2's color and size attributes are flattened into one comma-joined string per attribute across all its variants, destroying which value belongs to which variant. After, a variant-facet array holds one nested object per concrete, preserving the real grouping. The new field is additive, so this only needs an index mapping update and a normal product export -- no new index and no downtime.</desc>
+
+  <defs>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .sans { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#f5f3ef"/>
+
+  <text x="100" y="66" class="sans" font-size="20" font-weight="700" letter-spacing="2" fill="#5a6a72">ILLUSTRATIVE MOCKUP</text>
+  <text x="100" y="106" class="sans" font-size="24" fill="#122a35">Shoe #2 — search document</text>
+
+  <!-- BEFORE panel -->
+  <rect x="100" y="170" width="760" height="730" rx="16" fill="#122a35"/>
+  <rect x="136" y="206" width="112" height="38" rx="19" fill="#b5762a"/>
+  <text x="192" y="231" class="sans" font-size="17" font-weight="700" fill="#fffefa" text-anchor="middle">BEFORE</text>
+  <text x="136" y="272" class="sans" font-size="17" fill="#9fb0b5">One string per attribute — variants flattened together</text>
+
+  <g class="mono" font-size="22">
+    <text x="136" y="330" fill="#7c8f95">{</text>
+    <text x="164" y="364"><tspan fill="#5fd0cb">"id_product_abstract"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">4822</tspan><tspan fill="#7c8f95">,</tspan></text>
+    <text x="164" y="398"><tspan fill="#5fd0cb">"attributes"</tspan><tspan fill="#7c8f95">: {</tspan></text>
+    <text x="192" y="432"><tspan fill="#5fd0cb">"color"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">"green, red"</tspan><tspan fill="#7c8f95">,</tspan></text>
+    <text x="192" y="466"><tspan fill="#5fd0cb">"size"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">"40, 42"</tspan></text>
+    <text x="164" y="500" fill="#7c8f95">}</text>
+    <text x="136" y="534" fill="#7c8f95">}</text>
+  </g>
+
+  <!-- AFTER panel -->
+  <rect x="1060" y="170" width="760" height="730" rx="16" fill="#122a35"/>
+  <rect x="1096" y="206" width="100" height="38" rx="19" fill="#006e71"/>
+  <text x="1146" y="231" class="sans" font-size="17" font-weight="700" fill="#fffefa" text-anchor="middle">AFTER</text>
+  <text x="1096" y="272" class="sans" font-size="17" fill="#9fb0b5">One object per concrete — real grouping preserved</text>
+
+  <g class="mono" font-size="22">
+    <text x="1096" y="330" fill="#7c8f95">{</text>
+    <text x="1124" y="364"><tspan fill="#5fd0cb">"id_product_abstract"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">4822</tspan><tspan fill="#7c8f95">,</tspan></text>
+    <text x="1124" y="398"><tspan fill="#5fd0cb">"variant-facet"</tspan><tspan fill="#7c8f95">: [</tspan></text>
+    <text x="1152" y="432" fill="#7c8f95">{</text>
+    <text x="1180" y="466"><tspan fill="#5fd0cb">"sku"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">"SHOE2-GRN-40"</tspan><tspan fill="#7c8f95">,</tspan></text>
+    <text x="1180" y="500"><tspan fill="#5fd0cb">"vals"</tspan><tspan fill="#7c8f95">: { </tspan><tspan fill="#5fd0cb">"color"</tspan><tspan fill="#f5f3ef">: [</tspan><tspan fill="#e0a75e">"green"</tspan><tspan fill="#f5f3ef">] </tspan><tspan fill="#7c8f95">},</tspan></text>
+    <text x="1180" y="534"><tspan fill="#5fd0cb">"nums"</tspan><tspan fill="#7c8f95">: { </tspan><tspan fill="#5fd0cb">"size"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">40</tspan><tspan fill="#7c8f95"> }</tspan></text>
+    <text x="1152" y="568" fill="#7c8f95">},</text>
+    <text x="1152" y="602" fill="#7c8f95">{</text>
+    <text x="1180" y="636"><tspan fill="#5fd0cb">"sku"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">"SHOE2-RED-42"</tspan><tspan fill="#7c8f95">,</tspan></text>
+    <text x="1180" y="670"><tspan fill="#5fd0cb">"vals"</tspan><tspan fill="#7c8f95">: { </tspan><tspan fill="#5fd0cb">"color"</tspan><tspan fill="#f5f3ef">: [</tspan><tspan fill="#e0a75e">"red"</tspan><tspan fill="#f5f3ef">] </tspan><tspan fill="#7c8f95">},</tspan></text>
+    <text x="1180" y="704"><tspan fill="#5fd0cb">"nums"</tspan><tspan fill="#7c8f95">: { </tspan><tspan fill="#5fd0cb">"size"</tspan><tspan fill="#f5f3ef">: </tspan><tspan fill="#e0a75e">42</tspan><tspan fill="#7c8f95"> }</tspan></text>
+    <text x="1152" y="738" fill="#7c8f95">}</text>
+    <text x="1124" y="772" fill="#7c8f95">]</text>
+    <text x="1096" y="806" fill="#7c8f95">}</text>
+  </g>
+
+  <!-- Arrow between panels -->
+  <g>
+    <line x1="880" y1="535" x2="1030" y2="535" stroke="#006e71" stroke-width="3"/>
+    <path d="M1030 535 L1010 522 M1030 535 L1010 548" fill="none" stroke="#006e71" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="955" y="500" class="sans" font-size="16" font-weight="700" fill="#006e71" text-anchor="middle">export</text>
+  </g>
+
+  <!-- Bottom takeaway -->
+  <rect x="510" y="944" width="900" height="56" rx="28" fill="#dff0ed"/>
+  <text x="960" y="980" class="sans" font-size="19" font-weight="700" fill="#006e71" text-anchor="middle">Additive mapping change · standard export · no downtime</text>
+</svg>
