@@ -2,11 +2,11 @@
   "name": "search-relevance",
   "private": true,
   "type": "module",
-  "description": "search-relevance.dev static site, built with Eleventy: shared templates in _includes/, per-language content in _data/en.js and _data/de.js. screenshots.html stays a hand-rolled, JS-driven page (passthrough-copied, not templated).",
+  "description": "search-relevance.dev static site, built with Eleventy: shared templates in _includes/, per-language content in _data/en.js and _data/de.js.",
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "lint:html": "html-validate _site/index.html _site/de/index.html screenshots.html",
+    "lint:html": "html-validate _site/index.html _site/de/index.html _site/screenshots.html _site/de/screenshots.html",
     "images": "node tools/build-images.mjs"
   },
   "devDependencies": {

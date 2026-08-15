@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Regenerates the WebP derivatives the screenshot gallery actually serves, and records each image's
-// intrinsic size back into screenshots-data.json so the <img> tags can reserve their space up front.
+// intrinsic size back into _data/screenshotsEn.json so the <img> tags can reserve their space up front.
 //
 // The 1920px PNGs under screenshots/ stay the source of truth but are never sent to a browser:
 //
@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DATA = join(ROOT, "screenshots-data.json");
+const DATA = join(ROOT, "_data", "screenshotsEn.json");
 
 // 2x the CSS box (.carousel-thumb is 210px wide, .carousel-thumb-media 120px tall) so the strip stays
 // sharp on retina displays. object-fit: cover in the stylesheet crops the same way sharp does here.

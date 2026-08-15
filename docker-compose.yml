@@ -4,4 +4,6 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - .:/usr/share/nginx/html:ro
+      # _site is Eleventy's build output (npm run build), not the repo root -- index.html and
+      # screenshots.html only exist as .njk sources until that build has run.
+      - ./_site:/usr/share/nginx/html:ro

@@ -404,4 +404,20 @@ export default {
     homeHref: "https://search-relevance.dev/de/",
     homeText: "search-relevance.dev/de/",
   },
+  screenshots: {
+    meta: {
+      description: "Screenshots der Spryker Search-Relevance-Tools: Search Feedback, Search Debug, Search Ranking und Search Optimization.",
+      ogUrl: "https://search-relevance.dev/de/screenshots.html",
+      canonical: "https://search-relevance.dev/de/screenshots.html",
+    },
+    skipLink: "Zu den Screenshots springen",
+    hero: {
+      eyebrow: "Open-Source Spryker-Suchtools",
+      title: "In Aktion erleben.",
+      copy: "Eine Tour durch die Zed- und Yves-Oberflächen jedes Packages. Zuerst ein Package wählen, dann einen Screenshot.",
+    },
+    packageSelectorAriaLabel: "Package-Auswahl",
+    carousel: { prevLabel: "Vorheriger Screenshot", nextLabel: "Nächster Screenshot" },
+    galleryAriaLabel: "Screenshot-Galerie",
+  },
 };

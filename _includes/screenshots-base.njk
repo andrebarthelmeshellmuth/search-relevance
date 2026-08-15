@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="{{ t.htmlLang }}"{% if t.base %} data-base="{{ t.base }}"{% endif %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ t.screenshots.meta.description }}">
+  <meta name="theme-color" content="#f5f3ef">
+  <meta property="og:title" content="Screenshots | Search Relevance">
+  <meta property="og:description" content="{{ t.screenshots.meta.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ t.screenshots.meta.ogUrl }}">
+  <meta property="og:site_name" content="Search Relevance">
+  <meta property="og:image" content="https://search-relevance.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ t.meta.ogImageAlt }}">
+  <link rel="canonical" href="{{ t.screenshots.meta.canonical }}">
+  <link rel="alternate" hreflang="en" href="https://search-relevance.dev/screenshots.html">
+  <link rel="alternate" hreflang="de" href="https://search-relevance.dev/de/screenshots.html">
+  <link rel="alternate" hreflang="x-default" href="https://search-relevance.dev/screenshots.html">
+  <title>Screenshots | Search Relevance</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ccircle%20cx='16'%20cy='16'%20r='14'%20fill='%23f5f3ef'%20stroke='%23122a35'%20stroke-width='2'/%3E%3Ctext%20x='16'%20y='21'%20font-family='ui-monospace,SFMono-Regular,Menlo,monospace'%20font-size='11'%20font-weight='700'%20fill='%23122a35'%20text-anchor='middle'%3ESR%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ t.base }}styles.css">
+  <script src="{{ t.base }}screenshots.js" defer></script>
+</head>
+<body>
+{% include "sprite.njk" %}
+  <a class="skip-link" href="#screenshots">{{ t.screenshots.skipLink }}</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html#top" aria-label="{{ t.brand.ariaLabel }}">
+      <span class="brand-mark" aria-hidden="true">SR</span>
+      <span>Search Relevance</span>
+    </a>
+    <div class="site-header-right">
+      <nav class="site-nav" aria-label="{{ t.nav.ariaLabel }}">
+        <a href="index.html#explorer">{{ t.nav.formula }}</a>
+        <a href="screenshots.html" aria-current="page">Screenshots</a>
+        <a href="index.html#resources">{{ t.nav.resources }}</a>
+        <a href="https://github.com/andrebarthelmeshellmuth" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="{{ t.langSwitch.ariaLabel }}">
+        {% if t.htmlLang == "en" %}
+        <a href="screenshots.html" hreflang="en" lang="en" aria-current="page"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-en"/></svg>EN</a>
+        <span class="lang-switch-sep" aria-hidden="true">|</span>
+        <a href="de/screenshots.html" hreflang="de" lang="de"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-de"/></svg>DE</a>
+        {% else %}
+        <a href="../screenshots.html" hreflang="en" lang="en"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-en"/></svg>EN</a>
+        <span class="lang-switch-sep" aria-hidden="true">|</span>
+        <a href="screenshots.html" hreflang="de" lang="de" aria-current="page"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-de"/></svg>DE</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero page-hero" aria-labelledby="hero-title">
+      <p class="eyebrow">{{ t.screenshots.hero.eyebrow }}</p>
+      <h1 id="hero-title">{{ t.screenshots.hero.title }}</h1>
+      <p class="hero-copy">{{ t.screenshots.hero.copy }}</p>
+    </section>
+
+    <section class="screenshots-stage" id="screenshots" aria-label="{{ t.screenshots.galleryAriaLabel }}">
+      <div class="step-nav-wrap standalone">
+        <!-- Same group/aria-current pattern as the formula explorer on the homepage, so both pages
+             behave identically under a screen reader and under the arrow keys. -->
+        <div class="step-nav" role="group" aria-label="{{ t.screenshots.packageSelectorAriaLabel }}">
+          <button type="button" aria-current="true" aria-controls="screenshot-viewer" data-package="search-feedback">Search Feedback</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" aria-controls="screenshot-viewer" data-package="search-debug">Search Debug</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" aria-controls="screenshot-viewer" data-package="search-ranking">Search Ranking</button>
+          <span aria-hidden="true">|</span>
+          <button type="button" aria-controls="screenshot-viewer" data-package="search-optimization">Search Optimization</button>
+        </div>
+      </div>
+
+      <div class="carousel-row">
+        <button type="button" class="carousel-arrow carousel-prev" aria-label="{{ t.screenshots.carousel.prevLabel }}">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carousel-track"></div>
+        </div>
+        <button type="button" class="carousel-arrow carousel-next" aria-label="{{ t.screenshots.carousel.nextLabel }}">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <article class="screenshot-viewer" id="screenshot-viewer">
+        <div class="screenshot-frame" id="screenshot-frame"></div>
+        <div class="screenshot-caption">
+          <p class="opt-card-index" id="screenshot-index"></p>
+          <h2 id="screenshot-title"></h2>
+          <p id="screenshot-description"></p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Baked in at build time from _data/screenshots{En,De}.json, so the carousel never needs its own
+       fetch() (and the CORS restriction that came with it) -- screenshots.js reads this tag instead. -->
+  <script type="application/json" id="screenshots-data">{{ screenshotsData | dump | safe }}</script>
+
+  <footer class="site-footer">
+    <p>{{ t.footer.builtByPre }}<a class="footer-social" href="https://www.linkedin.com/in/andr%C3%A9-barthelmes-hellmuth-b7b16875/" target="_blank" rel="noopener noreferrer" aria-label="{{ t.footer.linkedinAriaLabel }}"><svg class="footer-social-icon icon-solid" width="16" height="16" aria-hidden="true"><use href="#i-linkedin"/></svg></a></p>
+    <p>{{ t.footer.license }}</p>
+    <p><a href="{{ t.footer.homeHref }}">{{ t.footer.homeText }}</a></p>
+  </footer>
+</body>
+</html>

@@ -1,21 +1,19 @@
-// Screenshot content (titles/descriptions/image paths) lives in screenshots-data.json, fetch()'d below —
-// kept out of this file so the long-form text doesn't drown out the carousel/lightbox behavior, and kept
-// out of screenshots.html so it's editable/diffable on its own. This requires a real HTTP origin (a local
-// server, or the deployed GitHub Pages site) — fetch() of a same-directory JSON file is blocked by CORS
-// when this page is opened as a plain file:// URL, unlike the inline <script type="application/json">
-// tag this replaced. See README for the local-preview docker-compose setup.
+// Screenshot content (titles/descriptions/image paths) lives in _data/screenshotsEn.json and
+// screenshotsDe.json, baked by Eleventy into a <script type="application/json"> tag on each page —
+// kept out of this file so the long-form text doesn't drown out the carousel/lightbox behavior, and
+// kept out of the templates so it's editable/diffable on its own. Reading it off the DOM rather than
+// fetch()ing a same-directory JSON file also means this page works over a plain file:// URL, not just
+// a real HTTP origin.
 //
-// This one file is shared by both the English and German pages. screenshots-data.de.json is a full,
-// separate copy of screenshots-data.json (not a per-field translation layered on top) — same src/thumb/
-// full/width/height values, German title/description text — so a future screenshot swap only has to
-// touch each language file's own image paths once, without a shared-vs-per-language split to reason
-// about. LANG picks which one to fetch; BASE (only set on de/screenshots.html, see its <html> tag)
-// accounts for that page living one directory deeper, for both the JSON fetch and every image path
-// inside it, since those paths are written relative to the repository root.
+// screenshotsDe.json is a full, separate copy of screenshotsEn.json (not a per-field translation
+// layered on top) — same src/thumb/full/width/height values, German title/description text — so a
+// future screenshot swap only has to touch each language file's own image paths once, without a
+// shared-vs-per-language split to reason about. BASE (only set on de/screenshots.html, see its <html>
+// tag) accounts for that page living one directory deeper, for every image path inside the baked-in
+// data, since those paths are written relative to the repository root.
 const LANG = document.documentElement.lang === "de" ? "de" : "en";
 const t = (en, de) => (LANG === "de" ? de : en);
 const BASE = document.documentElement.dataset.base || "";
-const DATA_FILE = LANG === "de" ? "screenshots-data.de.json" : "screenshots-data.json";
 
 let PACKAGES = null;
 
@@ -194,23 +192,17 @@ window.addEventListener("resize", () => {
   });
 });
 
-fetch(`${BASE}${DATA_FILE}`)
-  .then(response => {
-    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-    return response.json();
-  })
-  .then(packages => {
-    PACKAGES = packages;
-    const initial = PACKAGES.find(p => p.id === location.hash.slice(1)) || PACKAGES[0];
-    selectPackage(initial, { updateHash: false });
-  })
-  .catch(() => {
-    track.innerHTML = "";
-    frame.innerHTML = `<div class="screenshot-placeholder"><span>${t(
-      `Couldn't load ${DATA_FILE} — this page needs to be served over http(s), not opened directly as a file:// URL.`,
-      `${DATA_FILE} konnte nicht geladen werden — diese Seite muss über http(s) ausgeliefert werden, nicht direkt als file://-URL geöffnet.`
-    )}</span></div>`;
-  });
+try {
+  PACKAGES = JSON.parse(document.getElementById("screenshots-data").textContent);
+  const initial = PACKAGES.find(p => p.id === location.hash.slice(1)) || PACKAGES[0];
+  selectPackage(initial, { updateHash: false });
+} catch {
+  track.innerHTML = "";
+  frame.innerHTML = `<div class="screenshot-placeholder"><span>${t(
+    "Couldn't load screenshot data.",
+    "Screenshot-Daten konnten nicht geladen werden."
+  )}</span></div>`;
+}
 
 // Lightbox: clicking the main screenshot opens it larger in a scrollable overlay, closed by the fixed
 // close button (stays put regardless of scroll position), the Escape key, or a click on the backdrop

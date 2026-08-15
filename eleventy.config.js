@@ -7,25 +7,19 @@ export default function (eleventyConfig) {
     lstripBlocks: true,
   });
 
-  // Only .njk files are real templates — plain .html (screenshots.html, its de/ mirror) stays
-  // untouched, byte-for-byte, via passthrough below. Keeping html out of templateFormats means
-  // Eleventy never risks parsing Liquid/Nunjucks-looking syntax inside that already-working,
-  // hand-rolled JS-driven page.
   eleventyConfig.setTemplateFormats(["njk"]);
 
   // Static assets this migration does not touch — copied through exactly as they are today.
   eleventyConfig.addPassthroughCopy("styles.css");
   eleventyConfig.addPassthroughCopy("script.js");
-  eleventyConfig.addPassthroughCopy("screenshots.html");
   eleventyConfig.addPassthroughCopy("screenshots.js");
-  eleventyConfig.addPassthroughCopy("screenshots-data.json");
-  eleventyConfig.addPassthroughCopy("screenshots-data.de.json");
-  eleventyConfig.addPassthroughCopy("de/screenshots.html");
   eleventyConfig.addPassthroughCopy("screenshots");
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("og-image.png");
+  // Not part of the site itself -- only served locally to screenshot it while regenerating og-image.png.
+  eleventyConfig.addPassthroughCopy("tools/og-card.html");
 
   return {
     dir: {

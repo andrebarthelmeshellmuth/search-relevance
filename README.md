@@ -13,14 +13,17 @@ The homepage presents the ranking formula as an interactive, breadcrumb-driven e
 
 ## Local preview
 
-`screenshots.html` fetches `screenshots-data.json` at runtime, which needs a real HTTP origin — opening
-the file directly via a `file://` URL fails with a CORS error. Serve the site locally instead:
+The site is built with [Eleventy](https://www.11ty.dev/): shared templates live in `_includes/`,
+per-language content in `_data/en.js` and `_data/de.js`. Build it, then serve the output:
 
 ```sh
+npm install
+npm run build
 docker compose up -d
 ```
 
-Then open `http://localhost:8000/`. Stop it with `docker compose down`.
+Then open `http://localhost:8000/`. Stop it with `docker compose down`. `npm run serve` (Eleventy's
+own dev server, with live rebuild) works as a lighter-weight alternative to the two steps above.
 
 ## Screenshots
 
@@ -30,8 +33,8 @@ strip and a ≤1920px copy for the main viewer and lightbox. The thumbnail is th
 strip loads every screenshot of the selected package at once, so serving the originals there meant
 around 3 MB to draw a row of 210px images.
 
-After adding, replacing or removing a screenshot, add its entry to `screenshots-data.json` (`title`,
-`description`, `src`) and then run:
+After adding, replacing or removing a screenshot, add its entry to `_data/screenshotsEn.json` (and its
+German translation to `_data/screenshotsDe.json`) with `title`, `description` and `src`, then run:
 
 ```sh
 npm install        # once; sharp is an optionalDependency, so CI skips it
