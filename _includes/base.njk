@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="{{ t.htmlLang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ t.meta.description }}">
+  <meta name="theme-color" content="#f5f3ef">
+  <meta property="og:title" content="Spryker Search Ranking &amp; Debugging Tools | Search Relevance">
+  <meta property="og:description" content="{{ t.meta.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ t.meta.ogUrl }}">
+  <meta property="og:site_name" content="Search Relevance">
+  <!-- Absolute URL, because LinkedIn/Slack/Facebook resolve og:image against nothing. Regenerate the
+       file from tools/og-card.html -- see README, "Open Graph image". -->
+  <meta property="og:image" content="https://search-relevance.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ t.meta.ogImageAlt }}">
+  <link rel="canonical" href="{{ t.meta.canonical }}">
+  <link rel="alternate" hreflang="en" href="https://search-relevance.dev/">
+  <link rel="alternate" hreflang="de" href="https://search-relevance.dev/de/">
+  <link rel="alternate" hreflang="x-default" href="https://search-relevance.dev/">
+  <title>Spryker Search Ranking &amp; Debugging Tools | Search Relevance</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ccircle%20cx='16'%20cy='16'%20r='14'%20fill='%23f5f3ef'%20stroke='%23122a35'%20stroke-width='2'/%3E%3Ctext%20x='16'%20y='21'%20font-family='ui-monospace,SFMono-Regular,Menlo,monospace'%20font-size='11'%20font-weight='700'%20fill='%23122a35'%20text-anchor='middle'%3ESR%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ t.base }}styles.css">
+  <!-- Runs before first paint, so the stylesheet can collapse the explorer to a single step without a
+       flash of all five. With scripting off the class never lands and every step stays readable. -->
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="{{ t.base }}script.js" defer></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></symbol>
+    <!-- English has no single national flag, so this is a UK/US "slashed" flag: a diagonal split with a
+         simplified Union Jack corner on one side and simplified stars-and-stripes on the other, rather
+         than picking one country to represent the language. -->
+    <symbol id="i-flag-en" viewBox="0 0 20 15">
+      <clipPath id="flagEnTL"><polygon points="0,0 20,0 0,15"/></clipPath>
+      <clipPath id="flagEnBR"><polygon points="20,0 20,15 0,15"/></clipPath>
+      <!-- Each half is clipped from a full, correctly-proportioned flag (not a flag redrawn to fit its
+           own half), so the US canton lands in its real top-left corner and the Jack's cross keeps a
+           real arm's width -- clipping the whole thing is what makes the swap in the other symbol below
+           actually change which corner shows which flag's real, defining feature, instead of two blocks
+           of colour that happen to look the same from either side. -->
+      <g clip-path="url(#flagEnTL)">
+        <rect width="20" height="15" fill="#fff"/>
+        <rect y="0" width="20" height="1.15" fill="#b22234"/>
+        <rect y="2.3" width="20" height="1.15" fill="#b22234"/>
+        <rect y="4.6" width="20" height="1.15" fill="#b22234"/>
+        <rect y="6.9" width="20" height="1.15" fill="#b22234"/>
+        <rect y="9.2" width="20" height="1.15" fill="#b22234"/>
+        <rect y="11.5" width="20" height="1.15" fill="#b22234"/>
+        <rect y="13.8" width="20" height="1.15" fill="#b22234"/>
+        <rect x="0" y="0" width="8" height="8.05" fill="#3c3b6e"/>
+      </g>
+      <g clip-path="url(#flagEnBR)">
+        <rect width="20" height="15" fill="#00247d"/>
+        <path d="M0 0 L20 15 M20 0 L0 15" stroke="#fff" stroke-width="3.6"/>
+        <path d="M0 0 L20 15 M20 0 L0 15" stroke="#cf142b" stroke-width="1.4"/>
+        <path d="M10 0 V15 M0 7.5 H20" stroke="#fff" stroke-width="4.4"/>
+        <path d="M10 0 V15 M0 7.5 H20" stroke="#cf142b" stroke-width="1.8"/>
+      </g>
+      <line x1="0" y1="0" x2="20" y2="15" stroke="#fff" stroke-width="0.8"/>
+    </symbol>
+    <symbol id="i-flag-de" viewBox="0 0 20 15">
+      <rect y="0" width="20" height="5" fill="#000"/>
+      <rect y="5" width="20" height="5" fill="#dd0000"/>
+      <rect y="10" width="20" height="5" fill="#ffce00"/>
+    </symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"/><line x1="2" y1="20" x2="22" y2="20"/></symbol>
+  </svg>
+  <a class="skip-link" href="#explorer">{{ t.skipLink }}</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="{{ t.brand.ariaLabel }}">
+      <span class="brand-mark" aria-hidden="true">SR</span>
+      <span>Search Relevance</span>
+    </a>
+    <div class="site-header-right">
+      <nav class="site-nav" aria-label="{{ t.nav.ariaLabel }}">
+        <a href="#explorer">{{ t.nav.formula }}</a>
+        <a href="screenshots.html">Screenshots</a>
+        <a href="#resources">{{ t.nav.resources }}</a>
+        <a href="https://github.com/andrebarthelmeshellmuth" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="{{ t.langSwitch.ariaLabel }}">
+        {% if t.htmlLang == "en" %}
+        <a href="index.html" hreflang="en" lang="en" aria-current="page"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-en"/></svg>EN</a>
+        <span class="lang-switch-sep" aria-hidden="true">|</span>
+        <a href="de/index.html" hreflang="de" lang="de"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-de"/></svg>DE</a>
+        {% else %}
+        <a href="../index.html" hreflang="en" lang="en"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-en"/></svg>EN</a>
+        <span class="lang-switch-sep" aria-hidden="true">|</span>
+        <a href="index.html" hreflang="de" lang="de" aria-current="page"><svg class="lang-flag" width="20" height="15" aria-hidden="true"><use href="#i-flag-de"/></svg>DE</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">{{ t.hero.eyebrow }}</p>
+      <h1 id="hero-title">{{ t.hero.title }}</h1>
+      <div class="version-badges">
+        <a class="version-badge is-live" href="#resources">{{ t.hero.liveBadge }}</a>
+        <a class="version-badge is-upcoming" href="#roadmap">{{ t.hero.upcomingBadge }}</a>
+      </div>
+      <p class="hero-copy">{{ t.hero.copy }}</p>
+    </section>
+
+    <section class="formula-stage" id="explorer" aria-label="{{ t.formulaExplorer.ariaLabel }}">
+      <div class="formula-card">
+        <p class="formula-label">{{ t.formulaExplorer.label }}</p>
+        <div class="formula" role="img" aria-label="{{ t.formulaExplorer.ariaLabelFull }}">
+          <span class="formula-fragment" data-fragment="alpha">α</span>
+          <span class="operator">·</span>
+          <span class="fraction formula-fragment" data-fragment="relevance">
+            <span class="numerator">score</span>
+            <span class="denominator"><span>score</span> + <span class="formula-fragment nested" data-fragment="saturation">k</span></span>
+          </span>
+          <span class="operator">+</span>
+          <span class="formula-fragment" data-fragment="alpha">(1 − α)</span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="signals">Σ<sub>i=1</sub><sup>n</sup></span>
+          <span class="formula-fragment" data-fragment="weights">w<sub>i</sub></span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="signals">s<sub>i</sub></span>
+        </div>
+        <p class="formula-summary">{{ t.formulaExplorer.summary }}</p>
+      </div>
+
+      <div class="formula-card specificity-formula-card" id="specificity-formula-card" hidden>
+        <p class="formula-label">{{ t.formulaExplorer.specLabelPrefix }} <span class="no-uppercase">α</span> {{ t.formulaExplorer.specLabelSuffix }}</p>
+        <div class="formula formula-secondary" role="img" aria-label="{{ t.formulaExplorer.specAriaLabelFull }}">
+          <span class="formula-fragment" data-fragment="spec-alpha">α<sub>eff</sub></span>
+          <span class="operator">=</span>
+          <span class="formula-fragment" data-fragment="spec-alpha">α</span>
+          <span class="operator">+</span>
+          <span class="formula-fragment" data-fragment="spec-shift"><span class="formula-fragment nested" data-fragment="spec-param">m</span></span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="spec-shift">sign(d)</span>
+          <span class="operator">·</span>
+          <span class="formula-fragment" data-fragment="spec-shift">|d|</span><sup><span class="formula-fragment" data-fragment="spec-param">γ</span></sup>
+        </div>
+        <!-- Same treatment as the two formulas above: stacked fractions and superscripts read aloud as
+             an unpunctuated run of symbols, so each line carries the spoken version as its label. -->
+        <p class="formula-summary" role="img" aria-label="{{ t.formulaExplorer.dAriaLabelFull }}">d = <span class="formula-fragment" data-fragment="d-shift">2 ·</span> <span class="formula-fragment wraps-fraction" data-fragment="d-fraction"><span class="fraction"><span class="numerator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup></span><span class="denominator">specificity<sup><span class="formula-fragment nested" data-fragment="spec-param">p</span></sup> + <span class="formula-fragment nested" data-fragment="spec-param">k<sub>spec</sub><sup>p</sup></span></span></span></span> <span class="formula-fragment" data-fragment="d-shift">− 1</span></p>
+        <p class="formula-summary" role="img" aria-label="{{ t.formulaExplorer.specificityAriaLabelFull }}">specificity = <span class="formula-fragment" data-fragment="spec-max"><span class="formula-fragment nested" data-fragment="spec-param">β</span> · max(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">{{ t.formulaExplorer.specificityCatalogSize }}</span><span class="denominator">{{ t.formulaExplorer.specificityDocsContainingTerm }}</span></span>)</span><span class="formula-fragment" data-fragment="spec-max">)</span> + <span class="formula-fragment" data-fragment="spec-hmean">(1 − <span class="formula-fragment nested" data-fragment="spec-param">β</span>) · harmonicMean(</span><span class="formula-fragment wraps-fraction" data-fragment="spec-log">log(<span class="fraction"><span class="numerator">{{ t.formulaExplorer.specificityCatalogSize }}</span><span class="denominator">{{ t.formulaExplorer.specificityDocsContainingTerm }}</span></span>)</span><span class="formula-fragment" data-fragment="spec-hmean">)</span></p>
+      </div>
+
+      <!-- Deliberately not role="tablist": this row mixes five step buttons with two disclosure toggles
+           that hide the panel entirely rather than swapping its contents, which is not what a tablist is
+           and which browsers reject as an invalid tablist child. aria-current="step" describes what these
+           buttons actually are, and applies just as well to the two breadcrumb rows below. -->
+      <div class="step-nav-wrap standalone">
+          <div class="step-nav" role="group" aria-label="{{ t.stepNav.ariaLabel }}">
+            <button type="button" aria-current="step" aria-controls="step-panel-1" data-step="0">{{ t.stepNav.steps[0] }}</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" aria-controls="step-panel-2" data-step="1">{{ t.stepNav.steps[1] }}</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" aria-controls="step-panel-3" data-step="2">{{ t.stepNav.steps[2] }}</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" aria-controls="step-panel-4" data-step="3">{{ t.stepNav.steps[3] }}</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" aria-controls="step-panel-5" data-step="4">{{ t.stepNav.steps[4] }}</button>
+            <span aria-hidden="true">›</span>
+            <button type="button" id="specificity-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="specificity-crumbs">
+              {{ t.stepNav.specificityToggle }}
+            </button>
+            <span aria-hidden="true">›</span>
+            <button type="button" id="optimization-toggle" class="step-nav-optimization" aria-expanded="false" aria-controls="optimization-crumbs">
+              <svg class="icon-trend" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="14 6 21 6 21 13"/></svg>
+              {{ t.stepNav.optimizationToggle }}
+            </button>
+          </div>
+      </div>
+
+      <div class="optimization-crumbs" id="specificity-crumbs">
+        <div class="optimization-crumbs-clip">
+          <div class="optimization-crumbs-inner" role="group" aria-label="{{ t.specCrumbs.ariaLabel }}">
+            <button type="button" class="crumb" data-spec-step="0" aria-controls="specificity-terms">{{ t.specCrumbs.items[0] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-spec-step="1" aria-controls="specificity-raw">{{ t.specCrumbs.items[1] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-spec-step="2" aria-controls="specificity-normalize">{{ t.specCrumbs.items[2] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-spec-step="3" aria-controls="specificity-shift">{{ t.specCrumbs.items[3] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-spec-step="4" aria-controls="specificity-calibrate">{{ t.specCrumbs.items[4] }}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="optimization-crumbs" id="optimization-crumbs">
+        <div class="optimization-crumbs-clip">
+          <div class="optimization-crumbs-inner" role="group" aria-label="{{ t.optCrumbs.ariaLabel }}">
+            <button type="button" class="crumb" data-opt-step="0" aria-controls="optimization-dataset">{{ t.optCrumbs.items[0] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-opt-step="1" aria-controls="optimization-rank-eval">{{ t.optCrumbs.items[1] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-opt-step="2" aria-controls="optimization-cmaes">{{ t.optCrumbs.items[2] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-opt-step="3" aria-controls="optimization-parameters">{{ t.optCrumbs.items[3] }}</button>
+            <span class="arrow" aria-hidden="true">›</span>
+            <button type="button" class="crumb" data-opt-step="4" aria-controls="optimization-runtime">{{ t.optCrumbs.items[4] }}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="optimization-panel" id="optimization-panel" hidden>
+        {% for card in t.optimizationCards %}
+        <div class="content-card" id="{{ card.id }}" {% if not loop.first %}hidden{% endif %}>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">{{ card.index }}</p>
+              <h2>{{ card.title }}</h2>
+              <p class="opt-card-lead">{{ card.lead | safe }}</p>
+              <div class="opt-card-body">
+                {% for para in card.body %}
+                <p>{{ para | safe }}</p>
+                {% endfor %}
+              </div>
+              <p class="opt-card-tag">{{ card.tag | safe }}</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              {% if card.visual.kind == "dataset" %}
+              <div class="srp-card">
+                <div class="srp-thumb"><svg class="icon-line icon-line--thin" width="30" height="30"><use href="#i-printer"/></svg></div>
+                <div class="srp-info">
+                  <strong>{{ card.visual.productName }}</strong>
+                  <span>{{ card.visual.price }}</span>
+                </div>
+                <div class="srp-ratings-frame">
+                  <div class="srp-ratings">
+                    <span class="rate-heart" title="{{ card.visual.rateHeart }}"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+                    <span class="rate-check" title="{{ card.visual.rateCheck }}"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                    <span class="rate-x" title="{{ card.visual.rateX }}"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+                  </div>
+                </div>
+                <small class="admin-flag">{{ card.visual.adminFlag }}</small>
+              </div>
+              <div class="srp-more">
+                <span class="mini-icon" title="{{ card.visual.monitorTitle }}"><svg class="icon-line" width="16" height="16"><use href="#i-monitor"/></svg></span>
+                <span class="mini-icon" title="{{ card.visual.laptopTitle }}"><svg class="icon-line" width="16" height="16"><use href="#i-laptop"/></svg></span>
+                <small>{{ card.visual.moreText }}</small>
+              </div>
+              {% elif card.visual.kind == "rank-eval" %}
+              <div class="visual-card">
+                {% for isFirstRow in [true, false] %}
+                {% set rowIsMismatch = (isFirstRow and card.visual.firstRowMismatch) or (not isFirstRow and not card.visual.firstRowMismatch) %}
+                <div class="rank-row">
+                  <small>{{ card.visual.expectedLabel if isFirstRow else card.visual.actualLabel }}</small>
+                  <div class="rank-slots">
+                    {% if rowIsMismatch %}
+                    <span class="mini-product is-mismatch" title="{{ card.visual.monitorTitle }}">
+                      <span class="mini-thumb"><svg class="icon-line" width="20" height="20"><use href="#i-monitor"/></svg></span>
+                      <small>{{ card.visual.monitorTitle }}</small>
+                    </span>
+                    <span class="mini-product is-mismatch" title="{{ card.visual.printerTitle }}">
+                      <span class="mini-thumb"><svg class="icon-line" width="20" height="20"><use href="#i-printer"/></svg></span>
+                      <small>{{ card.visual.printerTitle }}</small>
+                    </span>
+                    {% else %}
+                    <span class="mini-product is-match" title="{{ card.visual.printerTitle }}">
+                      <span class="mini-thumb"><svg class="icon-line" width="20" height="20"><use href="#i-printer"/></svg></span>
+                      <small>{{ card.visual.printerTitle }}</small>
+                    </span>
+                    <span class="mini-product is-match" title="{{ card.visual.monitorTitle }}">
+                      <span class="mini-thumb"><svg class="icon-line" width="20" height="20"><use href="#i-monitor"/></svg></span>
+                      <small>{{ card.visual.monitorTitle }}</small>
+                    </span>
+                    {% endif %}
+                    <span class="mini-product is-match" title="{{ card.visual.laptopTitle }}">
+                      <span class="mini-thumb"><svg class="icon-line" width="20" height="20"><use href="#i-laptop"/></svg></span>
+                      <small>{{ card.visual.laptopTitle }}</small>
+                    </span>
+                  </div>
+                </div>
+                {% endfor %}
+                <p class="big-equation">{{ card.visual.ndcg }}</p>
+              </div>
+              {% elif card.visual.kind == "cmaes" %}
+              <svg viewBox="0 0 320 250" role="img" aria-label="{{ card.visual.ariaLabel }}">
+                <line class="mini-axis" x1="26" y1="216" x2="300" y2="216" />
+                <line class="mini-axis" x1="26" y1="216" x2="26" y2="20" />
+                <ellipse cx="150" cy="118" rx="112" ry="66" transform="rotate(-20 150 118)" fill="none" stroke="#c3ccca" stroke-width="1.6" stroke-dasharray="4 4"/>
+                <ellipse cx="170" cy="130" rx="62" ry="34" transform="rotate(-9 170 130)" fill="none" stroke="#7fbdba" stroke-width="1.8" stroke-dasharray="4 4"/>
+                <ellipse cx="182" cy="140" rx="24" ry="13" transform="rotate(5 182 140)" fill="rgba(0,127,131,.14)" stroke="var(--teal)" stroke-width="2"/>
+                <circle cx="96" cy="88" r="3" fill="#c3ccca"/>
+                <circle cx="212" cy="150" r="3" fill="#c3ccca"/>
+                <circle cx="128" cy="160" r="3" fill="#c3ccca"/>
+                <circle cx="222" cy="98" r="3" fill="#7fbdba"/>
+                <circle cx="152" cy="112" r="3" fill="#7fbdba"/>
+                <circle cx="190" cy="158" r="3" fill="#7fbdba"/>
+                <circle cx="174" cy="132" r="3" fill="var(--teal)"/>
+                <circle cx="188" cy="146" r="3" fill="var(--teal)"/>
+                <circle cx="184" cy="140" r="4.5" fill="var(--ink)"/>
+                <text class="mini-label" x="128" y="236">{{ card.visual.param1 }}</text>
+                <text class="mini-label" x="6" y="26">{{ card.visual.param2 }}</text>
+              </svg>
+              {% elif card.visual.kind == "params" %}
+              <table class="param-table">
+                <tbody>
+                  {% for row in card.visual.rows %}
+                  <tr>
+                    <td class="param-name">{{ row.name }}{% if row.sub %}<sub>{{ row.sub }}</sub>{% endif %} <small>{{ row.small }}</small></td>
+                    <td class="param-value is-before">{{ row.before }}</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">{{ row.after }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="optimization-panel" id="specificity-panel" hidden>
+        {% for card in t.specificityCards %}
+        <div class="content-card" id="{{ card.id }}" {% if not loop.first %}hidden{% endif %}>
+          <div class="opt-card-panel">
+            <div class="opt-card-copy">
+              <p class="opt-card-index">{{ card.index }}</p>
+              <h2>{{ card.title }}</h2>
+              <p class="opt-card-lead">{{ card.lead | safe }}</p>
+              <div class="opt-card-body">
+                {% for para in card.body %}
+                <p>{{ para | safe }}</p>
+                {% endfor %}
+              </div>
+              <p class="opt-card-tag">{{ card.tag | safe }}</p>
+            </div>
+            <div class="opt-card-visual" aria-hidden="true">
+              {% if card.visual.kind == "terms" %}
+              <div class="parameter-card">
+                <strong>{{ card.visual.heading }}</strong>
+                <table class="freq-table">
+                  <tbody>
+                    {% for row in card.visual.rows %}
+                    <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td></tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <p>{{ card.visual.caption }}</p>
+              </div>
+              {% elif card.visual.kind == "raw-specificity" %}
+              <div class="visual-card">
+                <div class="visual-split">
+                  <div class="metric-box"><small>{{ card.visual.maxIdfLabel }}</small><strong>{{ card.visual.maxIdfValue }}</strong></div>
+                  <div class="metric-box"><small>{{ card.visual.hmeanLabel }}</small><strong>{{ card.visual.hmeanValue }}</strong></div>
+                  <div class="metric-box"><small>{{ card.visual.betaLabel }}</small><strong>{{ card.visual.betaValue }}</strong></div>
+                  <div class="metric-box"><small>{{ card.visual.resultLabel }}</small><strong>{{ card.visual.resultValue }}</strong></div>
+                </div>
+                <p class="big-equation">{{ card.visual.equation }}</p>
+              </div>
+              {% elif card.visual.kind == "curve" %}
+              <div class="visual-card">
+                <svg class="chart-svg" viewBox="0 0 420 250" role="img" aria-label="{{ card.visual.ariaLabel }}">
+                  <line class="chart-grid" x1="52" y1="65" x2="390" y2="65" />
+                  <line class="chart-grid" x1="52" y1="130" x2="390" y2="130" />
+                  <line class="chart-axis" x1="52" y1="215" x2="390" y2="215" />
+                  <line class="chart-axis" x1="52" y1="215" x2="52" y2="25" />
+                  <path class="chart-curve" d="M52 215 C78 173, 104 143, 135 119 C186 80, 255 58, 390 43" />
+                  <circle class="chart-marker" cx="145" cy="131" r="7" />
+                  <text class="chart-label" x="18" y="69">1.0</text>
+                  <text class="chart-label" x="18" y="134">0.5</text>
+                  <text class="chart-label" x="52" y="238">0</text>
+                  <text class="chart-label" x="330" y="238">{{ card.visual.xAxisLabel }}</text>
+                  <line x1="145" y1="141" x2="145" y2="215" stroke="var(--teal)" stroke-dasharray="4 4"/>
+                  <text class="chart-label" x="139" y="238">{{ card.visual.kSpecLabel }}</text>
+                </svg>
+                <p class="big-equation">{{ card.visual.equation }}</p>
+              </div>
+              {% elif card.visual.kind == "shift" %}
+              <div class="parameter-grid">
+                <div class="parameter-card">
+                  <strong>{{ card.visual.heading }}</strong>
+                  <div class="shift-state">
+                    <small>{{ card.visual.specificLabel }}</small>
+                    <div class="mini-bar"><i class="fill-85"></i></div>
+                    <div class="bar-split"><span>{{ card.visual.specificText }}</span><span>{{ card.visual.specificBusiness }}</span></div>
+                  </div>
+                  <div class="bar-arrow" aria-hidden="true">↓</div>
+                  <div class="shift-state">
+                    <small>{{ card.visual.genericLabel }}</small>
+                    <div class="mini-bar"><i class="fill-40"></i></div>
+                    <div class="bar-split"><span>{{ card.visual.genericText }}</span><span>{{ card.visual.genericBusiness }}</span></div>
+                  </div>
+                  <p>{{ card.visual.caption }}</p>
+                </div>
+              </div>
+              {% elif card.visual.kind == "params" %}
+              <table class="param-table">
+                <tbody>
+                  {% for row in card.visual.rows %}
+                  <tr>
+                    <td class="param-name">{{ row.name }}{% if row.sub %}<sub>{{ row.sub }}</sub>{% endif %} <small>{{ row.small }}</small></td>
+                    <td class="param-value is-before">{{ row.before }}</td>
+                    <td class="param-arrow" aria-hidden="true">→</td>
+                    <td class="param-value is-after">{{ row.after }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- All five steps are real markup, not a JS array, so the explorer's actual writing is in the
+           served HTML: readable with scripting off, and visible to link unfurlers and crawlers that
+           don't execute JS. script.js hides the inactive ones (see the .js rule in styles.css) and
+           reads each panel's behaviour from data-visual / data-fragments; the illustrations stay
+           JS-rendered because they're decoration, not content.
+
+           No aria-live on the panels: they're swapped by an explicit button press and the button's
+           own aria-current already reports the change. <section> with an accessible name is
+           implicitly role="region", so the aria-labelledby is all each one needs. And no role="img"
+           on .step-visual — a role="img" ancestor makes its subtree presentational, which would throw
+           away each injected chart's own label. The visuals label themselves. -->
+      <div class="explorer-shell" id="explorer-shell">
+        {% set stepVisuals = ["overview", "curve", "saturation", "signals", "weights"] %}
+        {% set stepFragments = ["", "relevance", "saturation", "signals", "weights"] %}
+        {% for panel in t.stepPanels %}
+        <section class="step-panel{% if loop.first %} is-active{% endif %}" id="{{ panel.id }}" data-visual="{{ stepVisuals[loop.index0] }}" data-fragments="{{ stepFragments[loop.index0] }}" aria-labelledby="{{ panel.titleId }}">
+          <div class="step-copy">
+            <p class="step-count">{{ panel.count }}</p>
+            <h2 id="{{ panel.titleId }}">{{ panel.title }}</h2>
+            <p class="step-lead">{{ panel.lead | safe }}</p>
+            <div class="step-body">
+              {% for para in panel.body %}
+              <p>{{ para | safe }}</p>
+              {% endfor %}
+            </div>
+            <p class="implementation">{{ panel.implementation | safe }}</p>
+          </div>
+          <div class="step-visual"></div>
+        </section>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="resources" id="resources" aria-labelledby="resources-title">
+      <div class="section-heading compact">
+        <h2 id="resources-title">{{ t.resources.heading }}</h2>
+      </div>
+      <div class="resource-list">
+        {% for row in t.resources.rows %}
+        <div class="resource-row{% if not loop.first %} is-nested{% endif %}">
+          <a class="resource-row-link" href="{{ row.href }}" target="_blank" rel="noopener noreferrer">
+            <span>
+              <small>{{ row.small }}</small>
+              <strong>{{ row.title }}</strong>
+              <em>{{ row.desc }}</em>
+            </span>
+          </a>
+          {% if row.screenshotsAnchor %}
+          <a class="resource-screenshots-link" href="screenshots.html#{{ row.screenshotsAnchor }}">{{ t.resources.screenshotsText }}</a>
+          {% endif %}
+          <a class="resource-github-link" href="{{ row.href }}" target="_blank" rel="noopener noreferrer" aria-label="{{ row.githubAriaLabel }}">
+            <svg class="resource-github-icon icon-solid" width="20" height="20" aria-hidden="true"><use href="#i-github"/></svg>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      <figure class="deps-diagram">
+        <svg viewBox="0 0 960 500" role="img" aria-labelledby="deps-diagram-title" aria-describedby="deps-diagram-desc">
+          <title id="deps-diagram-title">{{ t.resources.diagram.titleText }}</title>
+          <desc id="deps-diagram-desc">{{ t.resources.diagram.descText }}</desc>
+
+          <defs>
+            <marker id="arrow-solid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)" />
+            </marker>
+            <marker id="arrow-dashed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" style="fill:var(--teal)" />
+            </marker>
+          </defs>
+
+          <!-- connectors (drawn first, under the nodes) -->
+          <!-- Toolkit fans out to all four packages it bundles, one strictly vertical drop per package -->
+          <line x1="105" y1="84" x2="105" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+          <line x1="355" y1="84" x2="355" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+          <line x1="605" y1="84" x2="605" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+          <line x1="855" y1="84" x2="855" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
+
+          <line x1="455" y1="205" x2="503" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
+          <text x="480" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">{{ t.resources.diagram.optionalLabel }}</text>
+
+          <line x1="755" y1="205" x2="707" y2="205" style="stroke:var(--ink); stroke-width:2" marker-end="url(#arrow-solid)" />
+          <text x="730" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--ink)">{{ t.resources.diagram.requiresLabel }}</text>
+
+          <line x1="855" y1="240" x2="855" y2="298" style="stroke:var(--ink); stroke-width:2" marker-end="url(#arrow-solid)" />
+          <text x="868" y="273" class="deps-edge-label" style="fill:var(--ink)">{{ t.resources.diagram.delegatesLabel }}</text>
+
+          <line x1="855" y1="408" x2="855" y2="370" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
+          <text x="868" y="393" class="deps-edge-label" style="fill:var(--teal)">{{ t.resources.diagram.alsoUsesLabel }}</text>
+
+          <!-- Search Toolkit -->
+          <g>
+            <rect x="5" y="20" width="950" height="64" rx="10" style="fill:var(--teal-soft); stroke:var(--teal); stroke-width:1.6" />
+            <text x="480" y="49" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.toolkitTitle }}</text>
+            <text x="480" y="68" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.toolkitSub }}</text>
+          </g>
+
+          <!-- Search Feedback -->
+          <g>
+            <rect x="5" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
+            <text x="105" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.feedbackTitle }}</text>
+            <text x="105" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
+          </g>
+
+          <!-- Search Debug -->
+          <g>
+            <rect x="255" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
+            <text x="355" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.debugTitle }}</text>
+            <text x="355" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
+          </g>
+
+          <!-- Search Ranking -->
+          <g>
+            <rect x="505" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
+            <text x="605" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.rankingTitle }}</text>
+            <text x="605" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
+          </g>
+
+          <!-- Search Optimization -->
+          <g>
+            <rect x="755" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
+            <text x="855" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.optimizationTitle }}</text>
+            <text x="855" y="222" class="deps-node-sub" style="fill:var(--muted)">{{ t.resources.diagram.optimizationSub }}</text>
+          </g>
+
+          <!-- blackbox-optimizer -->
+          <g>
+            <rect x="755" y="300" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
+            <text x="855" y="332" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.blackboxTitle }}</text>
+            <text x="855" y="352" class="deps-node-sub" style="fill:var(--muted)">{{ t.resources.diagram.blackboxSub }}</text>
+          </g>
+
+          <!-- any PHP project (ghost node) -->
+          <g>
+            <rect x="755" y="410" width="200" height="64" rx="10" style="fill:none; stroke:var(--line); stroke-width:1.4" stroke-dasharray="5 4" />
+            <text x="855" y="439" class="deps-node-title deps-node-title--ghost" style="fill:var(--muted)">{{ t.resources.diagram.ghostTitle }}</text>
+            <text x="855" y="458" class="deps-node-sub" style="fill:var(--muted)">{{ t.resources.diagram.ghostSub }}</text>
+          </g>
+        </svg>
+        <figcaption>{{ t.resources.diagram.figcaption }}</figcaption>
+      </figure>
+    </section>
+
+    <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="section-heading compact">
+        <h2 id="roadmap-title">{{ t.roadmap.heading }}</h2>
+      </div>
+      {% for para in t.roadmap.paragraphs %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </section>
+
+    <section class="roadmap" id="origins" aria-labelledby="origins-title">
+      <div class="section-heading compact">
+        <h2 id="origins-title">{{ t.origins.heading }}</h2>
+      </div>
+      <p>{{ t.origins.paragraph1Pre }} <a href="https://docs.spryker.com/docs/pbc/all/search/latest/base-shop/best-practices/data-driven-ranking" target="_blank" rel="noopener noreferrer">{{ t.origins.paragraph1LinkText }}</a> {{ t.origins.paragraph1Post }}</p>
+      <p>{{ t.origins.paragraph2 }}</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>{{ t.footer.builtByPre }}<a class="footer-social" href="https://www.linkedin.com/in/andr%C3%A9-barthelmes-hellmuth-b7b16875/" target="_blank" rel="noopener noreferrer" aria-label="{{ t.footer.linkedinAriaLabel }}"><svg class="footer-social-icon icon-solid" width="16" height="16" aria-hidden="true"><use href="#i-linkedin"/></svg></a></p>
+    <p>{{ t.footer.license }}</p>
+    <p><a href="{{ t.footer.homeHref }}">{{ t.footer.homeText }}</a></p>
+  </footer>
+</body>
+</html>
