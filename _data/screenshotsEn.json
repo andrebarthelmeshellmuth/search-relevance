@@ -307,8 +307,13 @@
     "label": "Search Variant Facets",
     "screenshots": [
       {
-        "title": "Screenshots coming soon",
-        "description": "Search Variant Facets screenshots will be added here soon."
+        "title": "Cross-facet AND, illustrated",
+        "description": "Filtering by Color: Red and Size: 40 should only return products where one single variant is both red and 40 \u2014 not products where red and 40 only exist in two different variants of the same abstract. Shoe #1 has a Red/40 variant and matches; Shoe #2 has a Green/40 variant and a separate Red/42 variant, so no single variant satisfies both filters and it's correctly excluded. This is an illustrative mockup; real product screenshots will replace it here.",
+        "src": "screenshots/search-variant-facets/facet-and-mockup.svg",
+        "thumb": "screenshots/search-variant-facets/facet-and-mockup.svg",
+        "full": "screenshots/search-variant-facets/facet-and-mockup.svg",
+        "width": 1920,
+        "height": 1080
       }
     ]
   }

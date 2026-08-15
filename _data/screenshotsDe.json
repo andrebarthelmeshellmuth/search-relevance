@@ -307,8 +307,13 @@
     "label": "Search Variant Facets",
     "screenshots": [
       {
-        "title": "Screenshots folgen in K\u00fcrze",
-        "description": "Screenshots zu Search Variant Facets folgen hier in K\u00fcrze."
+        "title": "Cross-Facet-AND, veranschaulicht",
+        "description": "Eine Filterung nach Farbe: Rot und Gr\u00f6\u00dfe: 40 sollte nur Produkte liefern, bei denen eine einzelne Variante sowohl rot als auch 40 ist \u2014 nicht Produkte, bei denen rot und 40 nur in zwei verschiedenen Varianten desselben Abstract-Produkts vorkommen. Schuh #1 hat eine Rot/40-Variante und passt; Schuh #2 hat eine Gr\u00fcn/40-Variante und eine separate Rot/42-Variante, sodass keine einzelne Variante beide Filter erf\u00fcllt und er korrekt ausgeschlossen wird. Dies ist ein illustrativer Mockup; echte Produkt-Screenshots werden ihn hier sp\u00e4ter ersetzen.",
+        "src": "screenshots/search-variant-facets/facet-and-mockup.svg",
+        "thumb": "screenshots/search-variant-facets/facet-and-mockup.svg",
+        "full": "screenshots/search-variant-facets/facet-and-mockup.svg",
+        "width": 1920,
+        "height": 1080
       }
     ]
   }
