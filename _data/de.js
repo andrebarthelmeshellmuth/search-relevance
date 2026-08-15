@@ -353,6 +353,14 @@ export default {
         screenshotsAnchor: "search-optimization",
       },
       {
+        small: "Facetten",
+        title: "Search Variant Facets",
+        desc: "Behebt die Cross-Facet-AND-Korrektheit für Produktvarianten, sodass eine Kombination aus Facetten wie Farbe und Größe nur Produkte liefert, die tatsächlich in dieser Kombination existieren.",
+        href: "https://github.com/andrebarthelmeshellmuth/spryker-search-variant-facets",
+        githubAriaLabel: "Search Variant Facets auf GitHub ansehen",
+        screenshotsAnchor: "search-variant-facets",
+      },
+      {
         small: "Abhängigkeit",
         title: "Blackbox Optimizer",
         desc: "Die Optimierungs-Engine, auf der Search Optimization aufbaut — einsetzbar in jedem PHP-Projekt.",

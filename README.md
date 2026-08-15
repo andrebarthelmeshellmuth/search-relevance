@@ -10,6 +10,7 @@ The homepage presents the ranking formula as an interactive, breadcrumb-driven e
 - [Search Debug](https://github.com/andrebarthelmeshellmuth/spryker-search-debugger)
 - [Search Optimization](https://github.com/andrebarthelmeshellmuth/spryker-search-ranking-optimizer)
 - [Search Feedback](https://github.com/andrebarthelmeshellmuth/spryker-search-feedback)
+- [Search Variant Facets](https://github.com/andrebarthelmeshellmuth/spryker-search-variant-facets)
 
 ## Local preview
 

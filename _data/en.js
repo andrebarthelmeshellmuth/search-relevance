@@ -353,6 +353,14 @@ export default {
         screenshotsAnchor: "search-optimization",
       },
       {
+        small: "Facets",
+        title: "Search Variant Facets",
+        desc: "Fixes cross-facet AND correctness for product variants, so combining facets like color and size only returns products that actually exist in that combination.",
+        href: "https://github.com/andrebarthelmeshellmuth/spryker-search-variant-facets",
+        githubAriaLabel: "View Search Variant Facets on GitHub",
+        screenshotsAnchor: "search-variant-facets",
+      },
+      {
         small: "Dependency",
         title: "Blackbox Optimizer",
         desc: "The optimization engine Search Optimization is built on — usable in any PHP project.",

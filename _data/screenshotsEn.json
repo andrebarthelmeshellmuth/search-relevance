@@ -5,7 +5,7 @@
     "screenshots": [
       {
         "title": "File a ticket from the SRP",
-        "description": "Customers can report search issues directly from the Search Results Page without leaving their current search. Each ticket automatically captures the complete search context—the query, active filters, page number, store/locale and the products shown—so administrators can reproduce exactly what the customer saw. Access is permission-controlled, keeping the storefront unchanged for everyone else.",
+        "description": "Customers can report search issues directly from the Search Results Page without leaving their current search. Each ticket automatically captures the complete search context\u2014the query, active filters, page number, store/locale and the products shown\u2014so administrators can reproduce exactly what the customer saw. Access is permission-controlled, keeping the storefront unchanged for everyone else.",
         "src": "screenshots/search-feedback/ticket-form.png",
         "thumb": "screenshots/search-feedback/ticket-form-thumb.webp",
         "full": "screenshots/search-feedback/ticket-form-full.webp",
@@ -23,7 +23,7 @@
       },
       {
         "title": "Ticket detail",
-        "description": "Every ticket contains the complete search context alongside the customer conversation, giving administrators everything needed to investigate a reported relevance issue. Replies are handled directly from Zed, and the View SRP shortcut replays the exact page the customer saw—the same ranking, the same order—rather than re-running the search against whatever the catalog looks like today. Ranking drifts over time (nightly tie-break randomization, refreshed business scores, retuned formula weights), so replaying the frozen result is what makes the ticket actually verifiable. Status changes are managed independently of the conversation.",
+        "description": "Every ticket contains the complete search context alongside the customer conversation, giving administrators everything needed to investigate a reported relevance issue. Replies are handled directly from Zed, and the View SRP shortcut replays the exact page the customer saw\u2014the same ranking, the same order\u2014rather than re-running the search against whatever the catalog looks like today. Ranking drifts over time (nightly tie-break randomization, refreshed business scores, retuned formula weights), so replaying the frozen result is what makes the ticket actually verifiable. Status changes are managed independently of the conversation.",
         "src": "screenshots/search-feedback/ticket-detail.png",
         "thumb": "screenshots/search-feedback/ticket-detail-thumb.webp",
         "full": "screenshots/search-feedback/ticket-detail-full.webp",
@@ -47,7 +47,7 @@
       },
       {
         "title": "Matched tokens breakdown",
-        "description": "Expand a product's text-score breakdown to see exactly which query tokens matched which indexed fields, together with their individual BM25 contribution. Every value comes from the live OpenSearch explain output, including the actual field boost configured for the project. The overlay is extensible, allowing other packages—such as Search Ranking—to contribute additional scoring sections without modifying the core debugger.",
+        "description": "Expand a product's text-score breakdown to see exactly which query tokens matched which indexed fields, together with their individual BM25 contribution. Every value comes from the live OpenSearch explain output, including the actual field boost configured for the project. The overlay is extensible, allowing other packages\u2014such as Search Ranking\u2014to contribute additional scoring sections without modifying the core debugger.",
         "src": "screenshots/search-debug/matched-tokens.png",
         "thumb": "screenshots/search-debug/matched-tokens-thumb.webp",
         "full": "screenshots/search-debug/matched-tokens-full.webp",
@@ -74,7 +74,7 @@
       },
       {
         "title": "Compare BM25 across tokens",
-        "description": "Pin multiple product overlays to compare BM25 scores side by side. Looking at individual query terms quickly reveals why one token contributes far more than another—for example because its inverse document frequency is much higher. This turns Elasticsearch scoring from a single opaque number into something that can be inspected and reasoned about.",
+        "description": "Pin multiple product overlays to compare BM25 scores side by side. Looking at individual query terms quickly reveals why one token contributes far more than another\u2014for example because its inverse document frequency is much higher. This turns Elasticsearch scoring from a single opaque number into something that can be inspected and reasoned about.",
         "src": "screenshots/search-debug/bm25-compare.png",
         "thumb": "screenshots/search-debug/bm25-compare-thumb.webp",
         "full": "screenshots/search-debug/bm25-compare-full.webp",
@@ -92,7 +92,7 @@
       },
       {
         "title": "Full German analyzer pipeline (index time)",
-        "description": "Visualize how a product's text is transformed during indexing. Every tokenizer and filter is shown in execution order together with its live configuration, allowing developers to follow the token through the complete analysis chain—from raw text to the final indexed terms. This makes custom analyzers and language-specific processing far easier to understand and debug.",
+        "description": "Visualize how a product's text is transformed during indexing. Every tokenizer and filter is shown in execution order together with its live configuration, allowing developers to follow the token through the complete analysis chain\u2014from raw text to the final indexed terms. This makes custom analyzers and language-specific processing far easier to understand and debug.",
         "src": "screenshots/search-debug/token-analysis.png",
         "thumb": "screenshots/search-debug/token-analysis-thumb.webp",
         "full": "screenshots/search-debug/token-analysis-full.webp",
@@ -101,7 +101,7 @@
       },
       {
         "title": "Search-time analyzer pipeline",
-        "description": "The same visualization is available for search-time analysis. Compare how user input is processed against the index-time pipeline to understand why a query matches—or fails to match—certain products. Differences such as synonym expansion or search-specific filters become immediately visible, making analyzer debugging significantly easier than inspecting raw OpenSearch responses.",
+        "description": "The same visualization is available for search-time analysis. Compare how user input is processed against the index-time pipeline to understand why a query matches\u2014or fails to match\u2014certain products. Differences such as synonym expansion or search-specific filters become immediately visible, making analyzer debugging significantly easier than inspecting raw OpenSearch responses.",
         "src": "screenshots/search-debug/token-analysis-search.png",
         "thumb": "screenshots/search-debug/token-analysis-search-thumb.webp",
         "full": "screenshots/search-debug/token-analysis-search-full.webp",
@@ -115,7 +115,7 @@
     "label": "Search Ranking",
     "screenshots": [
       {
-        "title": "Metrics list — three scopes at a glance",
+        "title": "Metrics list \u2014 three scopes at a glance",
         "description": "Define which business signals influence product ranking and how much each contributes. Every metric combines a normalization formula with a configurable weight, allowing business data such as sales, impressions, or custom KPIs to participate in the final OpenSearch ranking score. Metrics can either share one configuration across an entire store or be maintained independently per locale.",
         "src": "screenshots/search-ranking/metrics.png",
         "thumb": "screenshots/search-ranking/metrics-thumb.webp",
@@ -125,7 +125,7 @@
       },
       {
         "title": "Formula authoring: fitting a curve to real data",
-        "description": "Business metrics rarely follow a linear distribution. This editor compares the current normalization formula against the real distribution of imported product values and suggests alternative formulas that better separate products. Candidate formulas are automatically fitted to the data and ranked by goodness of fit (R²), allowing administrators to improve ranking quality without manually experimenting with mathematical functions.",
+        "description": "Business metrics rarely follow a linear distribution. This editor compares the current normalization formula against the real distribution of imported product values and suggests alternative formulas that better separate products. Candidate formulas are automatically fitted to the data and ranked by goodness of fit (R\u00b2), allowing administrators to improve ranking quality without manually experimenting with mathematical functions.",
         "src": "screenshots/search-ranking/edit-metric.png",
         "thumb": "screenshots/search-ranking/edit-metric-thumb.webp",
         "full": "screenshots/search-ranking/edit-metric-full.webp",
@@ -133,7 +133,7 @@
         "height": 1718
       },
       {
-        "title": "Product Values — the input every adopter must supply",
+        "title": "Product Values \u2014 the input every adopter must supply",
         "description": "Inspect the raw business metrics imported for every product together with their normalized values used during ranking. This page verifies that data imports are working as expected and makes it easy to understand how raw values are transformed before they contribute to the final ranking score.",
         "src": "screenshots/search-ranking/product-values.png",
         "thumb": "screenshots/search-ranking/product-values-thumb.webp",
@@ -142,7 +142,7 @@
         "height": 1080
       },
       {
-        "title": "Product Metric Gaps — finding the silent zeros",
+        "title": "Product Metric Gaps \u2014 finding the silent zeros",
         "description": "Missing business metrics silently reduce ranking quality. This view highlights every product that lacks a value for an active ranking metric, making incomplete imports immediately visible before they affect search results.",
         "src": "screenshots/search-ranking/product-metric-gap.png",
         "thumb": "screenshots/search-ranking/product-metric-gap-thumb.webp",
@@ -151,7 +151,7 @@
         "height": 1080
       },
       {
-        "title": "Settings — the ranking formula's own knobs",
+        "title": "Settings \u2014 the ranking formula's own knobs",
         "description": "Configure how OpenSearch relevance and business signals are combined into a single ranking score. Besides the overall relevance weight, this page exposes the optional query-specific weighting model, allowing search relevance to adapt automatically between broad and highly specific searches. Features requiring additional OpenSearch requests remain intentionally code-enabled rather than editable through the UI.",
         "src": "screenshots/search-ranking/settings.png",
         "thumb": "screenshots/search-ranking/settings-thumb.webp",
@@ -160,7 +160,7 @@
         "height": 1386
       },
       {
-        "title": "Metric History — an audit trail, not a diff",
+        "title": "Metric History \u2014 an audit trail, not a diff",
         "description": "Every ranking configuration change is recorded in an audit trail. Each entry captures the complete metric configuration at the time it was saved, making it easy to review how formulas, weights, and activation states evolved over time, regardless of whether the change was performed manually or by companion packages.",
         "src": "screenshots/search-ranking/metric-history.png",
         "thumb": "screenshots/search-ranking/metric-history-thumb.webp",
@@ -169,7 +169,7 @@
         "height": 1080
       },
       {
-        "title": "Scope Copy — bootstrapping a new market",
+        "title": "Scope Copy \u2014 bootstrapping a new market",
         "description": "Launching a new market rarely means starting from scratch. Scope Copy transfers ranking configuration between stores and locales, allowing successful tuning to be reused while keeping product-specific business data independent. Optional synchronization keeps selected configuration in sync across markets as they evolve.",
         "src": "screenshots/search-ranking/scope-copy.png",
         "thumb": "screenshots/search-ranking/scope-copy-thumb.webp",
@@ -178,7 +178,7 @@
         "height": 1864
       },
       {
-        "title": "Random Impact — judging the tie-breaker's weight",
+        "title": "Random Impact \u2014 judging the tie-breaker's weight",
         "description": "Evaluate the effect of the random tie-breaker directly on the Search Results Page. Products display how many positions they would move if the random business signal were disabled, making it easy to judge whether the configured weight introduces healthy variation or too much noise into the ranking.",
         "src": "screenshots/search-ranking/random-impact.png",
         "thumb": "screenshots/search-ranking/random-impact-thumb.webp",
@@ -299,6 +299,16 @@
         "full": "screenshots/search-optimization/automated-weight-optimization-after-full.webp",
         "width": 1920,
         "height": 1080
+      }
+    ]
+  },
+  {
+    "id": "search-variant-facets",
+    "label": "Search Variant Facets",
+    "screenshots": [
+      {
+        "title": "Screenshots coming soon",
+        "description": "Search Variant Facets screenshots will be added here soon."
       }
     ]
   }

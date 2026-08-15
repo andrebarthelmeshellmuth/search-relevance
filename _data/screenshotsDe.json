@@ -5,7 +5,7 @@
     "screenshots": [
       {
         "title": "Ein Ticket direkt von der SRP aus anlegen",
-        "description": "Kunden können Suchprobleme direkt von der Search Results Page melden, ohne ihre aktuelle Suche zu verlassen. Jedes Ticket erfasst automatisch den vollständigen Suchkontext — Query, aktive Filter, Seitenzahl, Store/Locale und die angezeigten Produkte —, sodass Administratoren exakt nachvollziehen können, was der Kunde gesehen hat. Der Zugriff ist berechtigungsgesteuert, sodass der Storefront für alle anderen unverändert bleibt.",
+        "description": "Kunden k\u00f6nnen Suchprobleme direkt von der Search Results Page melden, ohne ihre aktuelle Suche zu verlassen. Jedes Ticket erfasst automatisch den vollst\u00e4ndigen Suchkontext \u2014 Query, aktive Filter, Seitenzahl, Store/Locale und die angezeigten Produkte \u2014, sodass Administratoren exakt nachvollziehen k\u00f6nnen, was der Kunde gesehen hat. Der Zugriff ist berechtigungsgesteuert, sodass der Storefront f\u00fcr alle anderen unver\u00e4ndert bleibt.",
         "src": "screenshots/search-feedback/ticket-form.png",
         "thumb": "screenshots/search-feedback/ticket-form-thumb.webp",
         "full": "screenshots/search-feedback/ticket-form-full.webp",
@@ -14,7 +14,7 @@
       },
       {
         "title": "Ticketliste",
-        "description": "Der zentrale Posteingang für alle gemeldeten Suchprobleme. Administratoren können Tickets über Stores und Locales hinweg durchsuchen und filtern, ihren aktuellen Status auf einen Blick erkennen und jedes Ticket öffnen, um den vollständigen Suchkontext einzusehen und die Konversation fortzusetzen. Die Standardansicht spannt bewusst alle Scopes auf und eignet sich damit für die tägliche Suchqualitäts-Triage.",
+        "description": "Der zentrale Posteingang f\u00fcr alle gemeldeten Suchprobleme. Administratoren k\u00f6nnen Tickets \u00fcber Stores und Locales hinweg durchsuchen und filtern, ihren aktuellen Status auf einen Blick erkennen und jedes Ticket \u00f6ffnen, um den vollst\u00e4ndigen Suchkontext einzusehen und die Konversation fortzusetzen. Die Standardansicht spannt bewusst alle Scopes auf und eignet sich damit f\u00fcr die t\u00e4gliche Suchqualit\u00e4ts-Triage.",
         "src": "screenshots/search-feedback/ticket-list.png",
         "thumb": "screenshots/search-feedback/ticket-list-thumb.webp",
         "full": "screenshots/search-feedback/ticket-list-full.webp",
@@ -23,7 +23,7 @@
       },
       {
         "title": "Ticketdetail",
-        "description": "Jedes Ticket enthält den vollständigen Suchkontext zusammen mit der Konversation mit dem Kunden — alles, was Administratoren brauchen, um einem gemeldeten Relevanzproblem nachzugehen. Antworten werden direkt in Zed bearbeitet, und der View-SRP-Shortcut spielt exakt die Seite ab, die der Kunde gesehen hat — mit derselben Reihenfolge, demselben Ranking —, statt die Suche gegen den heutigen Katalogstand neu auszuführen. Da sich das Ranking über die Zeit verändert (nächtliches Randomisieren von Gleichständen, aktualisierte Business-Metriken, neu justierte Formel-Gewichte), macht erst das Abspielen des eingefrorenen Ergebnisses das Ticket wirklich nachvollziehbar. Statusänderungen werden unabhängig von der Konversation verwaltet.",
+        "description": "Jedes Ticket enth\u00e4lt den vollst\u00e4ndigen Suchkontext zusammen mit der Konversation mit dem Kunden \u2014 alles, was Administratoren brauchen, um einem gemeldeten Relevanzproblem nachzugehen. Antworten werden direkt in Zed bearbeitet, und der View-SRP-Shortcut spielt exakt die Seite ab, die der Kunde gesehen hat \u2014 mit derselben Reihenfolge, demselben Ranking \u2014, statt die Suche gegen den heutigen Katalogstand neu auszuf\u00fchren. Da sich das Ranking \u00fcber die Zeit ver\u00e4ndert (n\u00e4chtliches Randomisieren von Gleichst\u00e4nden, aktualisierte Business-Metriken, neu justierte Formel-Gewichte), macht erst das Abspielen des eingefrorenen Ergebnisses das Ticket wirklich nachvollziehbar. Status\u00e4nderungen werden unabh\u00e4ngig von der Konversation verwaltet.",
         "src": "screenshots/search-feedback/ticket-detail.png",
         "thumb": "screenshots/search-feedback/ticket-detail-thumb.webp",
         "full": "screenshots/search-feedback/ticket-detail-full.webp",
@@ -38,7 +38,7 @@
     "screenshots": [
       {
         "title": "SRP-Score-Overlay",
-        "description": "Suchrelevanz wird direkt auf der Search Results Page sichtbar. Jedes Produkt zeigt seinen aktuellen Elasticsearch-Score, ein einzelner Klick öffnet die Aufschlüsselung, wie dieser Score zustande kam. Das Overlay ist auf progressive Disclosure ausgelegt: der Gesamtscore ist sofort sichtbar, detaillierte Erklärungen bleiben eingeklappt, bis sie gebraucht werden. Der Zugriff ist berechtigungsgesteuert, sodass Entwickler und Search-Spezialisten live Suchen untersuchen können, ohne die Storefront-Erfahrung anderer Nutzer zu beeinflussen.",
+        "description": "Suchrelevanz wird direkt auf der Search Results Page sichtbar. Jedes Produkt zeigt seinen aktuellen Elasticsearch-Score, ein einzelner Klick \u00f6ffnet die Aufschl\u00fcsselung, wie dieser Score zustande kam. Das Overlay ist auf progressive Disclosure ausgelegt: der Gesamtscore ist sofort sichtbar, detaillierte Erkl\u00e4rungen bleiben eingeklappt, bis sie gebraucht werden. Der Zugriff ist berechtigungsgesteuert, sodass Entwickler und Search-Spezialisten live Suchen untersuchen k\u00f6nnen, ohne die Storefront-Erfahrung anderer Nutzer zu beeinflussen.",
         "src": "screenshots/search-debug/srp-overlay.png",
         "thumb": "screenshots/search-debug/srp-overlay-thumb.webp",
         "full": "screenshots/search-debug/srp-overlay-full.webp",
@@ -46,8 +46,8 @@
         "height": 1080
       },
       {
-        "title": "Aufschlüsselung der matched Tokens",
-        "description": "Die Textscore-Aufschlüsselung eines Produkts aufklappen, um genau zu sehen, welche Query-Tokens auf welche indexierten Felder gematcht haben, zusammen mit ihrem jeweiligen BM25-Beitrag. Jeder Wert stammt aus dem echten OpenSearch-Explain-Output, inklusive des tatsächlich im Projekt konfigurierten Field Boosts. Das Overlay ist erweiterbar, sodass andere Packages — etwa Search Ranking — zusätzliche Scoring-Abschnitte beisteuern können, ohne den Core-Debugger zu verändern.",
+        "title": "Aufschl\u00fcsselung der matched Tokens",
+        "description": "Die Textscore-Aufschl\u00fcsselung eines Produkts aufklappen, um genau zu sehen, welche Query-Tokens auf welche indexierten Felder gematcht haben, zusammen mit ihrem jeweiligen BM25-Beitrag. Jeder Wert stammt aus dem echten OpenSearch-Explain-Output, inklusive des tats\u00e4chlich im Projekt konfigurierten Field Boosts. Das Overlay ist erweiterbar, sodass andere Packages \u2014 etwa Search Ranking \u2014 zus\u00e4tzliche Scoring-Abschnitte beisteuern k\u00f6nnen, ohne den Core-Debugger zu ver\u00e4ndern.",
         "src": "screenshots/search-debug/matched-tokens.png",
         "thumb": "screenshots/search-debug/matched-tokens-thumb.webp",
         "full": "screenshots/search-debug/matched-tokens-full.webp",
@@ -55,8 +55,8 @@
         "height": 1080
       },
       {
-        "title": "Business-Signals-Abschnitt, über drei Karten hinweg angepinnt",
-        "description": "Search Debug bietet Extension Points, über die andere Packages ihre Scoring-Logik neben Elasticsearchs eigener Textrelevanz einblenden können. Hier steuert Search Ranking eine vollständige Business-Score-Aufschlüsselung bei, sodass Textrelevanz und Business-Metriken in einem einheitlichen Overlay gemeinsam einsehbar sind. Mehrere angepinnte Overlays erlauben den direkten Vergleich zwischen Produkten nebeneinander.",
+        "title": "Business-Signals-Abschnitt, \u00fcber drei Karten hinweg angepinnt",
+        "description": "Search Debug bietet Extension Points, \u00fcber die andere Packages ihre Scoring-Logik neben Elasticsearchs eigener Textrelevanz einblenden k\u00f6nnen. Hier steuert Search Ranking eine vollst\u00e4ndige Business-Score-Aufschl\u00fcsselung bei, sodass Textrelevanz und Business-Metriken in einem einheitlichen Overlay gemeinsam einsehbar sind. Mehrere angepinnte Overlays erlauben den direkten Vergleich zwischen Produkten nebeneinander.",
         "src": "screenshots/search-ranking/office-chair-business-signals.png",
         "thumb": "screenshots/search-ranking/office-chair-business-signals-thumb.webp",
         "full": "screenshots/search-ranking/office-chair-business-signals-full.webp",
@@ -64,8 +64,8 @@
         "height": 1080
       },
       {
-        "title": "Specificity-Weighting-Abschnitt, vollständig aufgeklappt",
-        "description": "Das Overlay kann zusätzliche Diagnoseabschnitte über OpenSearch selbst hinaus aufnehmen. Hier visualisiert Search Ranking, wie Query Specificity berechnet wird und wie sie die Balance zwischen Textrelevanz und Business-Signalen beeinflusst. Da diese Berechnung eine zusätzliche Elasticsearch-Anfrage erfordert, ist das Feature bewusst Opt-in.",
+        "title": "Specificity-Weighting-Abschnitt, vollst\u00e4ndig aufgeklappt",
+        "description": "Das Overlay kann zus\u00e4tzliche Diagnoseabschnitte \u00fcber OpenSearch selbst hinaus aufnehmen. Hier visualisiert Search Ranking, wie Query Specificity berechnet wird und wie sie die Balance zwischen Textrelevanz und Business-Signalen beeinflusst. Da diese Berechnung eine zus\u00e4tzliche Elasticsearch-Anfrage erfordert, ist das Feature bewusst Opt-in.",
         "src": "screenshots/search-ranking/specificity-banknote-counter.png",
         "thumb": "screenshots/search-ranking/specificity-banknote-counter-thumb.webp",
         "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp",
@@ -73,8 +73,8 @@
         "height": 1080
       },
       {
-        "title": "BM25 über mehrere Tokens vergleichen",
-        "description": "Mehrere Produkt-Overlays anpinnen, um BM25-Scores direkt nebeneinander zu vergleichen. Der Blick auf einzelne Query-Terme zeigt schnell, warum ein Token weitaus stärker beiträgt als ein anderer — etwa weil seine Inverse Document Frequency deutlich höher liegt. Damit wird aus dem Elasticsearch-Scoring eine einzelne undurchsichtige Zahl zu etwas, das sich untersuchen und nachvollziehen lässt.",
+        "title": "BM25 \u00fcber mehrere Tokens vergleichen",
+        "description": "Mehrere Produkt-Overlays anpinnen, um BM25-Scores direkt nebeneinander zu vergleichen. Der Blick auf einzelne Query-Terme zeigt schnell, warum ein Token weitaus st\u00e4rker beitr\u00e4gt als ein anderer \u2014 etwa weil seine Inverse Document Frequency deutlich h\u00f6her liegt. Damit wird aus dem Elasticsearch-Scoring eine einzelne undurchsichtige Zahl zu etwas, das sich untersuchen und nachvollziehen l\u00e4sst.",
         "src": "screenshots/search-debug/bm25-compare.png",
         "thumb": "screenshots/search-debug/bm25-compare-thumb.webp",
         "full": "screenshots/search-debug/bm25-compare-full.webp",
@@ -82,8 +82,8 @@
         "height": 1080
       },
       {
-        "title": "Einen Token bis zu seinem Datenbankfeld zurückverfolgen",
-        "description": "Jeden matched Token bis zu den indexierten Daten zurückverfolgen, aus denen er entstand. Jedes Vorkommen wird nach seinem ursprünglichen Datenbankfeld gruppiert, unter Verwendung der echten Schema-Namen des Projekts — so wird sofort klar, ob ein Match aus dem Produktnamen, der Kategorie, dem Merchant oder einem beliebigen benutzerdefinierten indexierten Feld stammt. Von dort führt ein einzelner Klick weiter in die Analyzer-Pipeline, die den Token erzeugt hat.",
+        "title": "Einen Token bis zu seinem Datenbankfeld zur\u00fcckverfolgen",
+        "description": "Jeden matched Token bis zu den indexierten Daten zur\u00fcckverfolgen, aus denen er entstand. Jedes Vorkommen wird nach seinem urspr\u00fcnglichen Datenbankfeld gruppiert, unter Verwendung der echten Schema-Namen des Projekts \u2014 so wird sofort klar, ob ein Match aus dem Produktnamen, der Kategorie, dem Merchant oder einem beliebigen benutzerdefinierten indexierten Feld stammt. Von dort f\u00fchrt ein einzelner Klick weiter in die Analyzer-Pipeline, die den Token erzeugt hat.",
         "src": "screenshots/search-debug/token-source.png",
         "thumb": "screenshots/search-debug/token-source-thumb.webp",
         "full": "screenshots/search-debug/token-source-full.webp",
@@ -91,8 +91,8 @@
         "height": 1080
       },
       {
-        "title": "Vollständige Analyzer-Pipeline (Index-Zeitpunkt)",
-        "description": "Visualisiert, wie der Text eines Produkts während der Indexierung transformiert wird. Jeder Tokenizer und Filter wird in Ausführungsreihenfolge zusammen mit seiner aktuellen Konfiguration angezeigt, sodass Entwickler den Token durch die komplette Analysekette verfolgen können — vom Rohtext bis zu den finalen indexierten Termen. Das macht benutzerdefinierte Analyzer und sprachspezifische Verarbeitung deutlich verständlicher und leichter zu debuggen.",
+        "title": "Vollst\u00e4ndige Analyzer-Pipeline (Index-Zeitpunkt)",
+        "description": "Visualisiert, wie der Text eines Produkts w\u00e4hrend der Indexierung transformiert wird. Jeder Tokenizer und Filter wird in Ausf\u00fchrungsreihenfolge zusammen mit seiner aktuellen Konfiguration angezeigt, sodass Entwickler den Token durch die komplette Analysekette verfolgen k\u00f6nnen \u2014 vom Rohtext bis zu den finalen indexierten Termen. Das macht benutzerdefinierte Analyzer und sprachspezifische Verarbeitung deutlich verst\u00e4ndlicher und leichter zu debuggen.",
         "src": "screenshots/search-debug/token-analysis.png",
         "thumb": "screenshots/search-debug/token-analysis-thumb.webp",
         "full": "screenshots/search-debug/token-analysis-full.webp",
@@ -101,7 +101,7 @@
       },
       {
         "title": "Analyzer-Pipeline zum Such-Zeitpunkt",
-        "description": "Dieselbe Visualisierung steht auch für die Analyse zum Suchzeitpunkt zur Verfügung. Vergleicht, wie Nutzereingaben gegenüber der Index-Zeitpunkt-Pipeline verarbeitet werden, um zu verstehen, warum eine Query auf bestimmte Produkte matcht — oder eben nicht. Unterschiede wie Synonym-Expansion oder suchspezifische Filter werden sofort sichtbar, was das Analyzer-Debugging deutlich einfacher macht als das Untersuchen roher OpenSearch-Antworten.",
+        "description": "Dieselbe Visualisierung steht auch f\u00fcr die Analyse zum Suchzeitpunkt zur Verf\u00fcgung. Vergleicht, wie Nutzereingaben gegen\u00fcber der Index-Zeitpunkt-Pipeline verarbeitet werden, um zu verstehen, warum eine Query auf bestimmte Produkte matcht \u2014 oder eben nicht. Unterschiede wie Synonym-Expansion oder suchspezifische Filter werden sofort sichtbar, was das Analyzer-Debugging deutlich einfacher macht als das Untersuchen roher OpenSearch-Antworten.",
         "src": "screenshots/search-debug/token-analysis-search.png",
         "thumb": "screenshots/search-debug/token-analysis-search-thumb.webp",
         "full": "screenshots/search-debug/token-analysis-search-full.webp",
@@ -115,8 +115,8 @@
     "label": "Search Ranking",
     "screenshots": [
       {
-        "title": "Metrikliste — drei Scopes auf einen Blick",
-        "description": "Festlegen, welche Business-Signale das Produkt-Ranking beeinflussen und mit welchem Gewicht. Jede Metrik kombiniert eine Normalisierungsformel mit einem konfigurierbaren Gewicht, sodass Geschäftsdaten wie Verkäufe, Impressionen oder benutzerdefinierte KPIs in den finalen OpenSearch-Ranking-Score einfließen können. Metriken können entweder eine Konfiguration für den gesamten Store teilen oder unabhängig pro Locale gepflegt werden.",
+        "title": "Metrikliste \u2014 drei Scopes auf einen Blick",
+        "description": "Festlegen, welche Business-Signale das Produkt-Ranking beeinflussen und mit welchem Gewicht. Jede Metrik kombiniert eine Normalisierungsformel mit einem konfigurierbaren Gewicht, sodass Gesch\u00e4ftsdaten wie Verk\u00e4ufe, Impressionen oder benutzerdefinierte KPIs in den finalen OpenSearch-Ranking-Score einflie\u00dfen k\u00f6nnen. Metriken k\u00f6nnen entweder eine Konfiguration f\u00fcr den gesamten Store teilen oder unabh\u00e4ngig pro Locale gepflegt werden.",
         "src": "screenshots/search-ranking/metrics.png",
         "thumb": "screenshots/search-ranking/metrics-thumb.webp",
         "full": "screenshots/search-ranking/metrics-full.webp",
@@ -125,7 +125,7 @@
       },
       {
         "title": "Formel-Editor: eine Kurve an echte Daten anpassen",
-        "description": "Business-Metriken folgen selten einer linearen Verteilung. Dieser Editor vergleicht die aktuelle Normalisierungsformel mit der echten Verteilung der importierten Produktwerte und schlägt alternative Formeln vor, die Produkte besser trennen. Kandidatenformeln werden automatisch an die Daten angepasst und nach Anpassungsgüte (R²) sortiert, sodass Administratoren die Rankingqualität verbessern können, ohne manuell mit mathematischen Funktionen zu experimentieren.",
+        "description": "Business-Metriken folgen selten einer linearen Verteilung. Dieser Editor vergleicht die aktuelle Normalisierungsformel mit der echten Verteilung der importierten Produktwerte und schl\u00e4gt alternative Formeln vor, die Produkte besser trennen. Kandidatenformeln werden automatisch an die Daten angepasst und nach Anpassungsg\u00fcte (R\u00b2) sortiert, sodass Administratoren die Rankingqualit\u00e4t verbessern k\u00f6nnen, ohne manuell mit mathematischen Funktionen zu experimentieren.",
         "src": "screenshots/search-ranking/edit-metric.png",
         "thumb": "screenshots/search-ranking/edit-metric-thumb.webp",
         "full": "screenshots/search-ranking/edit-metric-full.webp",
@@ -133,8 +133,8 @@
         "height": 1718
       },
       {
-        "title": "Product Values — der Input, den jeder Adopter liefern muss",
-        "description": "Die für jedes Produkt importierten rohen Business-Metriken zusammen mit ihren beim Ranking verwendeten normalisierten Werten einsehen. Diese Seite prüft, ob Datenimporte wie erwartet funktionieren, und macht nachvollziehbar, wie Rohwerte transformiert werden, bevor sie in den finalen Ranking-Score einfließen.",
+        "title": "Product Values \u2014 der Input, den jeder Adopter liefern muss",
+        "description": "Die f\u00fcr jedes Produkt importierten rohen Business-Metriken zusammen mit ihren beim Ranking verwendeten normalisierten Werten einsehen. Diese Seite pr\u00fcft, ob Datenimporte wie erwartet funktionieren, und macht nachvollziehbar, wie Rohwerte transformiert werden, bevor sie in den finalen Ranking-Score einflie\u00dfen.",
         "src": "screenshots/search-ranking/product-values.png",
         "thumb": "screenshots/search-ranking/product-values-thumb.webp",
         "full": "screenshots/search-ranking/product-values-full.webp",
@@ -142,8 +142,8 @@
         "height": 1080
       },
       {
-        "title": "Product Metric Gaps — die stillen Nullen finden",
-        "description": "Fehlende Business-Metriken mindern die Rankingqualität, ohne dass es auffällt. Diese Ansicht markiert jedes Produkt, dem ein Wert für eine aktive Ranking-Metrik fehlt, sodass unvollständige Importe sofort sichtbar werden, bevor sie die Suchergebnisse beeinflussen.",
+        "title": "Product Metric Gaps \u2014 die stillen Nullen finden",
+        "description": "Fehlende Business-Metriken mindern die Rankingqualit\u00e4t, ohne dass es auff\u00e4llt. Diese Ansicht markiert jedes Produkt, dem ein Wert f\u00fcr eine aktive Ranking-Metrik fehlt, sodass unvollst\u00e4ndige Importe sofort sichtbar werden, bevor sie die Suchergebnisse beeinflussen.",
         "src": "screenshots/search-ranking/product-metric-gap.png",
         "thumb": "screenshots/search-ranking/product-metric-gap-thumb.webp",
         "full": "screenshots/search-ranking/product-metric-gap-full.webp",
@@ -151,8 +151,8 @@
         "height": 1080
       },
       {
-        "title": "Settings — die eigenen Stellschrauben der Ranking-Formel",
-        "description": "Konfigurieren, wie OpenSearch-Relevanz und Business-Signale zu einem einzigen Ranking-Score kombiniert werden. Neben dem allgemeinen Relevanzgewicht macht diese Seite das optionale query-spezifische Weighting-Modell zugänglich, mit dem sich die Suchrelevanz automatisch zwischen breiten und sehr spezifischen Suchen anpasst. Features, die zusätzliche OpenSearch-Anfragen erfordern, bleiben bewusst per Code aktivierbar statt über die UI editierbar.",
+        "title": "Settings \u2014 die eigenen Stellschrauben der Ranking-Formel",
+        "description": "Konfigurieren, wie OpenSearch-Relevanz und Business-Signale zu einem einzigen Ranking-Score kombiniert werden. Neben dem allgemeinen Relevanzgewicht macht diese Seite das optionale query-spezifische Weighting-Modell zug\u00e4nglich, mit dem sich die Suchrelevanz automatisch zwischen breiten und sehr spezifischen Suchen anpasst. Features, die zus\u00e4tzliche OpenSearch-Anfragen erfordern, bleiben bewusst per Code aktivierbar statt \u00fcber die UI editierbar.",
         "src": "screenshots/search-ranking/settings.png",
         "thumb": "screenshots/search-ranking/settings-thumb.webp",
         "full": "screenshots/search-ranking/settings-full.webp",
@@ -160,8 +160,8 @@
         "height": 1386
       },
       {
-        "title": "Metric History — ein Audit-Trail, kein Diff",
-        "description": "Jede Änderung an der Ranking-Konfiguration wird in einem Audit-Trail festgehalten. Jeder Eintrag erfasst die vollständige Metrik-Konfiguration zum Zeitpunkt des Speicherns, sodass sich nachvollziehen lässt, wie sich Formeln, Gewichte und Aktivierungsstatus über die Zeit entwickelt haben — unabhängig davon, ob die Änderung manuell oder durch begleitende Packages erfolgte.",
+        "title": "Metric History \u2014 ein Audit-Trail, kein Diff",
+        "description": "Jede \u00c4nderung an der Ranking-Konfiguration wird in einem Audit-Trail festgehalten. Jeder Eintrag erfasst die vollst\u00e4ndige Metrik-Konfiguration zum Zeitpunkt des Speicherns, sodass sich nachvollziehen l\u00e4sst, wie sich Formeln, Gewichte und Aktivierungsstatus \u00fcber die Zeit entwickelt haben \u2014 unabh\u00e4ngig davon, ob die \u00c4nderung manuell oder durch begleitende Packages erfolgte.",
         "src": "screenshots/search-ranking/metric-history.png",
         "thumb": "screenshots/search-ranking/metric-history-thumb.webp",
         "full": "screenshots/search-ranking/metric-history-full.webp",
@@ -169,8 +169,8 @@
         "height": 1080
       },
       {
-        "title": "Scope Copy — einen neuen Markt bootstrappen",
-        "description": "Der Start eines neuen Marktes bedeutet selten, bei null anzufangen. Scope Copy überträgt die Ranking-Konfiguration zwischen Stores und Locales, sodass erfolgreiches Tuning wiederverwendet werden kann, während produktspezifische Geschäftsdaten unabhängig bleiben. Optionale Synchronisation hält ausgewählte Konfiguration über Märkte hinweg im Gleichschritt, während diese sich weiterentwickeln.",
+        "title": "Scope Copy \u2014 einen neuen Markt bootstrappen",
+        "description": "Der Start eines neuen Marktes bedeutet selten, bei null anzufangen. Scope Copy \u00fcbertr\u00e4gt die Ranking-Konfiguration zwischen Stores und Locales, sodass erfolgreiches Tuning wiederverwendet werden kann, w\u00e4hrend produktspezifische Gesch\u00e4ftsdaten unabh\u00e4ngig bleiben. Optionale Synchronisation h\u00e4lt ausgew\u00e4hlte Konfiguration \u00fcber M\u00e4rkte hinweg im Gleichschritt, w\u00e4hrend diese sich weiterentwickeln.",
         "src": "screenshots/search-ranking/scope-copy.png",
         "thumb": "screenshots/search-ranking/scope-copy-thumb.webp",
         "full": "screenshots/search-ranking/scope-copy-full.webp",
@@ -178,8 +178,8 @@
         "height": 1864
       },
       {
-        "title": "Random Impact — das Gewicht des Tie-Breakers beurteilen",
-        "description": "Die Wirkung des zufälligen Tie-Breakers direkt auf der Search Results Page beurteilen. Produkte zeigen an, um wie viele Positionen sie sich verschieben würden, wenn das zufällige Business-Signal deaktiviert wäre — so lässt sich leicht beurteilen, ob das konfigurierte Gewicht gesunde Variation oder zu viel Rauschen ins Ranking bringt.",
+        "title": "Random Impact \u2014 das Gewicht des Tie-Breakers beurteilen",
+        "description": "Die Wirkung des zuf\u00e4lligen Tie-Breakers direkt auf der Search Results Page beurteilen. Produkte zeigen an, um wie viele Positionen sie sich verschieben w\u00fcrden, wenn das zuf\u00e4llige Business-Signal deaktiviert w\u00e4re \u2014 so l\u00e4sst sich leicht beurteilen, ob das konfigurierte Gewicht gesunde Variation oder zu viel Rauschen ins Ranking bringt.",
         "src": "screenshots/search-ranking/random-impact.png",
         "thumb": "screenshots/search-ranking/random-impact-thumb.webp",
         "full": "screenshots/search-ranking/random-impact-full.webp",
@@ -187,8 +187,8 @@
         "height": 2150
       },
       {
-        "title": "Business-Signale (Bürostuhl)",
-        "description": "Genau nachvollziehen, warum Produkte in ihrer aktuellen Reihenfolge erscheinen. Das Overlay kombiniert OpenSearch-Textrelevanz mit jedem konfigurierten Business-Signal und zeigt, wie jede Metrik zum finalen Ranking-Score beiträgt. Mehrere Produkte nebeneinander anzupinnen erleichtert den Vergleich konkurrierender Produkte und die Erklärung von Ranking-Entscheidungen.",
+        "title": "Business-Signale (B\u00fcrostuhl)",
+        "description": "Genau nachvollziehen, warum Produkte in ihrer aktuellen Reihenfolge erscheinen. Das Overlay kombiniert OpenSearch-Textrelevanz mit jedem konfigurierten Business-Signal und zeigt, wie jede Metrik zum finalen Ranking-Score beitr\u00e4gt. Mehrere Produkte nebeneinander anzupinnen erleichtert den Vergleich konkurrierender Produkte und die Erkl\u00e4rung von Ranking-Entscheidungen.",
         "src": "screenshots/search-ranking/office-chair-business-signals.png",
         "thumb": "screenshots/search-ranking/office-chair-business-signals-thumb.webp",
         "full": "screenshots/search-ranking/office-chair-business-signals-full.webp",
@@ -197,7 +197,7 @@
       },
       {
         "title": "Query Specificity (generische Query)",
-        "description": "Generische Suchen profitieren stärker von Business-Signalen als sehr spezifische. Hier wird die Query „office“ als breit erkannt, wodurch die Ranking-Formel den Einfluss der Textrelevanz reduziert und konfigurierte Business-Metriken stärker gewichtet. Jede Zwischenberechnung wird für vollständige Transparenz angezeigt.",
+        "description": "Generische Suchen profitieren st\u00e4rker von Business-Signalen als sehr spezifische. Hier wird die Query \u201eoffice\u201c als breit erkannt, wodurch die Ranking-Formel den Einfluss der Textrelevanz reduziert und konfigurierte Business-Metriken st\u00e4rker gewichtet. Jede Zwischenberechnung wird f\u00fcr vollst\u00e4ndige Transparenz angezeigt.",
         "src": "screenshots/search-ranking/specificity-office.png",
         "thumb": "screenshots/search-ranking/specificity-office-thumb.webp",
         "full": "screenshots/search-ranking/specificity-office-full.webp",
@@ -206,7 +206,7 @@
       },
       {
         "title": "Query Specificity (spezifische Query)",
-        "description": "Sehr spezifische Suchen sollten vor allem textuelle Relevanz belohnen. Für die enge Query „banknote counter“ verschiebt sich das berechnete Relevanzgewicht stark in Richtung des OpenSearch-Scores, sodass präzise Treffer Produkte übertreffen, die lediglich bei den Business-Metriken gut abschneiden. Die vollständige Herleitung wird zusammen mit der finalen Ranking-Berechnung angezeigt.",
+        "description": "Sehr spezifische Suchen sollten vor allem textuelle Relevanz belohnen. F\u00fcr die enge Query \u201ebanknote counter\u201c verschiebt sich das berechnete Relevanzgewicht stark in Richtung des OpenSearch-Scores, sodass pr\u00e4zise Treffer Produkte \u00fcbertreffen, die lediglich bei den Business-Metriken gut abschneiden. Die vollst\u00e4ndige Herleitung wird zusammen mit der finalen Ranking-Berechnung angezeigt.",
         "src": "screenshots/search-ranking/specificity-banknote-counter.png",
         "thumb": "screenshots/search-ranking/specificity-banknote-counter-thumb.webp",
         "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp",
@@ -221,7 +221,7 @@
     "screenshots": [
       {
         "title": "Ein Ergebnis direkt auf der SRP bewerten",
-        "description": "Relevanzurteile direkt im Storefront sammeln, während echte Suchergebnisse durchsucht werden. Search-Administratoren können Produkte mit einem einzigen Klick als relevant, akzeptabel oder irrelevant markieren und so nach und nach einen realistischen Evaluationsdatensatz aufbauen, ohne den Storefront zu verlassen oder Tabellenblätter zu pflegen.",
+        "description": "Relevanzurteile direkt im Storefront sammeln, w\u00e4hrend echte Suchergebnisse durchsucht werden. Search-Administratoren k\u00f6nnen Produkte mit einem einzigen Klick als relevant, akzeptabel oder irrelevant markieren und so nach und nach einen realistischen Evaluationsdatensatz aufbauen, ohne den Storefront zu verlassen oder Tabellenbl\u00e4tter zu pflegen.",
         "src": "screenshots/search-optimization/srp-rating-widget.png",
         "thumb": "screenshots/search-optimization/srp-rating-widget-thumb.webp",
         "full": "screenshots/search-optimization/srp-rating-widget-full.webp",
@@ -229,8 +229,8 @@
         "height": 1080
       },
       {
-        "title": "Saturation-Point-Kalibrierung: aus einer Schätzung wird eine Stichprobe",
-        "description": "Geeignete Normalisierungsparameter direkt aus dem lebenden Katalog schätzen, statt sich auf Schätzwerte zu verlassen. Die Kalibrierung nimmt Stichproben echter OpenSearch-Relevanzscores oder Query-Specificity-Werte über repräsentative Suchen hinweg und schlägt Saturation Points vor, die besser zur tatsächlichen Verteilung des Katalogs passen.",
+        "title": "Saturation-Point-Kalibrierung: aus einer Sch\u00e4tzung wird eine Stichprobe",
+        "description": "Geeignete Normalisierungsparameter direkt aus dem lebenden Katalog sch\u00e4tzen, statt sich auf Sch\u00e4tzwerte zu verlassen. Die Kalibrierung nimmt Stichproben echter OpenSearch-Relevanzscores oder Query-Specificity-Werte \u00fcber repr\u00e4sentative Suchen hinweg und schl\u00e4gt Saturation Points vor, die besser zur tats\u00e4chlichen Verteilung des Katalogs passen.",
         "src": "screenshots/search-optimization/saturation-point-calibration.png",
         "thumb": "screenshots/search-optimization/saturation-point-calibration-thumb.webp",
         "full": "screenshots/search-optimization/saturation-point-calibration-full.webp",
@@ -238,8 +238,8 @@
         "height": 1720
       },
       {
-        "title": "Auto-Tune: die Kurve einer Metrik ehrlich halten, während sich das Geschäft weiterentwickelt",
-        "description": "Die Rankingqualität fortlaufend überwachen und automatisch reagieren, wenn sich die Formelqualität verschlechtert. Einzelne Metriken können Administratoren benachrichtigen, verbesserte Normalisierungsformeln vorschlagen oder sich selbst automatisch aktualisieren, sobald ihre gemessene Anpassungsgüte unter einen konfigurierbaren Schwellenwert fällt.",
+        "title": "Auto-Tune: die Kurve einer Metrik ehrlich halten, w\u00e4hrend sich das Gesch\u00e4ft weiterentwickelt",
+        "description": "Die Rankingqualit\u00e4t fortlaufend \u00fcberwachen und automatisch reagieren, wenn sich die Formelqualit\u00e4t verschlechtert. Einzelne Metriken k\u00f6nnen Administratoren benachrichtigen, verbesserte Normalisierungsformeln vorschlagen oder sich selbst automatisch aktualisieren, sobald ihre gemessene Anpassungsg\u00fcte unter einen konfigurierbaren Schwellenwert f\u00e4llt.",
         "src": "screenshots/search-optimization/auto-tune-settings.png",
         "thumb": "screenshots/search-optimization/auto-tune-settings-thumb.webp",
         "full": "screenshots/search-optimization/auto-tune-settings-full.webp",
@@ -248,7 +248,7 @@
       },
       {
         "title": "Ratings: der rohe Audit-Trail hinter jeder bewerteten Query",
-        "description": "Jedes einzelne über das Storefront-Rating-Widget erfasste Relevanzurteil durchsuchen. Jeder Eintrag hält die Einschätzung eines Administrators zu einer bestimmten Query und einem bestimmten Produkt fest und liefert damit den vollständigen Audit-Trail hinter dem aggregierten Evaluationsdatensatz, der bei der Optimierung verwendet wird.",
+        "description": "Jedes einzelne \u00fcber das Storefront-Rating-Widget erfasste Relevanzurteil durchsuchen. Jeder Eintrag h\u00e4lt die Einsch\u00e4tzung eines Administrators zu einer bestimmten Query und einem bestimmten Produkt fest und liefert damit den vollst\u00e4ndigen Audit-Trail hinter dem aggregierten Evaluationsdatensatz, der bei der Optimierung verwendet wird.",
         "src": "screenshots/search-optimization/ratings.png",
         "thumb": "screenshots/search-optimization/ratings-thumb.webp",
         "full": "screenshots/search-optimization/ratings-full.webp",
@@ -256,8 +256,8 @@
         "height": 1080
       },
       {
-        "title": "Assess Rated Queries: dem Optimizer sagen, welche Query mehr zählt",
-        "description": "Optimierungsaufwand dort einsetzen, wo er am meisten bewirkt. Bewertete Suchqueries werden in einer einzigen Übersicht gruppiert, in der Administratoren Wichtigkeitsgewichte vergeben können, damit geschäftskritische Suchen stärker in jede OpenSearch-Evaluation und jeden Optimierungslauf einfließen.",
+        "title": "Assess Rated Queries: dem Optimizer sagen, welche Query mehr z\u00e4hlt",
+        "description": "Optimierungsaufwand dort einsetzen, wo er am meisten bewirkt. Bewertete Suchqueries werden in einer einzigen \u00dcbersicht gruppiert, in der Administratoren Wichtigkeitsgewichte vergeben k\u00f6nnen, damit gesch\u00e4ftskritische Suchen st\u00e4rker in jede OpenSearch-Evaluation und jeden Optimierungslauf einflie\u00dfen.",
         "src": "screenshots/search-optimization/assess-rated-queries.png",
         "thumb": "screenshots/search-optimization/assess-rated-queries-thumb.webp",
         "full": "screenshots/search-optimization/assess-rated-queries-full.webp",
@@ -266,7 +266,7 @@
       },
       {
         "title": "Test Current Evaluation: aus Admin-Bewertungen wird eine echte Zielzahl",
-        "description": "Messen, wie gut die aktuelle OpenSearch-Ranking-Konfiguration gegenüber den gesammelten Relevanzurteilen abschneidet. Alle Bewertungen werden in einen einzigen gewichteten nDCG@10-Score überführt — eine objektive Qualitätsmetrik, die sich vor und nach jeder Optimierung vergleichen lässt.",
+        "description": "Messen, wie gut die aktuelle OpenSearch-Ranking-Konfiguration gegen\u00fcber den gesammelten Relevanzurteilen abschneidet. Alle Bewertungen werden in einen einzigen gewichteten nDCG@10-Score \u00fcberf\u00fchrt \u2014 eine objektive Qualit\u00e4tsmetrik, die sich vor und nach jeder Optimierung vergleichen l\u00e4sst.",
         "src": "screenshots/search-optimization/test-current-evaluation.png",
         "thumb": "screenshots/search-optimization/test-current-evaluation-thumb.webp",
         "full": "screenshots/search-optimization/test-current-evaluation-full.webp",
@@ -274,8 +274,8 @@
         "height": 1080
       },
       {
-        "title": "Weight Checkpoints: ein Weg zurück, bevor von Hand etwas geändert wird",
-        "description": "Wiederherstellbare Schnappschüsse der vollständigen Ranking-Konfiguration anlegen, bevor größere Änderungen vorgenommen werden. Checkpoints bewahren jeden Ranking-Parameter und jedes Business-Signal-Gewicht, sodass sich Experimente sofort zurückrollen lassen, ohne frühere Konfigurationen manuell zu rekonstruieren.",
+        "title": "Weight Checkpoints: ein Weg zur\u00fcck, bevor von Hand etwas ge\u00e4ndert wird",
+        "description": "Wiederherstellbare Schnappsch\u00fcsse der vollst\u00e4ndigen Ranking-Konfiguration anlegen, bevor gr\u00f6\u00dfere \u00c4nderungen vorgenommen werden. Checkpoints bewahren jeden Ranking-Parameter und jedes Business-Signal-Gewicht, sodass sich Experimente sofort zur\u00fcckrollen lassen, ohne fr\u00fchere Konfigurationen manuell zu rekonstruieren.",
         "src": "screenshots/search-optimization/weight-checkpoints.png",
         "thumb": "screenshots/search-optimization/weight-checkpoints-thumb.webp",
         "full": "screenshots/search-optimization/weight-checkpoints-full.webp",
@@ -283,8 +283,8 @@
         "height": 1500
       },
       {
-        "title": "Start New Optimization Run: drei Algorithmen — und was gesucht vs. fixiert wird",
-        "description": "Einen automatisierten Optimierungslauf konfigurieren, der mit CMA-ES nach besseren Ranking-Parametern sucht — einem ableitungsfreien Optimierungsalgorithmus, der gut zu verrauschten Suchqualitäts-Funktionen passt. Ausgewählte Parameter können entweder fixiert bleiben oder an der Suche teilnehmen, während die aktuelle OpenSearch-Konfiguration als Baseline dient.",
+        "title": "Start New Optimization Run: drei Algorithmen \u2014 und was gesucht vs. fixiert wird",
+        "description": "Einen automatisierten Optimierungslauf konfigurieren, der mit CMA-ES nach besseren Ranking-Parametern sucht \u2014 einem ableitungsfreien Optimierungsalgorithmus, der gut zu verrauschten Suchqualit\u00e4ts-Funktionen passt. Ausgew\u00e4hlte Parameter k\u00f6nnen entweder fixiert bleiben oder an der Suche teilnehmen, w\u00e4hrend die aktuelle OpenSearch-Konfiguration als Baseline dient.",
         "src": "screenshots/search-optimization/automated-weight-optimization-before.png",
         "thumb": "screenshots/search-optimization/automated-weight-optimization-before-thumb.webp",
         "full": "screenshots/search-optimization/automated-weight-optimization-before-full.webp",
@@ -292,13 +292,23 @@
         "height": 1300
       },
       {
-        "title": "Latest Run: was zurückkam, und die eine Zeile, die nur wegen der Mathematik da ist",
-        "description": "Die während der Optimierung gefundene beste Konfiguration prüfen, bevor entschieden wird, ob sie übernommen wird. Der Optimizer meldet die erreichte gewichtete nDCG-Verbesserung zusammen mit jeder vorgeschlagenen Parameteränderung, sodass Administratoren die Empfehlung einsehen können, bevor die aktive Ranking-Konfiguration aktualisiert wird.",
+        "title": "Latest Run: was zur\u00fcckkam, und die eine Zeile, die nur wegen der Mathematik da ist",
+        "description": "Die w\u00e4hrend der Optimierung gefundene beste Konfiguration pr\u00fcfen, bevor entschieden wird, ob sie \u00fcbernommen wird. Der Optimizer meldet die erreichte gewichtete nDCG-Verbesserung zusammen mit jeder vorgeschlagenen Parameter\u00e4nderung, sodass Administratoren die Empfehlung einsehen k\u00f6nnen, bevor die aktive Ranking-Konfiguration aktualisiert wird.",
         "src": "screenshots/search-optimization/automated-weight-optimization-after.png",
         "thumb": "screenshots/search-optimization/automated-weight-optimization-after-thumb.webp",
         "full": "screenshots/search-optimization/automated-weight-optimization-after-full.webp",
         "width": 1920,
         "height": 1080
+      }
+    ]
+  },
+  {
+    "id": "search-variant-facets",
+    "label": "Search Variant Facets",
+    "screenshots": [
+      {
+        "title": "Screenshots folgen in K\u00fcrze",
+        "description": "Screenshots zu Search Variant Facets folgen hier in K\u00fcrze."
       }
     ]
   }
