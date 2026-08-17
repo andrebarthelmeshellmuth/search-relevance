@@ -17,8 +17,5 @@ jobs:
           # obvious from the failure alone.
           node-version: 22
           cache: npm
-      # sharp is an optionalDependency because it's only needed by `npm run images`, which is a manual
-      # step run when screenshots change -- not part of CI. Skipping it keeps this job from pulling
-      # ~30 MB of platform binaries just to lint two HTML files.
-      - run: npm ci --omit=optional
+      - run: npm ci
       - run: npm run lint:html

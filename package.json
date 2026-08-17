@@ -1,15 +1,11 @@
 {
   "name": "search-relevance",
   "private": true,
-  "description": "search-relevance.dev static site -- no build step. This pins the lint tooling used in CI, plus the image tooling used to regenerate the gallery's WebP derivatives on demand.",
+  "description": "search-relevance.dev static site -- no build step. This pins the lint tooling used in CI.",
   "scripts": {
-    "lint:html": "html-validate index.html screenshots.html",
-    "images": "node tools/build-images.mjs"
+    "lint:html": "html-validate index.html"
   },
   "devDependencies": {
     "html-validate": "^11.6.2"
-  },
-  "optionalDependencies": {
-    "sharp": "^0.35.3"
   }
 }
