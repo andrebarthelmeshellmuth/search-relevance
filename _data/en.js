@@ -332,7 +332,7 @@ export default {
         small: "Explanation",
         title: "Search Debug",
         desc: "Inspect how every term contributes to a result.",
-        href: "https://github.com/andrebarthelmeshellmuth/spryker-search-debugger",
+        href: "https://github.com/andrebarthelmeshellmuth/spryker-search-debug",
         githubAriaLabel: "View Search Debug on GitHub",
         screenshotsAnchor: "search-debug",
       },
