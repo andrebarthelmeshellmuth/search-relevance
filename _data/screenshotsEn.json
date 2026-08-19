@@ -5,30 +5,30 @@
     "screenshots": [
       {
         "title": "File a ticket from the SRP",
-        "description": "Customers can report search issues directly from the Search Results Page without leaving their current search. Each ticket automatically captures the complete search context\u2014the query, active filters, page number, store/locale and the products shown\u2014so administrators can reproduce exactly what the customer saw. Access is permission-controlled, keeping the storefront unchanged for everyone else.",
+        "description": "Customers can report search issues directly from the Search Results Page without leaving their current search. Each ticket automatically captures the complete search context—the query, active filters, page number, store/locale and the products shown—so administrators can reproduce exactly what the customer saw. Access is permission-controlled, keeping the storefront unchanged for everyone else.",
         "src": "screenshots/search-feedback/ticket-form.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-feedback/ticket-form-thumb.webp",
-        "full": "screenshots/search-feedback/ticket-form-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-feedback/ticket-form-full.webp"
       },
       {
         "title": "Ticket list",
         "description": "The central inbox for all reported search issues. Administrators can browse, search and filter tickets across stores and locales, quickly see their current status, and open any ticket to inspect the full search context and continue the conversation. The default view intentionally spans all scopes, making it suitable for daily search-quality triage.",
         "src": "screenshots/search-feedback/ticket-list.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-feedback/ticket-list-thumb.webp",
-        "full": "screenshots/search-feedback/ticket-list-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-feedback/ticket-list-full.webp"
       },
       {
         "title": "Ticket detail",
-        "description": "Every ticket contains the complete search context alongside the customer conversation, giving administrators everything needed to investigate a reported relevance issue. Replies are handled directly from Zed, and the View SRP shortcut replays the exact page the customer saw\u2014the same ranking, the same order\u2014rather than re-running the search against whatever the catalog looks like today. Ranking drifts over time (nightly tie-break randomization, refreshed business scores, retuned formula weights), so replaying the frozen result is what makes the ticket actually verifiable. Status changes are managed independently of the conversation.",
+        "description": "Every ticket contains the complete search context alongside the customer conversation, giving administrators everything needed to investigate a reported relevance issue. Replies are handled directly from Zed, and the View SRP shortcut replays the exact page the customer saw—the same ranking, the same order—rather than re-running the search against whatever the catalog looks like today. Ranking drifts over time (nightly tie-break randomization, refreshed business scores, retuned formula weights), so replaying the frozen result is what makes the ticket actually verifiable. Status changes are managed independently of the conversation.",
         "src": "screenshots/search-feedback/ticket-detail.png",
+        "width": 1280,
+        "height": 1396,
         "thumb": "screenshots/search-feedback/ticket-detail-thumb.webp",
-        "full": "screenshots/search-feedback/ticket-detail-full.webp",
-        "width": 1920,
-        "height": 1260
+        "full": "screenshots/search-feedback/ticket-detail-full.webp"
       }
     ]
   },
@@ -40,73 +40,73 @@
         "title": "SRP score overlay",
         "description": "Search relevance becomes visible directly on the Search Results Page. Every product displays its live Elasticsearch score, and a single click opens a breakdown of how that score was produced. The overlay is designed for progressive disclosure: the overall score is immediately visible, while detailed explanations stay collapsed until needed. Access is permission-controlled, allowing developers and search specialists to inspect live searches without affecting the storefront experience for other users.",
         "src": "screenshots/search-debug/srp-overlay.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-debug/srp-overlay-thumb.webp",
-        "full": "screenshots/search-debug/srp-overlay-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-debug/srp-overlay-full.webp"
       },
       {
         "title": "Matched tokens breakdown",
-        "description": "Expand a product's text-score breakdown to see exactly which query tokens matched which indexed fields, together with their individual BM25 contribution. Every value comes from the live OpenSearch explain output, including the actual field boost configured for the project. The overlay is extensible, allowing other packages\u2014such as Search Ranking\u2014to contribute additional scoring sections without modifying the core debugger.",
+        "description": "Expand a product's text-score breakdown to see exactly which query tokens matched which indexed fields, together with their individual BM25 contribution. Every value comes from the live OpenSearch explain output, including the actual field boost configured for the project. The overlay is extensible, allowing other packages—such as Search Ranking—to contribute additional scoring sections without modifying the core debugger.",
         "src": "screenshots/search-debug/matched-tokens.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-debug/matched-tokens-thumb.webp",
-        "full": "screenshots/search-debug/matched-tokens-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-debug/matched-tokens-full.webp"
       },
       {
         "title": "Business signals section, pinned across three cards",
         "description": "Search Debug provides extension points that allow other packages to expose their scoring logic alongside Elasticsearch's own text relevance. Here, Search Ranking contributes a complete business-score breakdown, making it possible to inspect both text relevance and business metrics in one unified overlay. Multiple pinned overlays allow direct side-by-side comparison between products.",
         "src": "screenshots/search-ranking/office-chair-business-signals.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/office-chair-business-signals-thumb.webp",
-        "full": "screenshots/search-ranking/office-chair-business-signals-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/office-chair-business-signals-full.webp"
       },
       {
         "title": "Specificity weighting section, fully unfolded",
         "description": "The overlay can host additional diagnostic sections beyond OpenSearch itself. Here, Search Ranking visualizes how query specificity is calculated and how it influences the balance between text relevance and business signals. Because this calculation requires an additional Elasticsearch request, the feature is intentionally opt-in.",
         "src": "screenshots/search-ranking/specificity-banknote-counter.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/specificity-banknote-counter-thumb.webp",
-        "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp"
       },
       {
         "title": "Compare BM25 across tokens",
-        "description": "Pin multiple product overlays to compare BM25 scores side by side. Looking at individual query terms quickly reveals why one token contributes far more than another\u2014for example because its inverse document frequency is much higher. This turns Elasticsearch scoring from a single opaque number into something that can be inspected and reasoned about.",
+        "description": "Pin multiple product overlays to compare BM25 scores side by side. Looking at individual query terms quickly reveals why one token contributes far more than another—for example because its inverse document frequency is much higher. This turns Elasticsearch scoring from a single opaque number into something that can be inspected and reasoned about.",
         "src": "screenshots/search-debug/bm25-compare.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-debug/bm25-compare-thumb.webp",
-        "full": "screenshots/search-debug/bm25-compare-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-debug/bm25-compare-full.webp"
       },
       {
         "title": "Trace a token to its database field",
         "description": "Follow any matched token back to the indexed data that produced it. Every occurrence is grouped by its originating database field using the project's real schema names, making it immediately clear whether a match came from a product name, category, merchant, or any custom indexed field. From there, a single click continues into the analyzer pipeline that created the token.",
         "src": "screenshots/search-debug/token-source.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-debug/token-source-thumb.webp",
-        "full": "screenshots/search-debug/token-source-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-debug/token-source-full.webp"
       },
       {
         "title": "Full German analyzer pipeline (index time)",
-        "description": "Visualize how a product's text is transformed during indexing. Every tokenizer and filter is shown in execution order together with its live configuration, allowing developers to follow the token through the complete analysis chain\u2014from raw text to the final indexed terms. This makes custom analyzers and language-specific processing far easier to understand and debug.",
+        "description": "Visualize how a product's text is transformed during indexing. Every tokenizer and filter is shown in execution order together with its live configuration, allowing developers to follow the token through the complete analysis chain—from raw text to the final indexed terms. This makes custom analyzers and language-specific processing far easier to understand and debug.",
         "src": "screenshots/search-debug/token-analysis.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-debug/token-analysis-thumb.webp",
-        "full": "screenshots/search-debug/token-analysis-full.webp",
-        "width": 1920,
-        "height": 1224
+        "full": "screenshots/search-debug/token-analysis-full.webp"
       },
       {
         "title": "Search-time analyzer pipeline",
-        "description": "The same visualization is available for search-time analysis. Compare how user input is processed against the index-time pipeline to understand why a query matches\u2014or fails to match\u2014certain products. Differences such as synonym expansion or search-specific filters become immediately visible, making analyzer debugging significantly easier than inspecting raw OpenSearch responses.",
+        "description": "The same visualization is available for search-time analysis. Compare how user input is processed against the index-time pipeline to understand why a query matches—or fails to match—certain products. Differences such as synonym expansion or search-specific filters become immediately visible, making analyzer debugging significantly easier than inspecting raw OpenSearch responses.",
         "src": "screenshots/search-debug/token-analysis-search.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-debug/token-analysis-search-thumb.webp",
-        "full": "screenshots/search-debug/token-analysis-search-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-debug/token-analysis-search-full.webp"
       }
     ]
   },
@@ -115,103 +115,103 @@
     "label": "Search Ranking",
     "screenshots": [
       {
-        "title": "Metrics list \u2014 three scopes at a glance",
+        "title": "Metrics list — three scopes at a glance",
         "description": "Define which business signals influence product ranking and how much each contributes. Every metric combines a normalization formula with a configurable weight, allowing business data such as sales, impressions, or custom KPIs to participate in the final OpenSearch ranking score. Metrics can either share one configuration across an entire store or be maintained independently per locale.",
         "src": "screenshots/search-ranking/metrics.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/metrics-thumb.webp",
-        "full": "screenshots/search-ranking/metrics-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/metrics-full.webp"
       },
       {
         "title": "Formula authoring: fitting a curve to real data",
-        "description": "Business metrics rarely follow a linear distribution. This editor compares the current normalization formula against the real distribution of imported product values and suggests alternative formulas that better separate products. Candidate formulas are automatically fitted to the data and ranked by goodness of fit (R\u00b2), allowing administrators to improve ranking quality without manually experimenting with mathematical functions.",
+        "description": "Business metrics rarely follow a linear distribution. This editor compares the current normalization formula against the real distribution of imported product values and suggests alternative formulas that better separate products. Candidate formulas are automatically fitted to the data and ranked by goodness of fit (R²), allowing administrators to improve ranking quality without manually experimenting with mathematical functions.",
         "src": "screenshots/search-ranking/edit-metric.png",
+        "width": 1280,
+        "height": 1772,
         "thumb": "screenshots/search-ranking/edit-metric-thumb.webp",
-        "full": "screenshots/search-ranking/edit-metric-full.webp",
-        "width": 1920,
-        "height": 1718
+        "full": "screenshots/search-ranking/edit-metric-full.webp"
       },
       {
-        "title": "Product Values \u2014 the input every adopter must supply",
+        "title": "Product Values — the input every adopter must supply",
         "description": "Inspect the raw business metrics imported for every product together with their normalized values used during ranking. This page verifies that data imports are working as expected and makes it easy to understand how raw values are transformed before they contribute to the final ranking score.",
         "src": "screenshots/search-ranking/product-values.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/product-values-thumb.webp",
-        "full": "screenshots/search-ranking/product-values-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/product-values-full.webp"
       },
       {
-        "title": "Product Metric Gaps \u2014 finding the silent zeros",
+        "title": "Product Metric Gaps — finding the silent zeros",
         "description": "Missing business metrics silently reduce ranking quality. This view highlights every product that lacks a value for an active ranking metric, making incomplete imports immediately visible before they affect search results.",
         "src": "screenshots/search-ranking/product-metric-gap.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/product-metric-gap-thumb.webp",
-        "full": "screenshots/search-ranking/product-metric-gap-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/product-metric-gap-full.webp"
       },
       {
-        "title": "Settings \u2014 the ranking formula's own knobs",
+        "title": "Settings — the ranking formula's own knobs",
         "description": "Configure how OpenSearch relevance and business signals are combined into a single ranking score. Besides the overall relevance weight, this page exposes the optional query-specific weighting model, allowing search relevance to adapt automatically between broad and highly specific searches. Features requiring additional OpenSearch requests remain intentionally code-enabled rather than editable through the UI.",
         "src": "screenshots/search-ranking/settings.png",
+        "width": 1280,
+        "height": 1386,
         "thumb": "screenshots/search-ranking/settings-thumb.webp",
-        "full": "screenshots/search-ranking/settings-full.webp",
-        "width": 1920,
-        "height": 1386
+        "full": "screenshots/search-ranking/settings-full.webp"
       },
       {
-        "title": "Metric History \u2014 an audit trail, not a diff",
+        "title": "Metric History — an audit trail, not a diff",
         "description": "Every ranking configuration change is recorded in an audit trail. Each entry captures the complete metric configuration at the time it was saved, making it easy to review how formulas, weights, and activation states evolved over time, regardless of whether the change was performed manually or by companion packages.",
         "src": "screenshots/search-ranking/metric-history.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/metric-history-thumb.webp",
-        "full": "screenshots/search-ranking/metric-history-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/metric-history-full.webp"
       },
       {
-        "title": "Scope Copy \u2014 bootstrapping a new market",
+        "title": "Scope Copy — bootstrapping a new market",
         "description": "Launching a new market rarely means starting from scratch. Scope Copy transfers ranking configuration between stores and locales, allowing successful tuning to be reused while keeping product-specific business data independent. Optional synchronization keeps selected configuration in sync across markets as they evolve.",
         "src": "screenshots/search-ranking/scope-copy.png",
+        "width": 1280,
+        "height": 1882,
         "thumb": "screenshots/search-ranking/scope-copy-thumb.webp",
-        "full": "screenshots/search-ranking/scope-copy-full.webp",
-        "width": 1920,
-        "height": 1864
+        "full": "screenshots/search-ranking/scope-copy-full.webp"
       },
       {
-        "title": "Random Impact \u2014 judging the tie-breaker's weight",
+        "title": "Random Impact — judging the tie-breaker's weight",
         "description": "Evaluate the effect of the random tie-breaker directly on the Search Results Page. Products display how many positions they would move if the random business signal were disabled, making it easy to judge whether the configured weight introduces healthy variation or too much noise into the ranking.",
         "src": "screenshots/search-ranking/random-impact.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/random-impact-thumb.webp",
-        "full": "screenshots/search-ranking/random-impact-full.webp",
-        "width": 1920,
-        "height": 2150
+        "full": "screenshots/search-ranking/random-impact-full.webp"
       },
       {
         "title": "Business signals (office chair)",
         "description": "Understand exactly why products appear in their current order. The overlay combines OpenSearch text relevance with every configured business signal, showing how each metric contributes to the final ranking score. Pinning multiple products side by side makes it easy to compare competing products and explain ranking decisions.",
         "src": "screenshots/search-ranking/office-chair-business-signals.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/office-chair-business-signals-thumb.webp",
-        "full": "screenshots/search-ranking/office-chair-business-signals-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/office-chair-business-signals-full.webp"
       },
       {
         "title": "Query specificity (generic query)",
-        "description": "Generic searches benefit more from business signals than highly specific ones. Here, the query \"office\" is recognized as broad, causing the ranking formula to reduce the influence of text relevance and place greater emphasis on configured business metrics. Every intermediate calculation is shown for complete transparency.",
+        "description": "Generic searches benefit more from business signals than highly specific ones. Here, the query \"Feldwerk chair\" is recognized as broad, causing the ranking formula to reduce the influence of text relevance and place greater emphasis on configured business metrics. Every intermediate calculation is shown for complete transparency.",
         "src": "screenshots/search-ranking/specificity-office.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/specificity-office-thumb.webp",
-        "full": "screenshots/search-ranking/specificity-office-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/specificity-office-full.webp"
       },
       {
         "title": "Query specificity (specific query)",
-        "description": "Highly specific searches should primarily reward textual relevance. For the narrow query \"banknote counter\", the calculated relevance weight shifts strongly toward the OpenSearch score, ensuring that precise matches outrank products that merely perform well according to business metrics. The complete derivation is shown alongside the final ranking calculation.",
+        "description": "Highly specific searches should primarily reward textual relevance. For the narrow query \"Feldwerk\", the calculated relevance weight shifts strongly toward the OpenSearch score, ensuring that precise matches outrank products that merely perform well according to business metrics. The complete derivation is shown alongside the final ranking calculation.",
         "src": "screenshots/search-ranking/specificity-banknote-counter.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-ranking/specificity-banknote-counter-thumb.webp",
-        "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp"
       }
     ]
   },
@@ -223,82 +223,82 @@
         "title": "Rate a result, right on the SRP",
         "description": "Collect relevance judgments directly inside the storefront while browsing real search results. Search administrators can mark products as relevant, acceptable, or irrelevant with a single click, gradually building a realistic evaluation dataset without leaving the storefront or creating spreadsheets.",
         "src": "screenshots/search-optimization/srp-rating-widget.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-optimization/srp-rating-widget-thumb.webp",
-        "full": "screenshots/search-optimization/srp-rating-widget-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-optimization/srp-rating-widget-full.webp"
       },
       {
         "title": "Saturation point calibration: replacing a guess with a sample",
         "description": "Estimate suitable normalization parameters directly from the live catalog instead of relying on guesswork. Calibration samples real OpenSearch relevance scores or query specificity values across representative searches and proposes saturation points that better match the actual distribution of the catalog.",
         "src": "screenshots/search-optimization/saturation-point-calibration.png",
+        "width": 1280,
+        "height": 1418,
         "thumb": "screenshots/search-optimization/saturation-point-calibration-thumb.webp",
-        "full": "screenshots/search-optimization/saturation-point-calibration-full.webp",
-        "width": 1920,
-        "height": 1720
+        "full": "screenshots/search-optimization/saturation-point-calibration-full.webp"
       },
       {
         "title": "Auto-tune: keeping a metric's curve honest as the business drifts",
         "description": "Continuously monitor ranking quality and automatically react when formula quality deteriorates. Individual metrics can notify administrators, propose improved normalization formulas, or update themselves automatically once their measured fit falls below a configurable threshold.",
         "src": "screenshots/search-optimization/auto-tune-settings.png",
+        "width": 1280,
+        "height": 1508,
         "thumb": "screenshots/search-optimization/auto-tune-settings-thumb.webp",
-        "full": "screenshots/search-optimization/auto-tune-settings-full.webp",
-        "width": 1920,
-        "height": 1260
+        "full": "screenshots/search-optimization/auto-tune-settings-full.webp"
       },
       {
         "title": "Ratings: the raw audit trail behind every rated query",
         "description": "Browse every individual relevance judgment recorded through the storefront rating widget. Each entry captures one administrator's opinion for a specific query and product, providing a complete audit trail behind the aggregated evaluation dataset used during optimization.",
         "src": "screenshots/search-optimization/ratings.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-optimization/ratings-thumb.webp",
-        "full": "screenshots/search-optimization/ratings-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-optimization/ratings-full.webp"
       },
       {
         "title": "Assess Rated Queries: telling the optimizer which query matters more",
         "description": "Prioritize optimization effort where it matters most. Rated search queries are grouped into a single overview where administrators can assign importance weights, ensuring that high-value business searches contribute more strongly to every OpenSearch evaluation and optimization run.",
         "src": "screenshots/search-optimization/assess-rated-queries.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-optimization/assess-rated-queries-thumb.webp",
-        "full": "screenshots/search-optimization/assess-rated-queries-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-optimization/assess-rated-queries-full.webp"
       },
       {
         "title": "Test Current Evaluation: turning admin ratings into one real objective number",
         "description": "Measure how well the current OpenSearch ranking configuration performs against the collected relevance judgments. All ratings are converted into a single weighted nDCG@10 score, providing an objective quality metric that can be compared before and after every optimization.",
         "src": "screenshots/search-optimization/test-current-evaluation.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-optimization/test-current-evaluation-thumb.webp",
-        "full": "screenshots/search-optimization/test-current-evaluation-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-optimization/test-current-evaluation-full.webp"
       },
       {
         "title": "Weight Checkpoints: a way back before you change anything by hand",
         "description": "Record restorable snapshots of the complete ranking configuration before making larger changes. Checkpoints preserve every ranking parameter and business-signal weight, allowing experiments to be rolled back instantly without reconstructing previous configurations manually.",
         "src": "screenshots/search-optimization/weight-checkpoints.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-optimization/weight-checkpoints-thumb.webp",
-        "full": "screenshots/search-optimization/weight-checkpoints-full.webp",
-        "width": 1920,
-        "height": 1500
+        "full": "screenshots/search-optimization/weight-checkpoints-full.webp"
       },
       {
         "title": "Start New Optimization Run: three algorithms, and what to search vs. pin",
         "description": "Configure an automated optimization run that searches for better ranking parameters using CMA-ES, a derivative-free optimization algorithm well suited for noisy search-quality functions. Selected parameters can either remain fixed or participate in the search while the current OpenSearch configuration serves as the baseline.",
         "src": "screenshots/search-optimization/automated-weight-optimization-before.png",
+        "width": 1280,
+        "height": 1523,
         "thumb": "screenshots/search-optimization/automated-weight-optimization-before-thumb.webp",
-        "full": "screenshots/search-optimization/automated-weight-optimization-before-full.webp",
-        "width": 1920,
-        "height": 1300
+        "full": "screenshots/search-optimization/automated-weight-optimization-before-full.webp"
       },
       {
         "title": "Latest Run: what came back, and the one row that's just there for the math",
         "description": "Review the best configuration discovered during optimization before deciding whether to apply it. The optimizer reports the achieved weighted nDCG improvement together with every proposed parameter change, allowing administrators to inspect the recommendation before updating the live ranking configuration.",
         "src": "screenshots/search-optimization/automated-weight-optimization-after.png",
+        "width": 1280,
+        "height": 1024,
         "thumb": "screenshots/search-optimization/automated-weight-optimization-after-thumb.webp",
-        "full": "screenshots/search-optimization/automated-weight-optimization-after-full.webp",
-        "width": 1920,
-        "height": 1080
+        "full": "screenshots/search-optimization/automated-weight-optimization-after-full.webp"
       }
     ]
   },
@@ -308,19 +308,19 @@
     "screenshots": [
       {
         "title": "Cross-facet AND, illustrated",
-        "description": "Filtering by Color: Red and Size: 40 should only return products where one single variant is both red and 40 \u2014 not products where red and 40 only exist in two different variants of the same abstract. Shoe #1 has a Red/40 variant and matches; Shoe #2 has a Green/40 variant and a separate Red/42 variant, so no single variant satisfies both filters and it's correctly excluded. This is an illustrative mockup; real product screenshots will replace it here.",
+        "description": "Filtering by Color: Red and Size: 40 should only return products where one single variant is both red and 40 — not products where red and 40 only exist in two different variants of the same abstract. Shoe #1 has a Red/40 variant and matches; Shoe #2 has a Green/40 variant and a separate Red/42 variant, so no single variant satisfies both filters and it's correctly excluded. This is an illustrative mockup; real product screenshots will replace it here.",
         "src": "screenshots/search-variant-facets/facet-and-mockup.svg",
-        "thumb": "screenshots/search-variant-facets/facet-and-mockup.svg",
-        "full": "screenshots/search-variant-facets/facet-and-mockup.svg",
+        "thumb": "screenshots/search-variant-facets/facet-and-mockup-thumb.webp",
+        "full": "screenshots/search-variant-facets/facet-and-mockup-full.webp",
         "width": 1920,
         "height": 1080
       },
       {
-        "title": "Before \u2192 after: the search document",
-        "description": "Update the index mapping and run the standard export \u2014 no new index, no reindex-and-swap, no downtime. Before, Shoe #2's color and size values are flattened into one comma-joined string per attribute across all its variants, so it's impossible to tell which color went with which size. After, a variant-facet array holds one object per concrete (SKU, its own color, its own size), so a Color + Size filter can check whether one single variant satisfies both \u2014 the actual fix. The new field is purely additive: it sits alongside the existing document, so it only needs a mapping update and a normal export pass, not a new index.",
+        "title": "Before → after: the search document",
+        "description": "Update the index mapping and run the standard export — no new index, no reindex-and-swap, no downtime. Before, Shoe #2's color and size values are flattened into one comma-joined string per attribute across all its variants, so it's impossible to tell which color went with which size. After, a variant-facet array holds one object per concrete (SKU, its own color, its own size), so a Color + Size filter can check whether one single variant satisfies both — the actual fix. The new field is purely additive: it sits alongside the existing document, so it only needs a mapping update and a normal export pass, not a new index.",
         "src": "screenshots/search-variant-facets/index-document-before-after.svg",
-        "thumb": "screenshots/search-variant-facets/index-document-before-after.svg",
-        "full": "screenshots/search-variant-facets/index-document-before-after.svg",
+        "thumb": "screenshots/search-variant-facets/index-document-before-after-thumb.webp",
+        "full": "screenshots/search-variant-facets/index-document-before-after-full.webp",
         "width": 1920,
         "height": 1080
       }
