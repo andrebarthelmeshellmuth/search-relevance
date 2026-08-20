@@ -182,13 +182,13 @@
         "description": "Evaluate the effect of the random tie-breaker directly on the Search Results Page. Products display how many positions they would move if the random business signal were disabled, making it easy to judge whether the configured weight introduces healthy variation or too much noise into the ranking.",
         "src": "screenshots/search-ranking/random-impact.png",
         "width": 1280,
-        "height": 1024,
+        "height": 1500,
         "thumb": "screenshots/search-ranking/random-impact-thumb.webp",
         "full": "screenshots/search-ranking/random-impact-full.webp"
       },
       {
         "title": "Business signals (office chair)",
-        "description": "Understand exactly why products appear in their current order. The overlay combines OpenSearch text relevance with every configured business signal, showing how each metric contributes to the final ranking score. Pinning multiple products side by side makes it easy to compare competing products and explain ranking decisions.",
+        "description": "If the Debug package is also installed, administrators can inspect exactly why products appear in their current order. The overlay combines OpenSearch text relevance with every configured business signal, showing how each metric contributes to the final ranking score. Pinning multiple products side by side makes it easy to compare competing products and explain ranking decisions.",
         "src": "screenshots/search-ranking/office-chair-business-signals.png",
         "width": 1280,
         "height": 1024,
@@ -278,7 +278,7 @@
         "description": "Record restorable snapshots of the complete ranking configuration before making larger changes. Checkpoints preserve every ranking parameter and business-signal weight, allowing experiments to be rolled back instantly without reconstructing previous configurations manually.",
         "src": "screenshots/search-optimization/weight-checkpoints.png",
         "width": 1280,
-        "height": 1024,
+        "height": 2000,
         "thumb": "screenshots/search-optimization/weight-checkpoints-thumb.webp",
         "full": "screenshots/search-optimization/weight-checkpoints-full.webp"
       },
