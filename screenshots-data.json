@@ -23,7 +23,7 @@
       },
       {
         "title": "Ticket detail",
-        "description": "Every ticket contains the complete search context alongside the customer conversation, giving administrators everything needed to investigate a reported relevance issue. Replies are handled directly from Zed, and the View SRP shortcut recreates the original search—including query and filters—making it easy to verify the issue against the current catalog state. Status changes are managed independently of the conversation.",
+        "description": "Every ticket contains the complete search context alongside the customer conversation, giving administrators everything needed to investigate a reported relevance issue. Replies are handled directly from Zed, and the View SRP shortcut recreates the original search—including query and filters—making it easy to verify the issue against the current catalog state. Status changes are managed independently of the conversation. View SRP replays the captured result set; it does not execute a new search. UI changes are therefore reflected, while later ranking changes—such as updated business scores or random-score values—do not alter the results shown. When the Debug package from this toolkit is installed, administrators can use it then to inspect the individual search scores and their underlying components and calculations.",
         "src": "screenshots/search-feedback/ticket-detail.png",
         "width": 1280,
         "height": 1396,
