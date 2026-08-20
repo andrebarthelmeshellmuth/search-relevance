@@ -55,7 +55,7 @@
         "full": "screenshots/search-debug/matched-tokens-full.webp"
       },
       {
-        "title": "Business signals section, pinned across three cards",
+        "title": "Business signals section, pinned across two cards",
         "description": "Search Debug provides extension points that allow other packages to expose their scoring logic alongside Elasticsearch's own text relevance. Here, Search Ranking contributes a complete business-score breakdown, making it possible to inspect both text relevance and business metrics in one unified overlay. Multiple pinned overlays allow direct side-by-side comparison between products.",
         "src": "screenshots/search-ranking/office-chair-business-signals.png",
         "width": 1280,
