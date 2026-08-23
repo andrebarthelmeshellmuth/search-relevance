@@ -387,7 +387,7 @@ export default {
     screenshotsText: "Screenshots",
     diagram: {
       titleText: "Abhängigkeiten zwischen den Search-Relevance-Packages",
-      descText: "Search Toolkit ist ein einziges composer require, das alle sieben darunterliegenden Packages mitzieht. Search Feedback, Search Debug, Search Ranking und Search Index Alias haben keine eigenen Abhängigkeiten. Search Debug kann optional die Daten von Search Ranking lesen. Search Optimization benötigt Search Ranking und delegiert seine Optimierungsarbeit an Blackbox Optimizer, das keine Spryker-Abhängigkeit hat und ebenfalls in jedem PHP-Projekt einsetzbar ist. Search Analyzer Config benötigt Search Index Alias. Search Variant Facets empfiehlt Search Index Alias, für einen Zero-Downtime-Reindex seiner eigenen initialen Mapping-Änderung.",
+      descText: "Search Toolkit ist ein einziges composer require, das alle sieben darunterliegenden Packages mitzieht. Search Feedback, Search Debug, Search Ranking und Search Index Alias haben keine eigenen harten Abhängigkeiten. Search Feedback empfiehlt Search Debug, sodass die Replay-Ansicht der ursprünglichen Suchergebnisseite eines Tickets auch Debugs Score-Erklärungs-Overlay erhält. Search Debug kann optional die Daten von Search Ranking lesen. Search Optimization benötigt Search Ranking und delegiert seine Optimierungsarbeit an Blackbox Optimizer, das keine Spryker-Abhängigkeit hat und ebenfalls in jedem PHP-Projekt einsetzbar ist. Search Analyzer Config benötigt Search Index Alias. Search Variant Facets empfiehlt Search Index Alias, für einen Zero-Downtime-Reindex seiner eigenen initialen Mapping-Änderung.",
       optionalLabel: "optional",
       requiresLabel: "benötigt",
       delegatesLabel: "delegiert an",

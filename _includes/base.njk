@@ -453,6 +453,13 @@
           <line x1="1355" y1="84" x2="1355" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
           <line x1="1605" y1="84" x2="1605" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
 
+          <!-- Search Feedback composer-suggests Search Debug -- its ticket "View SRP" replay reuses the
+               real search route, which is exactly where Debug's overlay activates on its own, no
+               integration code needed. Same adjacent-column dashed shape as the other suggest/optional
+               edges. -->
+          <line x1="205" y1="205" x2="253" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
+          <text x="229" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">{{ t.resources.diagram.suggestsLabel }}</text>
+
           <line x1="455" y1="205" x2="503" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
           <text x="480" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">{{ t.resources.diagram.optionalLabel }}</text>
 
