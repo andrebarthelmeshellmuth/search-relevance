@@ -325,5 +325,62 @@
         "height": 1080
       }
     ]
+  },
+  {
+    "id": "search-index-alias",
+    "label": "Search Index Alias",
+    "screenshots": [
+      {
+        "title": "Managed scopes — rebuild, flip, roll back",
+        "description": "Every physical index behind a scope's alias, in one table: which one is live, its rollout status, document count, who triggered it, and any mapping diff against the previous target. Rebuild starts a new blue-green build in the background; once it reaches ready, Flip switches live traffic to it atomically. Older indices stay available to roll back to, or delete once they're no longer needed.",
+        "src": "screenshots/search-index-alias/overview.png",
+        "thumb": "screenshots/search-index-alias/overview-thumb.webp",
+        "full": "screenshots/search-index-alias/overview-full.webp",
+        "width": 1280,
+        "height": 1277
+      },
+      {
+        "title": "Rollout history — every attempt, not just the current state",
+        "description": "A full audit trail of every rebuild this scope has ever gone through: started/finished timestamps, who triggered it, the target index, expected vs. actual document counts, and — critically — the real failure reason when one fails, not just a generic error. Aborted and failed rollouts stay in the list alongside successful ones, so a recurring problem is visible at a glance instead of disappearing the moment it's retried.",
+        "src": "screenshots/search-index-alias/rollout-history.png",
+        "thumb": "screenshots/search-index-alias/rollout-history-thumb.webp",
+        "full": "screenshots/search-index-alias/rollout-history-full.webp",
+        "width": 1280,
+        "height": 1024
+      }
+    ]
+  },
+  {
+    "id": "search-analyzer-config",
+    "label": "Search Analyzer Config",
+    "screenshots": [
+      {
+        "title": "Staged analyzer config for a scope",
+        "description": "A summary of everything staged for one (source, store) scope: stemmer language, normalization filter, stopwords mode, decompounding with its word list, synonym rules, and do-not-decompound/brand terms. The revision badge makes clear whether this config has actually been applied to a live index yet, or is still waiting for the next Search Index Alias rebuild.",
+        "src": "screenshots/search-analyzer-config/scope-summary.png",
+        "thumb": "screenshots/search-analyzer-config/scope-summary-thumb.webp",
+        "full": "screenshots/search-analyzer-config/scope-summary-full.webp",
+        "width": 1280,
+        "height": 1024
+      },
+      {
+        "title": "Editing a shared filter across every analyzer that uses it",
+        "description": "Each filter (stemmer, normalization, decompounding, synonyms, ...) is one value shared by every analyzer that references it — editing it here changes it everywhere at once, the same way editing a shared index setting would. Rows marked “edited” show exactly what differs from what's currently live, and a banner surfaces when the whole scope has drifted from live, so nothing gets applied by surprise.",
+        "src": "screenshots/search-analyzer-config/edit-filter-matrix.png",
+        "thumb": "screenshots/search-analyzer-config/edit-filter-matrix-thumb.webp",
+        "full": "screenshots/search-analyzer-config/edit-filter-matrix-full.webp",
+        "width": 1280,
+        "height": 1132
+      },
+      {
+        "title": "Before/after: the real analyzer pipeline, live vs. staged",
+        "description": "Runs a sample search term through the actual analyzer chain twice — once against the live index, once against a throwaway index built just for this request with the staged config applied — and shows every tokenizer/filter step side by side. Here, a German compound word (“Bürostuhl”) gets decompounded into its parts and expanded through a staged synonym rule, visible step by step instead of as an opaque before/after diff.",
+        "src": "screenshots/search-analyzer-config/preview-diff.png",
+        "thumb": "screenshots/search-analyzer-config/preview-diff-thumb.webp",
+        "full": "screenshots/search-analyzer-config/preview-diff-full.webp",
+        "width": 1280,
+        "height": 1106
+      }
+    ]
   }
 ]
