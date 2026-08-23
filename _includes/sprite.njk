@@ -9,9 +9,10 @@
       <clipPath id="flagEnBR"><polygon points="20,0 20,15 0,15"/></clipPath>
       <!-- Each half is clipped from a full, correctly-proportioned flag (not a flag redrawn to fit its
            own half), so the US canton lands in its real top-left corner and the Jack's cross keeps a
-           real arm's width -- clipping the whole thing is what makes the swap in the other symbol below
-           actually change which corner shows which flag's real, defining feature, instead of two blocks
-           of colour that happen to look the same from either side. -->
+           real arm's width, instead of two blocks of colour that happen to look the same from either
+           side. The two clip triangles already share the exact diagonal seam -- deliberately no separate
+           divider line drawn on top, since an unclipped one bleeds into the wrong corner at this icon's
+           small rendered size. -->
       <g clip-path="url(#flagEnTL)">
         <rect width="20" height="15" fill="#fff"/>
         <rect y="0" width="20" height="1.15" fill="#b22234"/>
@@ -30,7 +31,6 @@
         <path d="M10 0 V15 M0 7.5 H20" stroke="#fff" stroke-width="4.4"/>
         <path d="M10 0 V15 M0 7.5 H20" stroke="#cf142b" stroke-width="1.8"/>
       </g>
-      <line x1="0" y1="0" x2="20" y2="15" stroke="#fff" stroke-width="0.8"/>
     </symbol>
     <symbol id="i-flag-de" viewBox="0 0 20 15">
       <rect y="0" width="20" height="5" fill="#000"/>
