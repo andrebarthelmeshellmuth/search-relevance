@@ -519,7 +519,7 @@ h1 {
   border-radius: .7rem;
   background: var(--teal-soft);
 }
-.deps-diagram svg { display: block; width: 100%; height: auto; max-width: 720px; margin: 0 auto; }
+.deps-diagram svg { display: block; width: 100%; height: auto; max-width: 1080px; margin: 0 auto; }
 .deps-node-title, .deps-node-sub { text-anchor: middle; }
 .deps-node-title { font: 700 .95rem/1 Georgia, serif; }
 .deps-node-title--ghost { font-style: italic; font-weight: 400; }
