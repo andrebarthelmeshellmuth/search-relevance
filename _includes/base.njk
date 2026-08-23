@@ -465,6 +465,11 @@
           <line x1="855" y1="408" x2="855" y2="370" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
           <text x="868" y="393" class="deps-edge-label" style="fill:var(--teal)">{{ t.resources.diagram.alsoUsesLabel }}</text>
 
+          <!-- Search Variant Facets composer-suggests Search Index Alias -- same adjacent-column dashed
+               shape as the Debug/Ranking optional edge above. -->
+          <line x1="1205" y1="205" x2="1253" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
+          <text x="1229" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">{{ t.resources.diagram.suggestsLabel }}</text>
+
           <!-- Search Analyzer Config requires Search Index Alias -- same horizontal "requires" shape as
                the Ranking/Optimization pair above, and same idea: being bundled by the toolkit (the
                vertical drop below) doesn't replace its own direct dependency on Index Alias, same as

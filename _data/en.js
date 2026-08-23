@@ -387,11 +387,12 @@ export default {
     screenshotsText: "Screenshots",
     diagram: {
       titleText: "Dependencies between the Search Relevance packages",
-      descText: "Search Toolkit is one composer require that pulls in all seven packages below it. Search Feedback, Search Debug, Search Ranking, Search Variant Facets, and Search Index Alias have no dependencies of their own. Search Debug can optionally read Search Ranking's data. Search Optimization requires Search Ranking and delegates its optimization work to Blackbox Optimizer, which has no Spryker dependency and is also usable in any PHP project. Search Analyzer Config requires Search Index Alias.",
+      descText: "Search Toolkit is one composer require that pulls in all seven packages below it. Search Feedback, Search Debug, Search Ranking, and Search Index Alias have no dependencies of their own. Search Debug can optionally read Search Ranking's data. Search Optimization requires Search Ranking and delegates its optimization work to Blackbox Optimizer, which has no Spryker dependency and is also usable in any PHP project. Search Analyzer Config requires Search Index Alias. Search Variant Facets suggests Search Index Alias, for a zero-downtime reindex of its own initial mapping change.",
       optionalLabel: "optional",
       requiresLabel: "requires",
       delegatesLabel: "delegates to",
       alsoUsesLabel: "also uses",
+      suggestsLabel: "suggests",
       toolkitTitle: "Search Toolkit",
       toolkitSub: "one composer require",
       feedbackTitle: "Search Feedback",
