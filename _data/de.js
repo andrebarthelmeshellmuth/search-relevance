@@ -316,7 +316,7 @@ export default {
       {
         small: "Bundle",
         title: "Search Toolkit",
-        desc: "Ein einziges composer require für die sechs Packages darunter — Blackbox Optimizer kommt transitiv über Search Optimization mit, nicht als direktes Require.",
+        desc: "Ein einziges composer require für die sieben Packages darunter — Blackbox Optimizer kommt transitiv über Search Optimization mit, nicht als direktes Require.",
         href: "https://github.com/andrebarthelmeshellmuth/spryker-search-toolkit",
         githubAriaLabel: "Search Toolkit auf GitHub ansehen",
       },
@@ -387,7 +387,7 @@ export default {
     screenshotsText: "Screenshots",
     diagram: {
       titleText: "Abhängigkeiten zwischen den Search-Relevance-Packages",
-      descText: "Search Toolkit ist ein einziges composer require, das alle sechs darunterliegenden Packages mitzieht. Search Feedback, Search Debug, Search Ranking, Search Variant Facets und Search Index Alias haben keine eigenen Abhängigkeiten. Search Debug kann optional die Daten von Search Ranking lesen. Search Optimization benötigt Search Ranking und delegiert seine Optimierungsarbeit an Blackbox Optimizer, das keine Spryker-Abhängigkeit hat und ebenfalls in jedem PHP-Projekt einsetzbar ist. Search Analyzer Config ist ein separates composer require außerhalb des Toolkit-Bundles, das seinerseits Search Index Alias benötigt.",
+      descText: "Search Toolkit ist ein einziges composer require, das alle sieben darunterliegenden Packages mitzieht. Search Feedback, Search Debug, Search Ranking, Search Variant Facets und Search Index Alias haben keine eigenen Abhängigkeiten. Search Debug kann optional die Daten von Search Ranking lesen. Search Optimization benötigt Search Ranking und delegiert seine Optimierungsarbeit an Blackbox Optimizer, das keine Spryker-Abhängigkeit hat und ebenfalls in jedem PHP-Projekt einsetzbar ist. Search Analyzer Config benötigt Search Index Alias.",
       optionalLabel: "optional",
       requiresLabel: "benötigt",
       delegatesLabel: "delegiert an",

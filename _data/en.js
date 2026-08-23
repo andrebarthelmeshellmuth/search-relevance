@@ -316,7 +316,7 @@ export default {
       {
         small: "Bundle",
         title: "Search Toolkit",
-        desc: "One composer require for the six packages below — Blackbox Optimizer comes along transitively through Search Optimization, not as a direct require.",
+        desc: "One composer require for the seven packages below — Blackbox Optimizer comes along transitively through Search Optimization, not as a direct require.",
         href: "https://github.com/andrebarthelmeshellmuth/spryker-search-toolkit",
         githubAriaLabel: "View Search Toolkit on GitHub",
       },
@@ -387,7 +387,7 @@ export default {
     screenshotsText: "Screenshots",
     diagram: {
       titleText: "Dependencies between the Search Relevance packages",
-      descText: "Search Toolkit is one composer require that pulls in all six packages below it. Search Feedback, Search Debug, Search Ranking, Search Variant Facets, and Search Index Alias have no dependencies of their own. Search Debug can optionally read Search Ranking's data. Search Optimization requires Search Ranking and delegates its optimization work to Blackbox Optimizer, which has no Spryker dependency and is also usable in any PHP project. Search Analyzer Config is a separate composer require, outside the toolkit bundle, that itself requires Search Index Alias.",
+      descText: "Search Toolkit is one composer require that pulls in all seven packages below it. Search Feedback, Search Debug, Search Ranking, Search Variant Facets, and Search Index Alias have no dependencies of their own. Search Debug can optionally read Search Ranking's data. Search Optimization requires Search Ranking and delegates its optimization work to Blackbox Optimizer, which has no Spryker dependency and is also usable in any PHP project. Search Analyzer Config requires Search Index Alias.",
       optionalLabel: "optional",
       requiresLabel: "requires",
       delegatesLabel: "delegates to",
