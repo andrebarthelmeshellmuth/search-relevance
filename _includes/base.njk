@@ -41,7 +41,7 @@
       <nav class="site-nav" aria-label="{{ t.nav.ariaLabel }}">
         <a href="#explorer">{{ t.nav.formula }}</a>
         <a href="screenshots.html">Screenshots</a>
-        <a href="#resources">{{ t.nav.resources }}</a>
+        <a href="resources.html">{{ t.nav.resources }}</a>
         <a href="https://github.com/andrebarthelmeshellmuth" target="_blank" rel="noopener noreferrer">GitHub</a>
       </nav>
       <div class="lang-switch" role="group" aria-label="{{ t.langSwitch.ariaLabel }}">
@@ -406,157 +406,12 @@
       </div>
     </section>
 
-    <section class="resources" id="resources" aria-labelledby="resources-title">
+    <section class="resources-teaser" id="resources" aria-labelledby="resources-title">
       <div class="section-heading compact">
-        <h2 id="resources-title">{{ t.resources.heading }}</h2>
+        <h2 id="resources-title">{{ t.resourcesTeaser.heading }}</h2>
       </div>
-      <div class="resource-list">
-        {% for row in t.resources.rows %}
-        <div class="resource-row{% if not loop.first %} is-nested{% endif %}">
-          <a class="resource-row-link" href="{{ row.href }}" target="_blank" rel="noopener noreferrer">
-            <span>
-              <small>{{ row.small }}</small>
-              <strong>{{ row.title }}</strong>
-              <em>{{ row.desc }}</em>
-            </span>
-          </a>
-          {% if row.screenshotsAnchor %}
-          <a class="resource-screenshots-link" href="screenshots.html#{{ row.screenshotsAnchor }}">{{ t.resources.screenshotsText }}</a>
-          {% endif %}
-          <a class="resource-github-link" href="{{ row.href }}" target="_blank" rel="noopener noreferrer" aria-label="{{ row.githubAriaLabel }}">
-            <svg class="resource-github-icon icon-solid" width="20" height="20" aria-hidden="true"><use href="#i-github"/></svg>
-          </a>
-        </div>
-        {% endfor %}
-      </div>
-      <figure class="deps-diagram">
-        <svg viewBox="0 0 1710 500" role="img" aria-labelledby="deps-diagram-title" aria-describedby="deps-diagram-desc">
-          <title id="deps-diagram-title">{{ t.resources.diagram.titleText }}</title>
-          <desc id="deps-diagram-desc">{{ t.resources.diagram.descText }}</desc>
-
-          <defs>
-            <marker id="arrow-solid" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink)" />
-            </marker>
-            <marker id="arrow-dashed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" style="fill:var(--teal)" />
-            </marker>
-          </defs>
-
-          <!-- connectors (drawn first, under the nodes) -->
-          <!-- Toolkit fans out to all seven packages it bundles, one strictly vertical drop per package -->
-          <line x1="105" y1="84" x2="105" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="355" y1="84" x2="355" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="605" y1="84" x2="605" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="855" y1="84" x2="855" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="1105" y1="84" x2="1105" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="1355" y1="84" x2="1355" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-          <line x1="1605" y1="84" x2="1605" y2="168" style="stroke:var(--ink); stroke-width:1.6" marker-end="url(#arrow-solid)" />
-
-          <!-- Search Feedback composer-suggests Search Debug -- its ticket "View SRP" replay reuses the
-               real search route, which is exactly where Debug's overlay activates on its own, no
-               integration code needed. Same adjacent-column dashed shape as the other suggest/optional
-               edges. -->
-          <line x1="205" y1="205" x2="253" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
-          <text x="229" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">{{ t.resources.diagram.suggestsLabel }}</text>
-
-          <line x1="455" y1="205" x2="503" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
-          <text x="480" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">{{ t.resources.diagram.optionalLabel }}</text>
-
-          <line x1="755" y1="205" x2="707" y2="205" style="stroke:var(--ink); stroke-width:2" marker-end="url(#arrow-solid)" />
-          <text x="730" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--ink)">{{ t.resources.diagram.requiresLabel }}</text>
-
-          <line x1="855" y1="240" x2="855" y2="298" style="stroke:var(--ink); stroke-width:2" marker-end="url(#arrow-solid)" />
-          <text x="868" y="273" class="deps-edge-label" style="fill:var(--ink)">{{ t.resources.diagram.delegatesLabel }}</text>
-
-          <line x1="855" y1="408" x2="855" y2="370" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
-          <text x="868" y="393" class="deps-edge-label" style="fill:var(--teal)">{{ t.resources.diagram.alsoUsesLabel }}</text>
-
-          <!-- Search Variant Facets composer-suggests Search Index Alias -- same adjacent-column dashed
-               shape as the Debug/Ranking optional edge above. -->
-          <line x1="1205" y1="205" x2="1253" y2="205" style="stroke:var(--teal); stroke-width:2" stroke-dasharray="6 5" marker-end="url(#arrow-dashed)" />
-          <text x="1229" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--teal)">{{ t.resources.diagram.suggestsLabel }}</text>
-
-          <!-- Search Analyzer Config requires Search Index Alias -- same horizontal "requires" shape as
-               the Ranking/Optimization pair above, and same idea: being bundled by the toolkit (the
-               vertical drop below) doesn't replace its own direct dependency on Index Alias, same as
-               Optimization's toolkit drop coexists with its own "requires" edge into Ranking. -->
-          <line x1="1505" y1="205" x2="1457" y2="205" style="stroke:var(--ink); stroke-width:2" marker-end="url(#arrow-solid)" />
-          <text x="1481" y="192" class="deps-edge-label deps-edge-label--center deps-edge-label--tight" style="fill:var(--ink)">{{ t.resources.diagram.requiresLabel }}</text>
-
-          <!-- Search Toolkit -->
-          <g>
-            <rect x="5" y="20" width="1700" height="64" rx="10" style="fill:var(--teal-soft); stroke:var(--teal); stroke-width:1.6" />
-            <text x="855" y="49" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.toolkitTitle }}</text>
-            <text x="855" y="68" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.toolkitSub }}</text>
-          </g>
-
-          <!-- Search Feedback -->
-          <g>
-            <rect x="5" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="105" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.feedbackTitle }}</text>
-            <text x="105" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
-          </g>
-
-          <!-- Search Debug -->
-          <g>
-            <rect x="255" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="355" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.debugTitle }}</text>
-            <text x="355" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
-          </g>
-
-          <!-- Search Ranking -->
-          <g>
-            <rect x="505" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="605" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.rankingTitle }}</text>
-            <text x="605" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
-          </g>
-
-          <!-- Search Optimization -->
-          <g>
-            <rect x="755" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="855" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.optimizationTitle }}</text>
-            <text x="855" y="222" class="deps-node-sub" style="fill:var(--muted)">{{ t.resources.diagram.optimizationSub }}</text>
-          </g>
-
-          <!-- blackbox-optimizer -->
-          <g>
-            <rect x="755" y="300" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="855" y="332" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.blackboxTitle }}</text>
-            <text x="855" y="352" class="deps-node-sub" style="fill:var(--muted)">{{ t.resources.diagram.blackboxSub }}</text>
-          </g>
-
-          <!-- any PHP project (ghost node) -->
-          <g>
-            <rect x="755" y="410" width="200" height="64" rx="10" style="fill:none; stroke:var(--line); stroke-width:1.4" stroke-dasharray="5 4" />
-            <text x="855" y="439" class="deps-node-title deps-node-title--ghost" style="fill:var(--muted)">{{ t.resources.diagram.ghostTitle }}</text>
-            <text x="855" y="458" class="deps-node-sub" style="fill:var(--muted)">{{ t.resources.diagram.ghostSub }}</text>
-          </g>
-
-          <!-- Search Variant Facets -->
-          <g>
-            <rect x="1005" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="1105" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.variantFacetsTitle }}</text>
-            <text x="1105" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
-          </g>
-
-          <!-- Search Index Alias -->
-          <g>
-            <rect x="1255" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="1355" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.indexAliasTitle }}</text>
-            <text x="1355" y="222" class="deps-node-sub" style="fill:var(--teal)">{{ t.resources.diagram.noDeps }}</text>
-          </g>
-
-          <!-- Search Analyzer Config: the toolkit's 7th direct member, same shape as the other six, plus
-               its own "requires" edge into Search Index Alias drawn above. -->
-          <g>
-            <rect x="1505" y="170" width="200" height="70" rx="10" style="fill:var(--surface); stroke:var(--ink); stroke-width:1.4" />
-            <text x="1605" y="202" class="deps-node-title" style="fill:var(--ink)">{{ t.resources.diagram.analyzerConfigTitle }}</text>
-            <text x="1605" y="222" class="deps-node-sub" style="fill:var(--muted)">{{ t.resources.diagram.analyzerConfigSub }}</text>
-          </g>
-        </svg>
-        <figcaption>{{ t.resources.diagram.figcaption }}</figcaption>
-      </figure>
+      <p class="resources-teaser-copy">{{ t.resourcesTeaser.copy }}</p>
+      <a class="resources-teaser-link" href="resources.html">{{ t.resourcesTeaser.linkText }}</a>
     </section>
 
     <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">

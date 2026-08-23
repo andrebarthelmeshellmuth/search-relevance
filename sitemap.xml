@@ -17,6 +17,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://search-relevance.dev/screenshots.html" />
   </url>
   <url>
+    <loc>https://search-relevance.dev/resources.html</loc>
+    <lastmod>2026-08-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://search-relevance.dev/resources.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://search-relevance.dev/de/resources.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://search-relevance.dev/resources.html" />
+  </url>
+  <url>
     <loc>https://search-relevance.dev/de/</loc>
     <lastmod>2026-08-12</lastmod>
     <priority>1.0</priority>
@@ -31,5 +39,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://search-relevance.dev/screenshots.html" />
     <xhtml:link rel="alternate" hreflang="de" href="https://search-relevance.dev/de/screenshots.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://search-relevance.dev/screenshots.html" />
+  </url>
+  <url>
+    <loc>https://search-relevance.dev/de/resources.html</loc>
+    <lastmod>2026-08-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://search-relevance.dev/resources.html" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://search-relevance.dev/de/resources.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://search-relevance.dev/resources.html" />
   </url>
 </urlset>

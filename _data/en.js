@@ -311,6 +311,17 @@ export default {
     },
   ],
   resources: {
+    meta: {
+      description: "Every open-source Search Relevance package for Spryker: what each one does, how they depend on each other, and where to get them.",
+      ogUrl: "https://search-relevance.dev/resources.html",
+      canonical: "https://search-relevance.dev/resources.html",
+    },
+    skipLink: "Skip to resources",
+    hero: {
+      eyebrow: "Open-source Spryker search tools",
+      title: "Seven packages, one composer require.",
+      copy: "What each package does, how they depend on each other, and where to get them on GitHub.",
+    },
     heading: "Resources",
     rows: [
       {
@@ -411,6 +422,11 @@ export default {
       ghostSub: "no Spryker dependency",
       figcaption: "Solid arrows are hard requirements; dashed arrows are optional or go outside this toolkit entirely.",
     },
+  },
+  resourcesTeaser: {
+    heading: "Resources",
+    copy: "Seven open-source packages behind one composer require — search relevance, debugging, indexing and analyzer config for Spryker.",
+    linkText: "Full package overview →",
   },
   roadmap: {
     heading: "Roadmap",

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "lint:html": "html-validate _site/index.html _site/de/index.html _site/screenshots.html _site/de/screenshots.html",
+    "lint:html": "html-validate _site/index.html _site/de/index.html _site/screenshots.html _site/de/screenshots.html _site/resources.html _site/de/resources.html",
     "images": "node tools/build-images.mjs"
   },
   "devDependencies": {

@@ -311,6 +311,17 @@ export default {
     },
   ],
   resources: {
+    meta: {
+      description: "Alle Open-Source-Packages von Search Relevance für Spryker: was jedes Package macht, wie sie voneinander abhängen und wo man sie bekommt.",
+      ogUrl: "https://search-relevance.dev/de/resources.html",
+      canonical: "https://search-relevance.dev/de/resources.html",
+    },
+    skipLink: "Zu den Ressourcen springen",
+    hero: {
+      eyebrow: "Open-Source Spryker-Suchtools",
+      title: "Sieben Packages, ein composer require.",
+      copy: "Was jedes Package macht, wie sie voneinander abhängen, und wo man sie auf GitHub findet.",
+    },
     heading: "Ressourcen",
     rows: [
       {
@@ -411,6 +422,11 @@ export default {
       ghostSub: "keine Spryker-Abhängigkeit",
       figcaption: "Durchgezogene Pfeile sind harte Abhängigkeiten; gestrichelte Pfeile sind optional oder führen komplett aus diesem Toolkit heraus.",
     },
+  },
+  resourcesTeaser: {
+    heading: "Ressourcen",
+    copy: "Sieben Open-Source-Packages hinter einem composer require — Suchrelevanz, Debugging, Indexierung und Analyzer-Konfiguration für Spryker.",
+    linkText: "Vollständige Package-Übersicht →",
   },
   roadmap: {
     heading: "Roadmap",

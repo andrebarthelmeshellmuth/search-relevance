@@ -465,6 +465,10 @@ h1 {
 .chart-marker { fill: var(--surface); stroke: var(--teal); stroke-width: 3; }
 .chart-label { fill: var(--muted); font: 12px ui-monospace, monospace; }
 .resources { padding-block: 8rem; }
+.resources-teaser { padding-block: 8rem; }
+.resources-teaser-copy { max-width: 640px; margin: 0 0 1.5rem; color: var(--muted); font-size: 1.05rem; }
+.resources-teaser-link { display: inline-block; color: var(--teal); font-weight: 700; text-decoration: none; }
+.resources-teaser-link:hover { text-decoration: underline; }
 .resource-list { border-top: 1px solid var(--line); }
 .resource-row {
   display: flex;
