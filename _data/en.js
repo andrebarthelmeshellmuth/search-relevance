@@ -371,7 +371,7 @@ export default {
       {
         small: "Analyzer",
         title: "Search Analyzer Config",
-        desc: "A separate composer require: stage analyzer knobs — stemming, synonyms, decompounding — from a Zed GUI, safely materialized into Search Index Alias's next rebuild.",
+        desc: "Stage analyzer knobs — stemming, synonyms, decompounding — from a Zed GUI, safely materialized into Search Index Alias's next rebuild.",
         href: "https://github.com/andrebarthelmeshellmuth/spryker-search-analyzer-config",
         githubAriaLabel: "View Search Analyzer Config on GitHub",
         screenshotsAnchor: "search-analyzer-config",

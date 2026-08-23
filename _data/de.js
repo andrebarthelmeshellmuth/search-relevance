@@ -371,7 +371,7 @@ export default {
       {
         small: "Analyzer",
         title: "Search Analyzer Config",
-        desc: "Ein separates composer require: Stellt Analyzer-Einstellungen — Stemming, Synonyme, Dekompundierung — über eine Zed-GUI bereit, die sicher in den nächsten Rebuild von Search Index Alias einfließen.",
+        desc: "Stellt Analyzer-Einstellungen — Stemming, Synonyme, Dekompundierung — über eine Zed-GUI bereit, die sicher in den nächsten Rebuild von Search Index Alias einfließen.",
         href: "https://github.com/andrebarthelmeshellmuth/spryker-search-analyzer-config",
         githubAriaLabel: "Search Analyzer Config auf GitHub ansehen",
         screenshotsAnchor: "search-analyzer-config",
