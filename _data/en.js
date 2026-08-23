@@ -405,7 +405,7 @@ export default {
       blackboxTitle: "Blackbox Optimizer",
       blackboxSub: "the optimization engine",
       analyzerConfigTitle: "Search Analyzer Config",
-      analyzerConfigSub: "separate composer require",
+      analyzerConfigSub: "stages analyzer settings",
       ghostTitle: "any PHP project",
       ghostSub: "no Spryker dependency",
       figcaption: "Solid arrows are hard requirements; dashed arrows are optional or go outside this toolkit entirely.",

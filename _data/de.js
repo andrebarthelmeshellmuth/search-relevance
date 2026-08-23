@@ -405,7 +405,7 @@ export default {
       blackboxTitle: "Blackbox Optimizer",
       blackboxSub: "die Optimierungs-Engine",
       analyzerConfigTitle: "Search Analyzer Config",
-      analyzerConfigSub: "separates composer require",
+      analyzerConfigSub: "verwaltet Analyzer-Einstellungen",
       ghostTitle: "beliebiges PHP-Projekt",
       ghostSub: "keine Spryker-Abhängigkeit",
       figcaption: "Durchgezogene Pfeile sind harte Abhängigkeiten; gestrichelte Pfeile sind optional oder führen komplett aus diesem Toolkit heraus.",
