@@ -332,7 +332,7 @@
     "screenshots": [
       {
         "title": "Managed scopes — rebuild, flip, roll back",
-        "description": "Every physical index behind a scope's alias, in one table: which one is live, its rollout status, document count, who triggered it, and any mapping diff against the previous target. Rebuild starts a new blue-green build in the background; once it reaches ready, Flip switches live traffic to it atomically. Older indices stay available to roll back to, or delete once they're no longer needed.",
+        "description": "Every physical index behind a scope's alias, in one table: which one is live, its rollout status, document count, who triggered it, and any mapping diff against the previous target. Rebuild builds the target from the project's own Shared/Search/Schema/*.json by default — the same source search:setup itself builds from — and, if Search Analyzer Config is installed, automatically materializes its staged synonyms, stemming and decompounding into the same build, no manual coordination needed. Once the target reaches ready, Flip switches live traffic to it atomically; older indices stay available to roll back to, or delete once they're no longer needed.",
         "src": "screenshots/search-index-alias/overview.png",
         "thumb": "screenshots/search-index-alias/overview-thumb.webp",
         "full": "screenshots/search-index-alias/overview-full.webp",

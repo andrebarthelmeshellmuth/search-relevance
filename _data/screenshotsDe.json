@@ -332,7 +332,7 @@
     "screenshots": [
       {
         "title": "Verwaltete Scopes — Rebuild, Flip, Rollback",
-        "description": "Jeder physische Index hinter dem Alias eines Scopes in einer Tabelle: welcher aktuell live ist, sein Rollout-Status, Dokumentenanzahl, wer ihn ausgelöst hat, und ein eventueller Mapping-Diff gegenüber dem vorherigen Ziel. Rebuild startet einen neuen Blue-Green-Build im Hintergrund; sobald er „ready“ erreicht, schaltet Flip den Live-Traffic atomar darauf um. Ältere Indizes bleiben für ein Rollback verfügbar oder können gelöscht werden, sobald sie nicht mehr gebraucht werden.",
+        "description": "Jeder physische Index hinter dem Alias eines Scopes in einer Tabelle: welcher aktuell live ist, sein Rollout-Status, Dokumentenanzahl, wer ihn ausgelöst hat, und ein eventueller Mapping-Diff gegenüber dem vorherigen Ziel. Rebuild baut das Ziel standardmäßig aus dem projekteigenen Shared/Search/Schema/*.json — derselben Quelle, aus der auch search:setup baut — und übernimmt automatisch die gestagten Synonyme, das Stemming und die Dekompundierung von Search Analyzer Config in denselben Build, sofern installiert, ganz ohne manuelle Abstimmung. Sobald das Ziel „ready“ erreicht, schaltet Flip den Live-Traffic atomar darauf um; ältere Indizes bleiben für ein Rollback verfügbar oder können gelöscht werden, sobald sie nicht mehr gebraucht werden.",
         "src": "screenshots/search-index-alias/overview.png",
         "width": 1280,
         "height": 1277,
