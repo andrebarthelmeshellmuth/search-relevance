@@ -27,25 +27,35 @@ const THUMB = { width: 420, height: 240 };
 // One 1920px variant covers both and still lands far under the PNG it replaces.
 const FULL_WIDTH = 1920;
 
-const variantPath = (src, suffix) =>
-  join(dirname(src), `${basename(src, extname(src))}-${suffix}.webp`);
+const variantPath = (src, suffix, format) =>
+  join(dirname(src), `${basename(src, extname(src))}-${suffix}.${format}`);
+
+// SVG-sourced illustrative mockups (as opposed to real product screenshots) are rendered here once
+// and never re-photographed, so there's no "real" compressed source to defer to -- and their solid-color
+// panels with sharp syntax-highlighted text are exactly the content shape that has been observed
+// triggering GPU hardware-rasterization tile corruption in some Chrome builds when served as WebP.
+// PNG's simpler decode path sidesteps that; it's lossless anyway, which matters more for flat vector
+// art than for photographic screenshots.
+const isSvgSource = (src) => extname(src).toLowerCase() === ".svg";
 
 async function build(src) {
   const abs = join(ROOT, src);
-  const thumbRel = variantPath(src, "thumb");
-  const fullRel = variantPath(src, "full");
+  const format = isSvgSource(src) ? "png" : "webp";
+  const thumbRel = variantPath(src, "thumb", format);
+  const fullRel = variantPath(src, "full", format);
 
-  await sharp(abs)
-    .resize({ ...THUMB, fit: "cover", position: "center" })
-    .webp({ quality: 78 })
-    .toFile(join(ROOT, thumbRel));
+  const thumbPipeline = sharp(abs).resize({ ...THUMB, fit: "cover", position: "center" });
+  await (format === "png" ? thumbPipeline.png({ compressionLevel: 9 }) : thumbPipeline.webp({ quality: 78 })).toFile(
+    join(ROOT, thumbRel),
+  );
 
   // withoutEnlargement keeps a screenshot narrower than 1920px at its native size rather than
   // upscaling it into a blurrier, larger file.
-  const full = await sharp(abs)
-    .resize({ width: FULL_WIDTH, withoutEnlargement: true })
-    .webp({ quality: 82 })
-    .toFile(join(ROOT, fullRel));
+  const fullPipeline = sharp(abs).resize({ width: FULL_WIDTH, withoutEnlargement: true });
+  const full = await (format === "png"
+    ? fullPipeline.png({ compressionLevel: 9 })
+    : fullPipeline.webp({ quality: 82 })
+  ).toFile(join(ROOT, fullRel));
 
   return { thumb: thumbRel, full: fullRel, width: full.width, height: full.height };
 }

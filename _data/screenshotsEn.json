@@ -181,8 +181,8 @@
         "title": "Random Impact — judging the tie-breaker's weight",
         "description": "Evaluate the effect of the random tie-breaker directly on the Search Results Page. Products display how many positions they would move if the random business signal were disabled, making it easy to judge whether the configured weight introduces healthy variation or too much noise into the ranking.",
         "src": "screenshots/search-ranking/random-impact.png",
-        "width": 1280,
-        "height": 1024,
+        "width": 1920,
+        "height": 1080,
         "thumb": "screenshots/search-ranking/random-impact-thumb.webp",
         "full": "screenshots/search-ranking/random-impact-full.webp"
       },
@@ -196,22 +196,13 @@
         "full": "screenshots/search-ranking/office-chair-business-signals-full.webp"
       },
       {
-        "title": "Query specificity (generic query)",
-        "description": "Generic searches benefit more from business signals than highly specific ones. Here, the query \"Feldwerk chair\" is recognized as broad, causing the ranking formula to reduce the influence of text relevance and place greater emphasis on configured business metrics. Every intermediate calculation is shown for complete transparency.",
+        "title": "Query specificity",
+        "description": "The ranking formula weighs business signals against text relevance based on how specific a query is. Broad queries lean more on configured business metrics, while narrow, specific queries shift the weight toward the OpenSearch score, so precise matches aren't outranked by products that merely perform well on business metrics. Every intermediate calculation is shown for complete transparency.",
         "src": "screenshots/search-ranking/specificity-office.png",
         "width": 1280,
-        "height": 1024,
+        "height": 1080,
         "thumb": "screenshots/search-ranking/specificity-office-thumb.webp",
         "full": "screenshots/search-ranking/specificity-office-full.webp"
-      },
-      {
-        "title": "Query specificity (specific query)",
-        "description": "Highly specific searches should primarily reward textual relevance. For the narrow query \"Feldwerk\", the calculated relevance weight shifts strongly toward the OpenSearch score, ensuring that precise matches outrank products that merely perform well according to business metrics. The complete derivation is shown alongside the final ranking calculation.",
-        "src": "screenshots/search-ranking/specificity-banknote-counter.png",
-        "width": 1280,
-        "height": 1024,
-        "thumb": "screenshots/search-ranking/specificity-banknote-counter-thumb.webp",
-        "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp"
       }
     ]
   },
@@ -296,7 +287,7 @@
         "description": "Review the best configuration discovered during optimization before deciding whether to apply it. The optimizer reports the achieved weighted nDCG improvement together with every proposed parameter change, allowing administrators to inspect the recommendation before updating the live ranking configuration.",
         "src": "screenshots/search-optimization/automated-weight-optimization-after.png",
         "width": 1280,
-        "height": 1024,
+        "height": 1080,
         "thumb": "screenshots/search-optimization/automated-weight-optimization-after-thumb.webp",
         "full": "screenshots/search-optimization/automated-weight-optimization-after-full.webp"
       }
@@ -310,8 +301,8 @@
         "title": "Cross-facet AND, illustrated",
         "description": "Filtering by Color: Red and Size: 40 should only return products where one single variant is both red and 40 — not products where red and 40 only exist in two different variants of the same abstract. Shoe #1 has a Red/40 variant and matches; Shoe #2 has a Green/40 variant and a separate Red/42 variant, so no single variant satisfies both filters and it's correctly excluded. This is an illustrative mockup; real product screenshots will replace it here.",
         "src": "screenshots/search-variant-facets/facet-and-mockup.svg",
-        "thumb": "screenshots/search-variant-facets/facet-and-mockup-thumb.webp",
-        "full": "screenshots/search-variant-facets/facet-and-mockup-full.webp",
+        "thumb": "screenshots/search-variant-facets/facet-and-mockup-thumb.png",
+        "full": "screenshots/search-variant-facets/facet-and-mockup-full.png",
         "width": 1920,
         "height": 1080
       },
@@ -319,8 +310,8 @@
         "title": "Before → after: the search document",
         "description": "Update the index mapping and run the standard export — no new index, no reindex-and-swap, no downtime. Before, Shoe #2's color and size values are flattened into one comma-joined string per attribute across all its variants, so it's impossible to tell which color went with which size. After, a variant-facet array holds one object per concrete (SKU, its own color, its own size), so a Color + Size filter can check whether one single variant satisfies both — the actual fix. The new field is purely additive: it sits alongside the existing document, so it only needs a mapping update and a normal export pass, not a new index.",
         "src": "screenshots/search-variant-facets/index-document-before-after.svg",
-        "thumb": "screenshots/search-variant-facets/index-document-before-after-thumb.webp",
-        "full": "screenshots/search-variant-facets/index-document-before-after-full.webp",
+        "thumb": "screenshots/search-variant-facets/index-document-before-after-thumb.png",
+        "full": "screenshots/search-variant-facets/index-document-before-after-full.png",
         "width": 1920,
         "height": 1080
       }

@@ -5,7 +5,7 @@
     "screenshots": [
       {
         "title": "Feedback-Ticket direkt aus der Trefferliste erstellen",
-        "description": "Kunden und Admins können Relevanzprobleme direkt auf der Suchergebnisseite melden, ohne den aktuellen Suchkontext zu verlassen. Jedes Ticket erfasst automatisch sämtliche Rahmenbedingungen — Suchanfrage, aktive Filter, Seitennummerierung, Store/Locale sowie die angezeigten Produkte —, sodass der exakte Zustand zum Zeitpunkt der Meldung nachvollziehbar bleibt. Über eine Berechtigungssteuerung bleibt das Widget für gewöhnliche Storefront-Nutzer unsichtbar.",
+        "description": "Admins können Relevanzprobleme direkt auf der Suchergebnisseite melden, ohne den aktuellen Suchkontext zu verlassen. Jedes Ticket erfasst automatisch sämtliche Rahmenbedingungen — Suchanfrage, aktive Filter, Seitennummerierung, Store/Locale sowie die angezeigten Produkte —, sodass der exakte Zustand zum Zeitpunkt der Meldung nachvollziehbar bleibt. Über eine Berechtigungssteuerung bleibt das Widget für gewöhnliche Storefront-Nutzer unsichtbar.",
         "src": "screenshots/search-feedback/ticket-form.png",
         "width": 1280,
         "height": 1024,
@@ -101,7 +101,7 @@
       },
       {
         "title": "Analyzer-Pipeline (Suchzeitpunkt)",
-        "description": "Stellt die Textanalyse zum Suchzeitpunkt dar. Der Vergleich mit der Indexierungs-Pipeline zeigt transparent auf, wie Suchanfragen verarbeitet werden und warum bestimmte Ergebnisse matchen oder ausgeschlossen werden. Effekte von Synonym-Erweiterungen oder query-spezifischen Filtern werden direkt sichtbar.",
+        "description": "Stellt die Textanalyse des vom User eingegebenen Queries zum Suchzeitpunkt dar. Der Vergleich mit der Indexierungs-Pipeline zeigt transparent auf, wie Suchanfragen verarbeitet werden und warum bestimmte Ergebnisse matchen oder ausgeschlossen werden. Effekte von Synonym-Erweiterungen oder query-spezifischen Filtern werden direkt sichtbar.",
         "src": "screenshots/search-debug/token-analysis-search.png",
         "width": 1280,
         "height": 1024,
@@ -152,7 +152,7 @@
       },
       {
         "title": "Einstellungen der Ranking-Formel",
-        "description": "Zentrale Konfiguration der Verrechnung von OpenSearch-Relevanz und Business-Signalen. Neben dem Basis-Gewicht für Textrelevanz lässt sich hier das adaptive Specificity-Modell aktivieren, das das Scoring automatisch an die Eindeutigkeit der Suchanfrage anpasst. Funktionen, die zusätzliche OpenSearch-Abfragen erfordern, werden bewusst über Code statt über die Benutzeroberfläche gesteuert.",
+        "description": "Zentrale Konfiguration der Verrechnung von OpenSearch-Relevanz und Business-Signalen. Neben dem Basis-Gewicht für Textrelevanz lässt sich hier das adaptive Specificity-Modell konfigurieren, das das Scoring automatisch an die Eindeutigkeit der Suchanfrage anpasst. Aktiviert wird es bewusst über Code statt über die Benutzeroberfläche; die zugehörigen Parameter lassen sich nach der Aktivierung hier anpassen.",
         "src": "screenshots/search-ranking/settings.png",
         "width": 1280,
         "height": 1386,
@@ -181,8 +181,8 @@
         "title": "Analyse des zufälligen Tie-Breakers auf der SRP",
         "description": "Bewertet den Einfluss des zufälligen Business-Signals zur Auflösung von Treffer-Gleichständen direkt im Storefront. Die Anzeige weist aus, um wie viele Positionen sich ein Produkt ohne das Random-Signal verschieben würde. Dies erlaubt eine präzise Feinabstimmung zwischen notwendiger Ergebnisvarianz und stabilem Ranking.",
         "src": "screenshots/search-ranking/random-impact.png",
-        "width": 1280,
-        "height": 1024,
+        "width": 1920,
+        "height": 1080,
         "thumb": "screenshots/search-ranking/random-impact-thumb.webp",
         "full": "screenshots/search-ranking/random-impact-full.webp"
       },
@@ -196,22 +196,13 @@
         "full": "screenshots/search-ranking/office-chair-business-signals-full.webp"
       },
       {
-        "title": "Query Specificity bei generischen Suchanfragen",
-        "description": "Generische Suchanfragen gewichten Business-Signale stärker als sehr spezifische Begriffe. Bei breiten Anfragen wie 'Feldwerk chair' reduziert die Formel den Einfluss der reinen Textrelevanz zugunsten der hinterlegten Business-KPIs. Alle Zwischenschritte der Berechnung werden transparent im Overlay dargestellt.",
+        "title": "Query Specificity",
+        "description": "Die Ranking-Formel gewichtet Business-Signale gegen die Textrelevanz abhängig davon, wie spezifisch eine Suchanfrage ist. Breite Anfragen gewichten stärker die hinterlegten Business-KPIs, während enge, spezifische Anfragen das Gewicht in Richtung des OpenSearch-Scores verschieben, damit exakte Treffer nicht von Produkten mit guten Business-Kennzahlen überholt werden. Alle Zwischenschritte der Berechnung werden transparent dargestellt.",
         "src": "screenshots/search-ranking/specificity-office.png",
         "width": 1280,
-        "height": 1024,
+        "height": 1080,
         "thumb": "screenshots/search-ranking/specificity-office-thumb.webp",
         "full": "screenshots/search-ranking/specificity-office-full.webp"
-      },
-      {
-        "title": "Query Specificity bei spezifischen Suchanfragen",
-        "description": "Präzise Suchanfragen erfordern eine hohe Gewichtung der Textrelevanz. Bei einer spezifischen Query wie 'Feldwerk' verschiebt sich das Gewicht stark in Richtung des OpenSearch-Scores, damit exakte Texttreffer höher rangieren als Produkte mit guten Business-Kennzahlen. Die mathematische Herleitung ist zusammen mit dem Endergebnis einsehbar.",
-        "src": "screenshots/search-ranking/specificity-banknote-counter.png",
-        "width": 1280,
-        "height": 1024,
-        "thumb": "screenshots/search-ranking/specificity-banknote-counter-thumb.webp",
-        "full": "screenshots/search-ranking/specificity-banknote-counter-full.webp"
       }
     ]
   },
@@ -296,7 +287,7 @@
         "description": "Ergebnisansicht der vom Optimizer ermittelten Konfiguration. Die Ansicht stellt den erwarteten nDCG-Zuwachs sowie die einzelnen Parameteränderungen transparent dar, sodass Administratoren die Vorschläge prüfen können, bevor diese in die Live-Konfiguration übernommen werden.",
         "src": "screenshots/search-optimization/automated-weight-optimization-after.png",
         "width": 1280,
-        "height": 1024,
+        "height": 1080,
         "thumb": "screenshots/search-optimization/automated-weight-optimization-after-thumb.webp",
         "full": "screenshots/search-optimization/automated-weight-optimization-after-full.webp"
       }
@@ -308,10 +299,10 @@
     "screenshots": [
       {
         "title": "Schematische Darstellung der Cross-Facet-AND-Logik",
-        "description": "Eine kombinierten Filterung nach Farbe (Rot) und Größe (40) darf nur Ergebnisse liefern, bei denen eine konkrete Variante beide Eigenschaften vereint. Schuh #1 besitzt eine Rot/40-Variante und entspricht dem Filter; Schuh #2 besitzt eine Grün/40- sowie eine Rot/42-Variante und wird korrekterweise ausgeschlossen. (Schematisches Mockup zur Veranschaulichung der Logik).",
+        "description": "Eine kombinierte Filterung nach Farbe (Rot) und Größe (40) darf nur Ergebnisse liefern, bei denen eine konkrete Variante beide Eigenschaften vereint. Schuh #1 besitzt eine Rot/40-Variante und entspricht dem Filter; Schuh #2 besitzt eine Grün/40- sowie eine Rot/42-Variante und wird korrekterweise ausgeschlossen. (Schematisches Mockup zur Veranschaulichung der Logik).",
         "src": "screenshots/search-variant-facets/facet-and-mockup.svg",
-        "thumb": "screenshots/search-variant-facets/facet-and-mockup-thumb.webp",
-        "full": "screenshots/search-variant-facets/facet-and-mockup-full.webp",
+        "thumb": "screenshots/search-variant-facets/facet-and-mockup-thumb.png",
+        "full": "screenshots/search-variant-facets/facet-and-mockup-full.png",
         "width": 1920,
         "height": 1080
       },
@@ -319,8 +310,8 @@
         "title": "Vergleich der Dokumentenstruktur (Vorher / Nachher)",
         "description": "Aktualisierung des Index-Mappings ohne Neuindexierung oder Ausfallzeiten: Zuvor wurden Attribute über alle Varianten hinweg in flachen Arrays zusammengefasst, wodurch die Zuordnung zwischen Farbe und Größe verloren ging. Mit der neuen Struktur hält ein Array dedizierte Objekte pro konkreter Variante (SKU, Farbe, Größe), was präzise UND-Verknüpfungen ermöglicht. Da das Feld rein additiv ist, genügt ein gewöhnlicher Exportlauf ohne Index-Neuaufbau.",
         "src": "screenshots/search-variant-facets/index-document-before-after.svg",
-        "thumb": "screenshots/search-variant-facets/index-document-before-after-thumb.webp",
-        "full": "screenshots/search-variant-facets/index-document-before-after-full.webp",
+        "thumb": "screenshots/search-variant-facets/index-document-before-after-thumb.png",
+        "full": "screenshots/search-variant-facets/index-document-before-after-full.png",
         "width": 1920,
         "height": 1080
       }
@@ -332,7 +323,7 @@
     "screenshots": [
       {
         "title": "Index-Verwaltung mit Blue-Green-Switching",
-        "description": "Übersicht aller physischen Indizes hinter den Alias-Zuordnungen: Zeigt den aktiven Index, Rollout-Status, Dokumentenzahlen, Auslöser sowie Mapping-Abweichungen. Indizes werden aus der Projektschema-Quelle aufgebaut; gestagete Synonyme, Stemming- und Dekompositionseinstellungen aus Search Analyzer Config fließen automatisch ein. Sobald ein Index den Status 'ready' erreicht, wird der Live-Traffic atomar umgeschaltet. Frühere Indizes bleiben für ein Rollback verfügbar.",
+        "description": "Übersicht aller physischen Indizes hinter den Alias-Zuordnungen: Zeigt den aktiven Index, Rollout-Status, Dokumentenzahlen, Auslöser sowie Mapping-Abweichungen. Indizes werden aus der Projektschema-Quelle aufgebaut; vorgemerkte Synonyme, Stemming- und Dekompositionseinstellungen aus Search Analyzer Config fließen automatisch ein. Sobald ein Index den Status 'ready' erreicht, kann der Live-Traffic atomar umgeschaltet werden. Frühere Indizes bleiben für ein Rollback verfügbar.",
         "src": "screenshots/search-index-alias/overview.png",
         "width": 1280,
         "height": 1277,
@@ -365,7 +356,7 @@
       },
       {
         "title": "Zentrale Verwaltung wiederverwendbarer Filter",
-        "description": "Filter-Einstellungen (Stemmer, Synonyme, Dekomposition) werden als zentrale Objekte verwaltet, die von verschiedenen Analyzern referenziert werden. Änderungen wirken sich konsistent auf alle zugewiesenen Analyzer aus. Geänderte Zeilen werden farblich hervorgehoben; Warnhinweise informieren über Abweichungen zum aktiven Live-Stand.",
+        "description": "Filter-Einstellungen (Stemmer, Synonyme, Dekomposition, Stoppwörter, Nicht-Dekompositions-/Markenliste) werden als zentrale Objekte verwaltet, die von verschiedenen Analyzern referenziert werden. Änderungen wirken sich konsistent auf alle zugewiesenen Analyzer aus. Geänderte Zeilen werden farblich hervorgehoben; Warnhinweise informieren über Abweichungen zum aktiven Live-Stand.",
         "src": "screenshots/search-analyzer-config/edit-filter-matrix.png",
         "width": 1280,
         "height": 1132,

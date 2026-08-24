@@ -52,7 +52,7 @@ export default {
       title: "Relevanz-Datensatz",
       lead: "Basis jeder Optimierung ist eine repräsentative Stichprobe aus Suchanfragen und manuell bewerteten Suchergebnissen.",
       body: [
-        "Jeder Query werden Produkte sowie deren Soll-Relevanz zugewiesen. Die Qualität der optimierten Formel steht und fällt mit der Güte dieses Datensatzes — er sollte typische Suchmuster, Spezialfälle und geschäftskritische Anfragen gleichermaßen abdecken.",
+        "Jeder Query werden Produkte sowie deren Soll-Relevanz zugewiesen. Die Qualität der optimierten Formel steht und fällt mit der Güte und Größe dieses Datensatzes — er sollte typische Suchmuster, Spezialfälle und geschäftskritische Anfragen gleichermaßen abdecken.",
       ],
       tag: "Der Datensatz ist vom Optimierungsalgorithmus entkoppelt und kann sich bei Katalog- und Sortimentsänderungen kontinuierlich weiterentwickeln.",
       visual: {
@@ -108,7 +108,7 @@ export default {
       id: "optimization-parameters",
       index: "4 / 5",
       title: "Optimale Parameter",
-      lead: "Nach Abschluss des Optimierungslaufs wird der performanteste Parametersatz als neue Runtime-Konfiguration übernommen.",
+      lead: "Nach Abschluss des Optimierungslaufs kann der performanteste Parametersatz als neue Runtime-Konfiguration übernommen werden.",
       body: [
         "Zu den optimierten Werten gehören unter anderem der Spezifitätsexponent, die Textgewichtung, die Gewichte der Business-Signale sowie die maximale Spezifitätsverschiebung — exakt die Parameter aus der dargestellten Formel.",
       ],
@@ -233,7 +233,7 @@ export default {
       title: "Parameter kalibrieren",
       lead: "k<sub>spec</sub>, β, p, γ und m basieren nicht auf Schätzungen, sondern werden wie der Rest der Formel systematisch kalibriert.",
       body: [
-        "Die Sättigungspunkt-Kalibrierung von Search Ranking Optimizer bietet einen eigenen Specificity-Modus: Sie wertet echte Suchanfragen aus und leitet k<sub>spec</sub> direkt aus deren Verteilung ab. Die verbleibenden Shift-Parameter werden automatisiert vom Optimizer durchsucht.",
+        "Die Sättigungspunkt-Kalibrierung von Search Ranking Optimizer bietet einen eigenen Specificity-Modus: Sie wertet echte Suchanfragen aus und leitet k<sub>spec</sub> direkt aus deren Verteilung ab. Die verbleibenden Shift-Parameter werden automatisiert vom Optimizer durchsucht (siehe Tab „Optimierung“ oben).",
       ],
       tag: "Derselbe Kalibrierungs- und Optimierungsablauf, angewendet auf die Spezifitätsparameter.",
       visual: {
@@ -280,7 +280,7 @@ export default {
       lead: "Der Parameter k definiert den Schwellenwert, an dem die normalisierte Relevanz exakt 0,5 erreicht.",
       body: [
         "Gilt <strong>score = k</strong>, liefert der Relevanzterm genau <strong>0,5</strong>. Kleinere Werte führen zu einer früheren Sättigung; größere Werte erhalten die Feinabstimmung bei hohen Elasticsearch-Scores aufrechterhalten.",
-        "Statt k manuell zu raten, ermittelt Search Ranking praxisnahe Richtwerte: Auf Basis importierter CSV-Queries und einer definierten Auswertungs-Tiefe analysiert das Package die Top-Treffer und schlägt den gemessenen Mittelwert der <code>_score</code>-Werte als Startpunkt für k vor.",
+        "Statt k manuell zu raten, ermittelt Search Ranking praxisnahe Richtwerte: Auf Basis eines Query-Sets aus CSV-Import oder Admin-Bewertung und einer definierten Auswertungs-Tiefe analysiert das Package die Top-Treffer und schlägt den gemessenen Mittelwert der <code>_score</code>-Werte als Startpunkt für k vor.",
       ],
       implementation: "Test-Queries + Stichprobentiefe → Gemessene _score-Verteilung → Empfohlenes k",
     },
@@ -304,7 +304,7 @@ export default {
       title: "Einheitliche Signalgewichtung",
       lead: "Alle eingegebenen Signalgewichte werden automatisch so normiert, dass ihre Summe stets 1 ergibt.",
       body: [
-        "Die Fachredaktion kann relative Verhältnisse angeben, ohne manuell eine Gesamtsumme von 100 % ausrechnen zu müssen. Die Eingaben 30 und 10 werden automatisch zu 0,75 und 0,25 umgerechnet.",
+        "In Zed können Administratoren relative Verhältnisse angeben, ohne manuell eine Gesamtsumme von 100 % ausrechnen zu müssen. Die Eingaben 30 und 10 werden automatisch zu 0,75 und 0,25 umgerechnet.",
         "Diese Umrechnung erfolgt einmalig beim Publizieren der Konfiguration, damit Anfragen zur Laufzeit schlank bleiben.",
       ],
       implementation: "w<sub>i</sub> = enteredWeight<sub>i</sub> / Σ enteredWeight<sub>j</sub>",
@@ -334,7 +334,7 @@ export default {
       {
         small: "Feedback",
         title: "Search Feedback",
-        desc: "Ermöglicht autorisierten Admins im Storefront das Erstellen von Feedback-Tickets zu konkreten Suchergebnissen.",
+        desc: "Ermöglicht Admins im Storefront das Erstellen von Feedback-Tickets zu konkreten Suchergebnissen.",
         href: "https://github.com/andrebarthelmeshellmuth/spryker-search-feedback",
         githubAriaLabel: "Search Feedback auf GitHub ansehen",
         screenshotsAnchor: "search-feedback",
@@ -439,7 +439,7 @@ export default {
     heading: "Ursprung",
     paragraph1Pre: "Das Projekt basiert auf Sprykers",
     paragraph1LinkText: "Data-driven ranking",
-    paragraph1Post: "Best-Practice-Leitfaden. Dieser beschreibt ein bewährtes Praxissystem, das ursprünglich von Martin Loetsch und Krešimir Slugan bei Contorion entwickelt wurde — Spryker lieferte im Core lediglich das Dokument, aber keine Implementierung mit.",
+    paragraph1Post: "Best-Practice-Leitfaden. Dieser beschreibt ein bewährtes Praxissystem, das ursprünglich von Martin Loetsch und Krešimir Slugan für Contorion konzipiert und implementiert wurde. Spryker selbst liefert hierfür keinen Quellcode, lediglich obige Anleitung.",
     paragraph2: "search-ranking und search-ranking-optimizer setzen dieses Konzept für die Spryker-Architektur um und erweitern es um Funktionen wie Store-/Locale-Scoping, spezifitätsbasierte Relevanzgewichtung und automatisierte Blackbox-Optimierung.",
   },
   footer: {
