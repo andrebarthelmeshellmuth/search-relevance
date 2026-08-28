@@ -7,9 +7,9 @@ The homepage presents the ranking formula as an interactive, breadcrumb-driven e
 ## Public packages
 
 - [Search Ranking](https://github.com/andrebarthelmeshellmuth/spryker-search-ranking)
-- [Search Debug](https://github.com/andrebarthelmeshellmuth/spryker-search-debug)
+- [Search Debug](https://github.com/spryker-community/search-debug)
 - [Search Optimization](https://github.com/andrebarthelmeshellmuth/spryker-search-ranking-optimizer)
-- [Search Feedback](https://github.com/andrebarthelmeshellmuth/spryker-search-feedback)
+- [Search Feedback](https://github.com/spryker-community/search-feedback)
 - [Search Variant Facets](https://github.com/andrebarthelmeshellmuth/spryker-search-variant-facets)
 - [Search Index Alias](https://github.com/andrebarthelmeshellmuth/spryker-search-index-alias)
 - [Search Analyzer Config](https://github.com/andrebarthelmeshellmuth/spryker-search-analyzer-config)
